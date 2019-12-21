@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>{% block title %}
+
+    {% endblock title %} | Dangui Stamp Maker</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+
+  <!-- jquery -->
+  <script src="{% static 'jquery/jquery-3.4.1.min.js' %}"></script>
+
+  <!-- javaScript -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- Font-awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+  <!-- Nav bar -->
+  {% include "partials/navbar.html" %}
+  <!-- Main container -->
+  <div class="container">
+    {% block content %}
+
+    {% endblock content %}
+  </div>
+
+  <!-- Footer -->
+  {% include "partials/footer.html" %}
+
+  <!-- Bootstrap js -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="https://kit.fontawesome.com/b35026081c.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
