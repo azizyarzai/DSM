@@ -1,2 +1,2 @@
 # DSM
-Back end of the last year project.
+Dangui Stamp Makers web application.
