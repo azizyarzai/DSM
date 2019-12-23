@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<!-- Showcase -->
+<section id="about">
+    <div class="container justify-content-center">
+        <h1 class="text-center heading">About Us</h1>
+    </div>
+</section>
+
+<section class="about-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <h3>OUR MISSION</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur esse optio inventore atque
+                    quam odio? Dolor, unde. Quidem odit dolorem perferendis pariatur unde autem sed tenetur fugit
+                    molestiae iure. Obcaecati.
+                    Aspernatur nostrum velit nulla, fugit quae maiores. Nobis sapiente facere modi nesciunt non eos
+                    necessitatibus totam quod incidunt, temporibus, distinctio reprehenderit enim eum aut vel
+                    accusantium inventore minus, quibusdam animi. sunt possimus animi, error incidunt
+                    quas laboriosam blanditiis libero velit atque iure,
+                </p>
+            </div>
+            <div class="col-xl-6">
+                <img src="{% static 'img/showcase.jpg' %}" class="img-fluid" alt="about">
+            </div>
+        </div>
+    </div>
+</section>
+{% include "partials/team.html" %}
+{% include "partials/pre_footer.html" %}
+{% endblock content %}

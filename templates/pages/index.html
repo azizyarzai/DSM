@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- Image Slider -->
+<section>
+  <div class="bd-example">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active drk">
+          <img src="{% static 'img/showcase.jpg' %}" class="d-block w-100" alt="showcase">
+          <div class="carousel-caption d-md-block mr-auto ml-auto ">
+            <h5>First slide label</h5>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <a class="btn btn-primary" href="#" role="button">Learn More</a>
+            <a class='anchor-hidden' href="#">Learn More --></a>
+          </div>
+        </div>
+        <div class="carousel-item drk">
+          <img src="{% static 'img/showcase.jpg' %}" class="d-block w-100" alt="showcase">
+          <div class="carousel-caption d-md-block mr-auto ml-auto">
+            <h5>Second slide label</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <a class="btn btn-primary" href="#" role="button">Learn More</a>
+            <a class='anchor-hidden' href="#">Learn More --></a>
+          </div>
+        </div>
+        <div class="carousel-item drk">
+          <img src="{% static 'img/showcase.jpg' %}" class="d-block w-100" alt="showcase">
+          <div class="carousel-caption d-md-block mr-auto ml-auto">
+            <h5>Third slide label</h5>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <a class="btn btn-primary" href="#" role="button">Learn More</a>
+            <a class='anchor-hidden' href="#">Learn More --></a>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Browse Stamps section -->
+<section id="browse-stamps">
+  <div class="header">
+    <h1 class="heading">Browse Stamps</h1>
+  </div>
+  <div class="stamp-container">
+    <!-- First row -->
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/address-stamps.jpg' %}" class='rounded' width='100%'
+        alt="address stamp">
+      <a href="stamps-types-list.html" class='head'>custom Address Stamps <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="stamps-list.html">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/corporate-seal-stamps.jpg' %}" class='rounded' width='100%'
+        alt="corporate-seal-stamp">
+      <a href="#" class='head align-middle'>Seal Stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/office-stamps.jpg' %}" class='rounded' width='100%'
+        alt="office stampss">
+      <a href="#" class='head'>Office stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/inspection-stamps.jpg' %}" class='rounded' width='100%'
+        alt="inspection stamp">
+      <a href="#" class='head'>Inspection Stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <!-- Second Row -->
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/address-stamps.jpg' %}" class='rounded' width='100%'
+        alt="address stamp">
+      <a href="#" class='head'>Address Stamps <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/corporate-seal-stamps.jpg' %}" class='rounded' width='100%'
+        alt="corporate-seal-stamp">
+      <a href="#" class='head align-middle'>Seal Stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/office-stamps.jpg' %}" class='rounded' width='100%'
+        alt="office stampss">
+      <a href="#" class='head'>Office stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+    <div class="stamp-list-item">
+      <img src="{% static 'img/stamps_categories/inspection-stamps.jpg' %}" class='rounded' width='100%'
+        alt="inspection stamp">
+      <a href="#" class='head'>Inspection Stamp <i class="fa fa-chevron-right"></i></a>
+      <span>up to 30% off</span>
+      <div class="stamp-types">
+        <a href="#">address & return address stamps</a>
+        <a href="#">designer & Monogram address stamps</a>
+        <a href="#">custom stamps with your photo display</a>
+        <a href="#">Upload your own artwork holidays addres stamps</a>
+      </div>
+    </div>
+  </div>
+  <div class="browse-all text-center">
+    <a href="{% url 'pages:browse_stamps' %}" class="btn btn-danger">Browse All Stamps</a>
+  </div>
+</section>
+
+{% include "partials/pre_footer.html" %}
+
+{% endblock content %}

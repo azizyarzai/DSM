@@ -5,45 +5,50 @@
 <head>
   <title>{% block title %}
 
-    {% endblock title %} | Dangui Stamp Maker</title>
+    {% endblock title %} Dangui Stamp Maker</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
+  <!-- google font B612 -->
+  <link href="https://fonts.googleapis.com/css?family=B612&display=swap" rel="stylesheet">
+
+  <!--Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
   <!-- jquery -->
-  <script src="{% static 'jquery/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
-  <!-- javaScript -->
-  <script src="{% static 'js/main.js' %}"></script>
-
-  <!-- Font-awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
 <body>
-  <!-- Nav bar -->
   {% include "partials/navbar.html" %}
+
+
   <!-- Main container -->
-  <div class="container">
-    {% block content %}
+  {% block content %}
 
-    {% endblock content %}
-  </div>
+  {% endblock content %}
 
-  <!-- Footer -->
+
   {% include "partials/footer.html" %}
 
+  <!-- Bootstrap popper -->
+  <script src="{% static 'js/popper.min.js' %}"></script>
+
   <!-- Bootstrap js -->
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="https://kit.fontawesome.com/b35026081c.js" crossorigin="anonymous"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  <!-- Font Awsome -->
+  <script src="{% static 'js/font-awsome.js' %}"></script>
+
+  <!-- custom javascript -->
+  <script src="{% static 'js/main.js' %}"></script>
+
 </body>
 
 </html>
