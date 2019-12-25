@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'pages',
     'stamps',
+    'accounts',
+    'staff',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +149,13 @@ MESSAGE_TAGS = {
 # Email config
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'Put-your-email-here'
-EMAIL_HOST_PASSWORD = 'Put-your-password-here'
+EMAIL_HOST_USER = 'danguistamp@gmail.com'
+EMAIL_HOST_PASSWORD = 'dsm@1234'
 EMAIL_USE_TLS = True
+
+# Authentication Choices
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.EmailAuthenticationBackend.EmailBackend',
+    'accounts.PhoneAuthenticationBackend.PhoneBackend',
+)
