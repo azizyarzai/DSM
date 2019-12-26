@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 from django.contrib.messages import constants as messages
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+
+    'django.contrib.sites',
+
+    # All auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Providers
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+
+    # Local
     'pages',
     'stamps',
     'accounts',
@@ -159,3 +173,7 @@ AUTHENTICATION_BACKENDS = (
     'accounts.EmailAuthenticationBackend.EmailBackend',
     'accounts.PhoneAuthenticationBackend.PhoneBackend',
 )
+
+LOGIN_REDIRECT_URL = reverse_lazy('accounts:dashboard')
+
+SITE_ID = 1
