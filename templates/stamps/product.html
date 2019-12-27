@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Stamp customization -->
+<section class="customization">
+    <div class="details">
+        <div class="img">
+            <img src="{{ product.image.url }}" alt="checkerboard">
+        </div>
+        <div class="desc">
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+
+    <div class="customize">
+        <div class="price">
+
+        </div>
+        <div class="customize-details">
+            <form action="" method="POST" class="form-container">
+                <div class="body-style grid">
+                    <div class="lft">
+                        <label for="stamp body">choose body style:</label>
+                    </div>
+                    <div class="rgt">
+                        <div class="input-center">
+                            <input type="radio" name="body style"> <img
+                                src="{% static 'img/stamp_body/Maxlight_SLIM-4141_plus_tex.jpg' %}" alt="stamp body">
+                        </div>
+                        <div class="input-center">
+                            <input type="radio" name="body style"> <img
+                                src="{% static 'img/stamp_body/trodat_printy_4924_text.jpg' %}" alt="stamp body">
+                        </div>
+                        <div class="input-center">
+                            <input type="radio" name="body style"> <img
+                                src="{% static 'img/stamp_body/wood-mon-plus-text.jpg' %}" alt="stamp body">
+                        </div>
+                    </div>
+                </div>
+                <div class="line grid">
+                    <div class="lft">
+                        <label for="line text">lin 1:</label>
+                    </div>
+                    <div class="rgt stretch form-group">
+                        <input type="text" name="line1" class="form-control">
+                    </div>
+                </div>
+                <div class="line grid">
+                    <div class="lft">
+                        <label for="line text">lin 2:</label>
+                    </div>
+                    <div class="rgt stretch form-group">
+                        <input type="text" name="line2" class="form-control">
+                    </div>
+                </div>
+                <div class="line grid">
+                    <div class="lft">
+                        <label for="line text">lin 3:</label>
+                    </div>
+                    <div class="rgt stretch form-group">
+                        <input type="text" name="line3" class="form-control">
+                    </div>
+                </div>
+                <div class="color grid">
+                    <div class="lft">
+                        <label for="color">ink color:</label>
+                    </div>
+                    <div class="rgt">
+                        <input type="radio" name="color" value="black"> Black <br>
+                        <input type="radio" name="color" value="red"> Red <br>
+                        <input type="radio" name="color" value="blue"> Blue <br>
+                        <input type="radio" name="color" value="green"> Green <br>
+                        <input type="radio" name="color" value="purple"> Purple
+                    </div>
+                </div>
+                <div class="instruction grid">
+                    <div class="lft">
+                        <label for="">special instruction:</label>
+                    </div>
+                    <div class="rgt stretch form-group">
+                        <textarea name="instruction" id="3" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div class="quantity">
+    <label for="quantity">Quantity: </label>
+    <select class="form-control" id="quantity">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+    </select>
+</div>
+<div class="add">
+    <div class="buy">
+        <a href="" class="btn bn"><i class="fa fa-bolt"></i>Buy</a>
+    </div>
+    <div class="add-cart">
+        <a href="" class="btn atc"><i class="fa fa-cart-plus"></i>Add to Cart</a>
+    </div>
+</div>
+
+{% endblock content %}

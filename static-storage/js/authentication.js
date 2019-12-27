@@ -1,97 +1,102 @@
-(function ($) {
-    "use strict";
+const inputs = document.querySelectorAll('.input');
 
+function focusFunc() {
+    let parent = this.parentNode.parentNode;
+    parent.classList.add('focus');
+}
 
-    /*==================================================================
-    [ Focus input ]*/
-    $('.input100').each(function () {
-        $(this).on('blur', function () {
-            if ($(this).val().trim() != "") {
-                $(this).addClass('has-val');
-            }
-            else {
-                $(this).removeClass('has-val');
-            }
-        })
-    })
-
-
-    /*==================================================================
-    [ Validate ]*/
-    var input = $('.validate-input .input100');
-
-    $('.validate-form').on('submit', function () {
-        var check = true;
-
-        for (var i = 0; i < input.length; i++) {
-            if (validate(input[i]) == false) {
-                showValidate(input[i]);
-                check = false;
-            }
-        }
-
-        return check;
-    });
-
-
-    $('.validate-form .input100').each(function () {
-        $(this).focus(function () {
-            hideValidate(this);
-        });
-    });
-
-    function validate(input) {
-        if ($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if ($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                return false;
-            }
-        }
-
-        else if ($(input).attr('name') == 'pass1') {
-            var pass = $(".match ").val();
-            var pass1 = $(input).val();
-            if (pass != pass1) {
-                return false;
-            }
-
-        }
-        else {
-            if ($(input).val().trim() == '') {
-                return false;
-            }
-        }
+function blurFunc() {
+    let parent = this.parentNode.parentNode;
+    if (this.value == "") {
+        parent.classList.remove('focus');
     }
+}
 
-    function showValidate(input) {
-        var thisAlert = $(input).parent();
+inputs.forEach(input => {
+    input.addEventListener('focus', focusFunc);
+    input.addEventListener('blur', blurFunc);
+});
 
-        $(thisAlert).addClass('alert-validate');
-    }
+$(function () {
+    // Custom password validators
+    $.validator.addMethod("passLength", function (value, element) {
+        return value.length >= 6;
+    }, "Your password must be at least 6 character long");
 
-    function hideValidate(input) {
-        var thisAlert = $(input).parent();
+    $.validator.addMethod("charNum", function (value, element) {
+        return /\d/.test(value)
+            && /[a-z]/i.test(value);
+    }, "Your password must contain at least one number and one character");
 
-        $(thisAlert).removeClass('alert-validate');
-    }
+    // Custom phone and email validators
+    $.validator.addMethod("emailPhone", function (value, element) {
+        return this.optional(element)
+            || /^\d{10}$/.test(value)
+            || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+    }, "Please enter a valid phone number or email");
 
-    /*==================================================================
-    [ Show pass ]*/
-    var showPass = 0;
-    $('.btn-show-pass').on('click', function () {
-        if (showPass == 0) {
-            $(this).next('input').attr('type', 'text');
-            $(this).find('i').removeClass('zmdi-eye');
-            $(this).find('i').addClass('zmdi-eye-off');
-            showPass = 1;
+    $.validator.addMethod("onlyEmail", function (value, element) {
+        return this.optional(element)
+            || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+    }, "Please enter a <em>valid</em> email address");
+    $("#auth-form").validate({
+        rules: {
+            email: {
+                required: true,
+                onlyEmail: true
+            },
+            email_phone: {
+                required: true,
+                emailPhone: true
+            },
+            pass: {
+                required: true
+            },
+            password: {
+                required: true,
+                passLength: true,
+                charNum: true
+            },
+            password1: {
+                required: true,
+                equalTo: "#password"
+            },
+            fname: {
+                required: true,
+                lettersonly: true
+            },
+            lname: {
+                required: true,
+                lettersonly: true
+            }
+        },
+        messages: {
+            email: {
+                required: "Please enter an email address",
+            },
+            email_phone: {
+                required: "Please enter an email address or phone number",
+            },
+            pass: {
+                required: "Please enter the password"
+            },
+            password: {
+                required: "Please enter the password"
+            },
+            password1: {
+                required: "Please enter the password",
+            },
+            fname: {
+                required: "Please enter your first name"
+            },
+            lname: {
+                required: "Please enter your last name"
+            }
         }
-        else {
-            $(this).next('input').attr('type', 'password');
-            $(this).find('i').addClass('zmdi-eye');
-            $(this).find('i').removeClass('zmdi-eye-off');
-            showPass = 0;
-        }
-
     });
+});
 
 
-})(jQuery);
+setTimeout(function () {
+    $('#message').fadeOut('slow');
+}, 3000);

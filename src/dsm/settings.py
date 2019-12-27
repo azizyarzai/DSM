@@ -173,7 +173,7 @@ AUTHENTICATION_BACKENDS = (
     'accounts.EmailAuthenticationBackend.EmailBackend',
     'accounts.PhoneAuthenticationBackend.PhoneBackend',
 )
-
+LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:dashboard')
 
 SITE_ID = 1

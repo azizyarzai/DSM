@@ -1,6 +1,13 @@
 const date = new Date();
 document.querySelector('.year').innerHTML = date.getFullYear();
 
+$(".avatar span").hover(function () {
+    $(this).css("cursor", "pointer");
+});
+
+setTimeout(function () {
+    $('#message').fadeOut('slow');
+}, 5000);
 
 const slider = document.querySelector(".bd-example");
 const nav = document.querySelector("nav");
@@ -17,7 +24,6 @@ const observer = new IntersectionObserver(function (entries, observer) {
             nav.classList.add('inverse');
         }
         else {
-            console.log(entry.target);
             nav.classList.add('bg-tran');
             nav.classList.remove('inverse');
         }
@@ -25,3 +31,4 @@ const observer = new IntersectionObserver(function (entries, observer) {
 }, options);
 
 observer.observe(slider);
+

@@ -1,6 +1,14 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 # Create your models here.
+
+
+class ProductManager(models.Manager):
+    def all(self):
+        qs = self.get_queryset().all()
+        qs = qs.filter(availible=True)
+        return qs
 
 
 class Category(models.Model):
@@ -15,6 +23,13 @@ class Category(models.Model):
         ordering = ('name',)
         verbose_name = "category"
         verbose_name_plural = "categories"
+
+    def get_absolute_url(self):
+        return reverse_lazy("stamps:category", args=[self.slug])
+
+    def get_groups(self):
+        groups = Group.objects.filter(category=self)
+        return groups
 
     def __str__(self):
         return self.name
@@ -34,6 +49,9 @@ class Group(models.Model):
         verbose_name = "group"
         verbose_name_plural = "groups"
 
+    def get_absolute_url(self):
+        return reverse_lazy("stamps:group", args=[self.category.slug, self.slug])
+
     def __str__(self):
         return self.name
 
@@ -51,10 +69,15 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    objects = ProductManager()
+
     class Meta:
         ordering = ('name',)
         verbose_name = "product"
         verbose_name_plural = "products"
+
+    def get_absolute_url(self):
+        return reverse_lazy("stamps:product", args=[self.group.category.slug, self.group.slug, self.slug])
 
     def __str__(self):
         return self.name

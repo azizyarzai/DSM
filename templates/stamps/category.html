@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section id="stamp-type">
+    {% if category %}
+    <div>
+        <h1 class="heading">{{ category.name }}</h1>
+    </div>
+    {% endif %}
+    <div class="stamp-type-container">
+        <!-- First row -->
+        {% if groups %}
+        {% for group in groups %}
+        <div class="stamp-type-details">
+            <div class="stamp-type-img">
+                <a href="#"><img src="{{ group.image.url }}" class='rounded' width='100%' alt="{{ group.slug }}"></a>
+            </div>
+            <div class="stamp-type-desc">
+                <a href="{{ group.get_absolute_url }}" class='head'>{{ group.name }}
+                    <i class="fa fa-chevron-right"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1>The following stamps types are not availible</h1>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

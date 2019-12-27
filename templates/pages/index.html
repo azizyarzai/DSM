@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
 <!-- Image Slider -->
 <section>
   <div class="bd-example">
@@ -12,10 +13,12 @@
         <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
         <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
       </ol>
+
       <div class="carousel-inner">
         <div class="carousel-item active drk">
           <img src="{% static 'img/showcase.jpg' %}" class="d-block w-100" alt="showcase">
           <div class="carousel-caption d-md-block mr-auto ml-auto ">
+            {% include "partials/alerts.html" %}
             <h5>First slide label</h5>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             <a class="btn btn-primary" href="#" role="button">Learn More</a>
@@ -59,107 +62,27 @@
     <h1 class="heading">Browse Stamps</h1>
   </div>
   <div class="stamp-container">
-    <!-- First row -->
+
+    {% if categories %}
+
+    {% for category in categories %}
     <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/address-stamps.jpg' %}" class='rounded' width='100%'
-        alt="address stamp">
-      <a href="stamps-types-list.html" class='head'>custom Address Stamps <i class="fa fa-chevron-right"></i></a>
+      <img src="{{ category.image.url }}" class='rounded' width='100%' alt="{{ category.slug }}">
+      <a href="{{ category.get_absolute_url }}" class='head'>{{ category.name }} <i class="fa fa-chevron-right"></i></a>
       <span>up to 30% off</span>
       <div class="stamp-types">
-        <a href="stamps-list.html">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
+
+        {% if category.get_groups %}
+        {% for group in category.get_groups %}
+        <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+        {% endfor %}
+        {% endif %}
       </div>
     </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/corporate-seal-stamps.jpg' %}" class='rounded' width='100%'
-        alt="corporate-seal-stamp">
-      <a href="#" class='head align-middle'>Seal Stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/office-stamps.jpg' %}" class='rounded' width='100%'
-        alt="office stampss">
-      <a href="#" class='head'>Office stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/inspection-stamps.jpg' %}" class='rounded' width='100%'
-        alt="inspection stamp">
-      <a href="#" class='head'>Inspection Stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <!-- Second Row -->
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/address-stamps.jpg' %}" class='rounded' width='100%'
-        alt="address stamp">
-      <a href="#" class='head'>Address Stamps <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/corporate-seal-stamps.jpg' %}" class='rounded' width='100%'
-        alt="corporate-seal-stamp">
-      <a href="#" class='head align-middle'>Seal Stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/office-stamps.jpg' %}" class='rounded' width='100%'
-        alt="office stampss">
-      <a href="#" class='head'>Office stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-    <div class="stamp-list-item">
-      <img src="{% static 'img/stamps_categories/inspection-stamps.jpg' %}" class='rounded' width='100%'
-        alt="inspection stamp">
-      <a href="#" class='head'>Inspection Stamp <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
-      <div class="stamp-types">
-        <a href="#">address & return address stamps</a>
-        <a href="#">designer & Monogram address stamps</a>
-        <a href="#">custom stamps with your photo display</a>
-        <a href="#">Upload your own artwork holidays addres stamps</a>
-      </div>
-    </div>
-  </div>
-  <div class="browse-all text-center">
-    <a href="{% url 'pages:browse_stamps' %}" class="btn btn-danger">Browse All Stamps</a>
+    {% endfor %}
+    {% else %}
+    <h1>Database is <em>Empty</em></h1>
+    {% endif %}
   </div>
 </section>
 

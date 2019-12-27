@@ -1,16 +1,23 @@
 {% load static %}
 
+<!-- A check form for logout -->
+<form action="{% url 'accounts:logout' %}" id="logout" method="POST">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mynav sticky-top bg-tran">
-  <a class="navbar-brand" href="{% url 'pages:home' %}"><img src="{% static 'img/logo.png' %}" alt="LOGO"></a>
+  <a class="navbar-brand" href="{% url 'pages:home' %}"><img src="{% static 'img/logo/logo.png' %}" alt="LOGO"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse ml-5" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav menu-left">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'stamps:browse_stamps' %}">Browse Stamps</a>
+        <a class="nav-link" href="{% url 'stamps:browse_stamps' %}">Stamps</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
@@ -20,12 +27,29 @@
       </li>
     </ul>
     <div class="mrt ml-auto mr-5">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav menu-right">
         <li class="nav-item">
+          {% if user.is_authenticated %}
+          <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
+          {% else %}
           <a class="nav-link" href="{% url 'accounts:register' %}"><i class="fa fa-user-plus"></i> Register</a>
+          {% endif %}
         </li>
-        <li class="nav-item">
+        <li class="nav-item {% if user.is_authenticated %} avatar dropdown {% endif %}">
+          {% if user.is_authenticated %}
+          <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img src="{{ user.profile.image.url }}" class="rounded-circle z-depth-0" alt="avatar image">
+          </span>
+          <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+            aria-labelledby="navbarDropdownMenuLink-55">
+            <a class="dropdown-item" href="#">My orders</a>
+            <a class="dropdown-item" href="#">Wish List</a>
+            <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+          </div>
+          {% else %}
           <a class="nav-link" href="{% url 'accounts:login' %}"><i class="fa fa-sign-in"></i> Login</a>
+          {% endif%}
         </li>
       </ul>
     </div>

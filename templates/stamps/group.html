@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- List of the stamps -->
+<section id="stamps-list">
+    {% if group %}
+    <div>
+        <h1 class="heading">{{ group.name }}</h1>
+    </div>
+    {% endif %}
+    <div class="stamp-container">
+        {% if products %}
+        {% for product in products %}
+        <div class="stamp-details">
+            <div class="stamp-img">
+                <a href="stamp-customization.html"><img src="{{ product.image.url }}" class='rounded' width='100%'
+                        alt="{{ product.slug }}"></a>
+            </div>
+            <div class="stamp-desc">
+                <a href="stamp-customization.html" class="stamp-name">{{ product.name }}</a>
+                <p class="stamp-price">&#8377; {{ product.price }}</p>
+                <p class="stamp-size">{{ product.height}}cm x {{ product.width }}cm</p>
+                <a href="{{ product.get_absolute_url }}" class="stamp-detail-btn">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}
