@@ -97,6 +97,10 @@ a.nav-link {
     margin-top: .5rem;
 }
 
+.cart-icon {
+    font-family: sans-serif !important;
+}
+
 @media only screen and (max-width: 1265px) {
     .navbar-brand {
         margin-left: 10px;
@@ -1025,13 +1029,13 @@ label {
     padding: 0 2rem;
 }
 
-.img {
+.content-container .img {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.img img {
+.content-container .img img {
     width: 30rem;
 }
 
@@ -1049,7 +1053,7 @@ label {
     width: 100px;
 }
 
-form h2 {
+.login-container form h2 {
     font-size: 2.9rem;
     text-transform: uppercase;
     margin: 1rem 0;
@@ -1105,13 +1109,13 @@ form h2 {
     margin-bottom: 4px;
 }
 
-form .i {
+.login-container form .i {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-form .i i {
+.login-container form .i i {
     color: #d9d9d9;
     transition: .3s;
     margin-top: .3rem;
@@ -1132,7 +1136,7 @@ form .i i {
     color: #d9d9d9;
 }
 
-.input {
+.login-container .input {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -1254,20 +1258,20 @@ form .i i {
 }
 
 @media (max-width: 1000px) {
-    form {
+    .content-container form {
         width: 290px;
     }
-    form h2 {
+    .content-container form h2 {
         font-size: 2.4rem;
         margin: 10px 0;
     }
-    .img img {
+    .content-container .img img {
         width: 400px;
     }
 }
 
 @media (max-width: 900px) {
-    .img {
+    .content-container .img {
         display: none;
     }
     .content-container {
@@ -1276,4 +1280,36 @@ form .i i {
     .login-container {
         justify-content: center;
     }
+}
+
+/* My Cart Page */
+
+.my_custom_table {
+    min-width: 400px;
+    font-size: 14px;
+}
+
+.my_custom_thead {
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    background-color: #f8f9fa !important;
+}
+
+.custom_image {
+    width: 100px;
+    height: 100px;
+}
+
+.custom_a {
+    text-decoration: none;
+}
+
+.custom_icon {
+    text-decoration: none;
+    color: #868e96 !important;
+}
+
+.my_custom_button {
+    margin-top: 5px;
 }
