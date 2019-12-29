@@ -855,7 +855,7 @@ footer img {
 
 .details .img {
     display: flex;
-    padding: 3rem;
+    padding: 1.5rem;
     border: 1px solid #DBDBDB;
     box-shadow: 0 0.625rem 3.5rem 0 rgba(198, 203, 222, .45);
     background-image: url(../img/checkerboard.png);
@@ -863,7 +863,8 @@ footer img {
 }
 
 .details img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
     margin: auto
 }
 

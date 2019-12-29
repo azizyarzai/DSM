@@ -28,6 +28,7 @@ def group(request, slug_category, slug_group):
     group = get_object_or_404(Group, slug=slug_group)
     products = Product.objects.all().filter(group=group)
     template = "stamps/group.html"
+
     context = {
         "group": group,
         "products": products

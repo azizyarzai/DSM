@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+
+
 {% block title %}
 Cart -
 {% endblock title %}
+
 
 {% block content %}
 {% if not cart_items %}
@@ -110,6 +113,8 @@ Cart -
             </tbody>
         </table>
         <div class="mx-auto">
+            <a href="{% url 'cart:checkout' %}" class="btn btn-secondary btn-block my_custom_button">Pay
+                by card</a>
             <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                 Shopping</a>
         </div>

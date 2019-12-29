@@ -24,6 +24,9 @@
 
   <!-- jquery -->
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  {% block extra_head %}
+
+  {% endblock extra_head %}
 
 </head>
 
@@ -47,6 +50,10 @@
 
   <!-- custom javascript -->
   <script src="{% static 'js/main.js' %}"></script>
+
+  {% block extra_scripts %}
+
+  {% endblock extra_scripts %}
 
 </body>
 
