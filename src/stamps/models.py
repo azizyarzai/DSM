@@ -66,6 +66,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products")
     availible = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    stock = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -52,11 +52,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 
+    # stripe
+    'stripe',
+
     # Local
     'pages',
     'stamps',
     'accounts',
     'staff',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.counter',
             ],
         },
     },
@@ -173,7 +178,14 @@ AUTHENTICATION_BACKENDS = (
     'accounts.EmailAuthenticationBackend.EmailBackend',
     'accounts.PhoneAuthenticationBackend.PhoneBackend',
 )
+
+# Login Settings
 LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:dashboard')
 
 SITE_ID = 1
+
+
+# Stripe Settings
+STRIPE_PUBLISHABLE_KEY = 'pk_test_lBI9kqGAAO9InhjBTTHEChp200XcjyNk8q'
+STRIPE_SECRET_KEY = 'sk_test_4S0QxWmiEJdjREyFph0wdydD00OQKx8ACK'
