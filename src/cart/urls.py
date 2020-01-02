@@ -4,7 +4,8 @@ from .views import (
     cart_detail,
     remove_from_cart,
     full_remove,
-    checkout
+    pay_by_card,
+    razorpay
 )
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path('', cart_detail, name="cart_detail"),
     path('remove/<int:product_id>/', remove_from_cart, name="remove_from_cart"),
     path('full-remove/<int:product_id>/', full_remove, name="full_remove"),
-    path('checkout/', checkout, name="checkout"),
+    path('pay-by-card/', pay_by_card, name="pay_by_card"),
+    path('razorpay/', razorpay, name="razorpay"),
 ]

@@ -189,3 +189,11 @@ SITE_ID = 1
 # Stripe Settings
 STRIPE_PUBLISHABLE_KEY = 'pk_test_lBI9kqGAAO9InhjBTTHEChp200XcjyNk8q'
 STRIPE_SECRET_KEY = 'sk_test_4S0QxWmiEJdjREyFph0wdydD00OQKx8ACK'
+
+# Razorpay seeting
+RAZORPAY_KEY_ID = 'rzp_test_5egSm5RO3cfJUq'
+RAZORPAY_KEY_SECRET = 'Z0wINS1Qnvj7TJXJlqfKpMzd'
+
+# text local sms setting
+
+SMS_API_KEY = 'HzIdYmDfHQ0-dVfwREKByXDNF4j8xwB1y5oyZKLo1y'

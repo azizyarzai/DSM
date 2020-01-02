@@ -3,6 +3,10 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+import urllib.request
+import urllib.parse
+import json
+from django.conf import settings
 from .models import Profile
 # Create your views here.
 
@@ -89,3 +93,40 @@ def logout(request):
         auth.logout(request)
         messages.success(request, "You are now logged out")
         return HttpResponseRedirect(reverse_lazy("pages:home"))
+
+
+def send_otp(request):
+    if request.method == 'POST':
+        api_key = settings.SMS_API_KEY
+        sender = 'TXTLCL'
+        number = request.POST.get('number')
+        message = request.POST.get('otp')
+        data = urllib.parse.urlencode({'apikey': api_key, 'numbers': number,
+                                       'message': message, 'sender': sender})
+        data = data.encode('utf-8')
+        request = urllib.request.Request("https://api.textlocal.in/send/?")
+        f = urllib.request.urlopen(request, data)
+        fr = f.read()
+        response = json.loads(fr).get('status')
+        if response == 'success':
+            return HttpResponseRedirect(reverse_lazy('otp verfication page.'))
+        elif response.get('warnings')[0].get('code') == 3:
+            messages.error("Please enter a valid phone number.")
+            return HttpResponseRedirect(reverse_lazy("Phone number page."))
+        else:
+            messages.error(request, "OTP was not sent.")
+            return HttpResponseRedirect(reverse_lazy("Phone number page."))
+
+    template = 'account/register.html'
+    context = {
+        'response': response
+    }
+    return(request, template, context)
+
+
+def view_profile(request):
+    template = 'accounts/profile.html'
+    context = {
+
+    }
+    return render(request, template, context)

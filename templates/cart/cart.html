@@ -113,8 +113,10 @@ Cart -
             </tbody>
         </table>
         <div class="mx-auto">
-            <a href="{% url 'cart:checkout' %}" class="btn btn-secondary btn-block my_custom_button">Pay
+            <a href="{% url 'cart:pay_by_card' %}" class="btn btn-secondary btn-block my_custom_button">Pay
                 by card</a>
+            <a href="{% url 'cart:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay
+                by razorpay</a>
             <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                 Shopping</a>
         </div>

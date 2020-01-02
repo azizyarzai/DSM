@@ -16,14 +16,19 @@
   <!-- google font B612 -->
   <link href="https://fonts.googleapis.com/css?family=B612&display=swap" rel="stylesheet">
 
-  <!--Custom CSS -->
+
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 
   <!-- Font Awsome -->
   <script src="https://kit.fontawesome.com/2f1b59521c.js" crossorigin="anonymous"></script>
 
   <!-- jquery -->
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
   {% block extra_head %}
 
   {% endblock extra_head %}
@@ -31,30 +36,47 @@
 </head>
 
 <body>
-  {% include "partials/navbar.html" %}
+  <!-- Preloader -->
+  <div id="preloader">
+    <div data-loader="dual-ring"></div>
+  </div>
+  <!-- Preloader End -->
+  <div id="main-wrapper">
+    {% include "partials/navbar.html" %}
 
 
-  <!-- Main container -->
-  {% block content %}
+    <!-- Main container -->
+    {% block content %}
 
-  {% endblock content %}
+    {% endblock content %}
 
 
-  {% include "partials/footer.html" %}
+    {% include "partials/footer.html" %}
 
+  </div>
+  <!-- Document Wrapper end -->
+
+  <!-- Back to Top
+  ============================================= -->
+  <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i
+      class="fa fa-chevron-up"></i></a>
   <!-- Bootstrap popper -->
   <script src="{% static 'js/popper.min.js' %}"></script>
 
-  <!-- Bootstrap js -->
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
 
   <!-- custom javascript -->
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+
+
 
   {% block extra_scripts %}
 
   {% endblock extra_scripts %}
-
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
