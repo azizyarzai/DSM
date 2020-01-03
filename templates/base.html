@@ -44,12 +44,14 @@
   <div id="main-wrapper">
     {% include "partials/navbar.html" %}
 
+    <!-- Content ============================================= -->
+    <div id="content">
+      <!-- Main container -->
+      {% block content %}
 
-    <!-- Main container -->
-    {% block content %}
-
-    {% endblock content %}
-
+      {% endblock content %}
+    </div>
+    <!-- Content end -->
 
     {% include "partials/footer.html" %}
 

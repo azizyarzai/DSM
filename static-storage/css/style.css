@@ -814,6 +814,12 @@ hr {
     border-color: rgba(250, 250, 250, 0.2);
 }
 
+/* cart */
+
+.fa-shopping-cart {
+    font-size: 1.3rem;
+}
+
 @media (max-width: 991px) {
     #header .navbar-dropdown-dark.primary-menu:before, .primary-menu.navbar-dropdown-dark ul.navbar-nav>li.dropdown .dropdown-menu .dropdown-menu {
         background-color: #252A2C;
@@ -1078,7 +1084,7 @@ hr {
 
 .page-header {
     margin: 0 0 30px 0;
-    padding: 30px 0;
+    padding: 15px 0 !important;
 }
 
 .page-header h1 {
@@ -1159,6 +1165,11 @@ hr {
 
 .page-header.page-header-text-dark .breadcrumb>li a:hover {
     color: #2dbe60;
+}
+
+.breadcrumb .next {
+    padding: .4rem;
+    font-size: 10px;
 }
 
 /* =================================== */

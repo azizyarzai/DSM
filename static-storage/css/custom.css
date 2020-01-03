@@ -1,16 +1,13 @@
 html, body {
-    width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    box-sizing: border-box;
 }
 
 body {
     background-color: #fff;
     font-family: 'B612', sans-serif !important;
     font-size: 14px;
+    color: #4c4d4d;
+    line-height: 22px;
 }
 
 /* About Page */
@@ -756,7 +753,7 @@ label {
     bottom: -2px;
     width: 0;
     height: 2px;
-    background-color: #6159E6;
+    background-color: #38CE3E;
     transition: .3s;
 }
 
@@ -769,7 +766,7 @@ label {
 }
 
 .input-div.focus .i i {
-    color: #6159E6;
+    color: #38CE3E;
 }
 
 .input-div.focus div h5 {
@@ -854,7 +851,7 @@ label {
     font-size: 1.2rem;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #6159E6, #B6B1FF, #6159E6);
+    background-image: linear-gradient(to right, #38CE3E, #9FF2A2, #38CE3E);
     cursor: pointer;
     background-size: 200%;
     transition: .5s;
