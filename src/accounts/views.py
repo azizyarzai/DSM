@@ -124,6 +124,7 @@ def send_otp(request):
     return(request, template, context)
 
 
+@login_required
 def view_profile(request):
     template = 'accounts/profile.html'
     context = {

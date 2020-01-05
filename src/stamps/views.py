@@ -30,6 +30,7 @@ def group(request, slug_category, slug_group):
     template = "stamps/group.html"
 
     context = {
+        "category": category,
         "group": group,
         "products": products
     }
@@ -43,6 +44,7 @@ def product(request, slug_category, slug_group, slug_product):
     product = get_object_or_404(products, slug=slug_product)
     template = "stamps/product.html"
     context = {
+        "category": category,
         "group": group,
         "product": product
     }

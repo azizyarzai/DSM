@@ -33,87 +33,20 @@
                   <li>
                     <div class="dropdown-mega-content">
                       <div class="row">
-                        <div class="col-lg-3"> <span class="sub-title">Homepage</Span>
+                        {% if categories %}
+                        {% for category in categories %}
+                        <div class="col-lg-3"> <span class="sub-title">{{ category.name}}</Span>
                           <ul class="dropdown-mega-submenu">
-                            <li><a class="dropdown-item" href="index.html">Home Version 1</a></li>
-                            <li><a class="dropdown-item" href="index-2.html">Home Version 2</a></li>
-                            <li><a class="dropdown-item" href="landing-page-send.html">Landing Page - Send</a></li>
-                            <li><a class="dropdown-item" href="landing-page-receive.html">Landing Page - Receive</a>
+                            {% if category.get_groups %}
+                            {% for group in category.get_groups %}
+                            <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
                             </li>
+                            {% endfor %}
+                            {% endif %}
                           </ul>
                         </div>
-                        <div class="col-lg-3"> <span class="sub-title">Account</Span>
-                          <ul class="dropdown-mega-submenu">
-                            <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                            <li><a class="dropdown-item" href="profile-cards-and-bank-accounts.html">Cards & Bank
-                                Accounts</a></li>
-                            <li><a class="dropdown-item" href="profile-notifications.html">Notifications</a></li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Login</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="login.html">Login Page 1</a></li>
-                                <li><a class="dropdown-item" href="login-2.html">Login Page 2</a></li>
-                                <li><a class="dropdown-item" href="login-3.html">Login Page 3</a></li>
-                              </ul>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Signup</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="signup.html">Signup Page 1</a></li>
-                                <li><a class="dropdown-item" href="signup-2.html">Signup Page 2 </a></li>
-                                <li><a class="dropdown-item" href="signup-3.html">Signup Page 3 </a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3"> <span class="sub-title">Dashboard</Span>
-                          <ul class="dropdown-mega-submenu">
-                            <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
-                            <li><a class="dropdown-item" href="transactions.html">Transactions</a></li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Send Money</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="send-money.html">Send Money</a></li>
-                                <li><a class="dropdown-item" href="send-money-confirm.html">Send Money Confirm</a></li>
-                                <li><a class="dropdown-item" href="send-money-success.html">Send Money Success </a></li>
-                              </ul>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Request Money</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="request-money.html">Request Money</a></li>
-                                <li><a class="dropdown-item" href="request-money-confirm.html">Request Money Confirm</a>
-                                </li>
-                                <li><a class="dropdown-item" href="request-money-success.html">Request Money Success
-                                  </a></li>
-                              </ul>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Deposit Money</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="deposit-money.html">Deposit Money</a></li>
-                                <li><a class="dropdown-item" href="deposit-money-confirm.html">Deposit Money Confirm</a>
-                                </li>
-                                <li><a class="dropdown-item" href="deposit-money-success.html">Deposit Money Success
-                                  </a></li>
-                              </ul>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Withdraw Money</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="withdraw-money.html">Withdraw Money</a></li>
-                                <li><a class="dropdown-item" href="withdraw-money-confirm.html">Withdraw Money
-                                    Confirm</a></li>
-                                <li><a class="dropdown-item" href="withdraw-money-success.html">Withdraw Money Success
-                                  </a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3"> <span class="sub-title">Others</Span>
-                          <ul class="dropdown-mega-submenu">
-                            <li><a class="dropdown-item" href="about-us.html">About Us</a></li>
-                            <li><a class="dropdown-item" href="fees.html">Fees</a></li>
-                            <li><a class="dropdown-item" href="help.html">Help</a></li>
-                            <li><a class="dropdown-item" href="contact-us.html">Contact Us</a></li>
-                            <li><a class="dropdown-item" href="elements.html">Elements</a></li>
-                            <li><a class="dropdown-item" href="elements-2.html">Elements 2</a></li>
-                          </ul>
-                        </div>
+                        {% endfor %}
+                        {% endif %}
                       </div>
                     </div>
                   </li>
@@ -184,10 +117,35 @@
           ============================== -->
         <nav class="login-signup navbar navbar-expand">
           <ul class="navbar-nav">
-            <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i></a> </li>
+            <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart nav-icon"></i></a> </li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a> </li>
+            <li class="dropdown avatar">
+              <a class="dropdown-toggle profile-img" data-toggle="adm">
+                <img
+                  src="{% if user.profile.image %} {{ user.profile.image.url }} {% else %}{% static 'img/svg/profile.svg' %}{% endif %}"
+                  width="40px" height="40px" class="rounded-circle z-depth-0" alt="profile image">
+              </a>
+              <ul class="dropdown-menu adm">
+                <li><a class="dropdown-item" href="{% url 'accounts:view_profile' %}"><i
+                      class="fas fa-user drop-icon"></i>My
+                    Profile</a>
+                </li>
+                <li><a class="dropdown-item" href="feature-layout-boxed.html"><i
+                      class="fas fa-briefcase drop-icon"></i>Orders</a>
+                </li>
+                <li><a class="dropdown-item" href="feature-layout-boxed.html"><i class="fas fa-heart drop-icon"></i>Wish
+                    List</a>
+                </li>
+                <li><a class="dropdown-item" href="javascript:document.getElementById('logout').submit();"><i
+                      class="fas fa-sign-out-alt drop-icon"></i>Logout</a></li>
+              </ul>
+            </li>
+            {% else %}
             <li><a href="{% url 'accounts:login' %}">Login</a> </li>
             <li class="align-items-center h-auto ml-sm-3"><a class="btn btn-primary d-none d-sm-block"
                 href="{% url 'accounts:register' %}">Sign Up</a></li>
+            {% endif %}
           </ul>
         </nav>
         <!-- Login & Signup Link end -->

@@ -5,12 +5,8 @@ from stamps.models import Category, Group
 
 
 def home(request):
-    categories = Category.objects.all()
     template = "pages/index.html"
-    context = {
-        "categories": categories,
-    }
-    return render(request, template, context)
+    return render(request, template)
 
 
 def about(request):

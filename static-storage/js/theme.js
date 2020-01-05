@@ -1,19 +1,5 @@
-
-
-/*
-Template:  		Payyed HTML Template
-Written by: 	Harnish Design - (http://www.harnishdesign.net)
-*/
-
 (function ($) {
     "use strict";
-
-    // Preloader
-    $(window).on('load', function () {
-        $('[data-loader="circle-side"]').fadeOut(); // will first fade out the loading animation
-        $('#preloader').delay(333).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(333);
-    });
 
     /*---------------------------------------------------
         Primary Menu
@@ -79,6 +65,20 @@ Written by: 	Harnish Design - (http://www.harnishdesign.net)
         $(this).toggleClass('open');
     });
 
+    $(".profile-img").click(function () {
+        // Hide other dropdown menus in case of multiple dropdowns
+        $(".dropdown-menu").not($(this).next()).slideUp("fast");
+
+        // Toggle the current dropdown menu
+        $(this).next(".dropdown-menu").slideToggle("fast");
+    });
+
+    // Hide dropdown menu on click outside
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest(".avatar").length) {
+            $(".adm").slideUp("fast");
+        }
+    });
 
     /*---------------------------------------------------
     Carousel (Owl Carousel)
@@ -133,14 +133,10 @@ Written by: 	Harnish Design - (http://www.harnishdesign.net)
         $("#video").attr('src', $videoSrc);
     })
 
-    /*---------------------------------------------------
-       tooltips
-    ----------------------------------------------------- */
+    /*--------------------------------------------------- tooltips ----------------------------------------------------- */
     $('[data-toggle=\'tooltip\']').tooltip({ container: 'body' });
 
-    /*---------------------------------------------------
-       Scroll to top
-    ----------------------------------------------------- */
+    /*--------------------------------------------------- Scroll to top ----------------------------------------------------- */
     $(function () {
         $(window).on('scroll', function () {
             if ($(this).scrollTop() > 150) {
@@ -164,4 +160,6 @@ Written by: 	Harnish Design - (http://www.harnishdesign.net)
     });
 
 
+
 })(jQuery);
+

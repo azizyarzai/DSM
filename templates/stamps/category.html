@@ -4,18 +4,15 @@
 {% block content %}
 <!-- Page Header
 ============================================= -->
-<section class="page-header page-header-text-light bg-dark-3 py-5">
+<section class="page-header page-header-text-light bg-dark-5 py-5">
     <div class="container">
         <div class="row text-center">
             <div class="col-12">
                 <ul class="breadcrumb mb-0">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'pages:home' %}">Home</a></li>
                     <i class="fas fa-chevron-right next"></i>
-                    <li class="active">Contact Us</li>
+                    <li class="active">{{ category.name }}</li>
                 </ul>
-            </div>
-            <div class="col-12">
-                <h1>Contact Us</h1>
             </div>
         </div>
     </div>
