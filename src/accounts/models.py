@@ -25,6 +25,7 @@ class Profile(models.Model):
     blocked = models.BooleanField(default=False)
 
     class Meta:
+        db_table = 'profile'
         ordering = ('user',)
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
@@ -48,6 +49,7 @@ class Address(models.Model):
         User, on_delete=models.CASCADE, related_name='addresses')
 
     class Meta:
+        db_table = 'address'
         ordering = ('address',)
         verbose_name = "Address"
         verbose_name_plural = "Addresses"

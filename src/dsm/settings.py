@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'stamps',
     'accounts',
     'staff',
-    'cart',
+    'carts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,7 @@ WSGI_APPLICATION = 'dsm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dsm',
+        'NAME': 'dsm_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',

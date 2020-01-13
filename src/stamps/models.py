@@ -15,6 +15,7 @@ class Category(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = 'category'
         ordering = ('name',)
         verbose_name = "category"
         verbose_name_plural = "categories"
@@ -47,6 +48,7 @@ class Group(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = 'group'
         ordering = ('name',)
         verbose_name = "group"
         verbose_name_plural = "groups"
@@ -88,6 +90,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     class Meta:
+        db_table = 'product'
         ordering = ('name',)
         verbose_name = "product"
         verbose_name_plural = "products"

@@ -61,13 +61,13 @@ Cart -
                         &#8377; {{ cart_item.sub_total }}
                     </td>
                     <td>
-                        <a href="{% url 'cart:add_to_cart' cart_item.product.id %}" class="custom_a">
+                        <a href="{% url 'carts:add_to_cart' cart_item.product.id %}" class="custom_a">
                             <i class="fas fa-plus-circle custom_icon"></i>
                         </a>&nbsp;
-                        <a href="{% url 'cart:remove_from_cart' cart_item.product.id %}" class="custom_a">
+                        <a href="{% url 'carts:remove_from_cart' cart_item.product.id %}" class="custom_a">
                             <i class="fas fa-minus-circle custom_icon"></i>
                         </a>&nbsp;
-                        <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_a">
+                        <a href="{% url 'carts:full_remove' cart_item.product.id %}" class="custom_a">
                             <i class="fas fa-trash custom_icon"></i>
                         </a>
                     </td>
@@ -99,7 +99,7 @@ Cart -
             </tbody>
         </table>
         <div class="mx-auto">
-            <a href="{% url 'cart:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay Now</a>
+            <a href="{% url 'carts:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay Now</a>
             <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                 Shopping</a>
         </div>

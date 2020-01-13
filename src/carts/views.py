@@ -27,7 +27,7 @@ def add_to_cart(request, product_id):
             cart=cart
         )
         cart_item.save()
-    return HttpResponseRedirect(reverse_lazy("cart:cart_detail"))
+    return HttpResponseRedirect(reverse_lazy("carts:cart_detail"))
 
 # View cart details
 
@@ -64,7 +64,7 @@ def remove_from_cart(request, product_id):
         # Reducing the amount of the product from the cart
         cart.total = cart.total - product.price
         cart.save()
-    return HttpResponseRedirect(reverse_lazy('cart:cart_detail'))
+    return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))
 
 
 # Removing the full item
@@ -74,14 +74,13 @@ def full_remove(request, product_id):
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
 
-
     # Reducing the amount of the product from the cart
     subtract = cart_item.quantity * product.price
     print(subtract)
     cart.total = cart.total - subtract
     cart.save()
 
-    return HttpResponseRedirect(reverse_lazy('cart:cart_detail'))
+    return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))
 
 # Payment
 

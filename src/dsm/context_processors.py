@@ -1,4 +1,4 @@
-from cart.models import Cart, CartItem
+from carts.models import Cart, CartItem
 from stamps.models import Category
 
 

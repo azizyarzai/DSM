@@ -25,8 +25,8 @@ urlpatterns = [
     path('accounts/', include(("accounts.urls", "accounts"), "accounts")),
     path('accounts/', include('allauth.urls')),
     path('stamps/', include(("stamps.urls", "stamps"), "stamps")),
-    path('stuff/', include(("staff.urls", "stuff"), "staff")),
-    path('cart/', include(("cart.urls", "cart"), "cart")),
+    path('staff/', include(("staff.urls", "stuff"), "staff")),
+    path('carts/', include(("carts.urls", "carts"), "carts")),
 ]
 
 if settings.DEBUG:

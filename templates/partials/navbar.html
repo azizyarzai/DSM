@@ -117,14 +117,14 @@
           ============================== -->
         <nav class="login-signup navbar navbar-expand">
           <ul class="navbar-nav">
-            <li><a href="{% url 'cart:cart_detail' %}"><i
-                  class="fas fa-shopping-cart nav-icon"></i>{% if item_count == 0 %}
+            <li><a href="{% url 'carts:cart_detail' %}"><i class="fas fa-shopping-cart nav-icon"></i>
+                {% if item_count == 0 %}
                 {% else %}
                 <span class="counter">{{ item_count }}</span>
                 {% endif %}
               </a> </li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a> </li>
+            <li><a href="{% url 'carts:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a> </li>
             <li class="dropdown avatar">
               <a class="dropdown-toggle profile-img" data-toggle="adm">
                 <img

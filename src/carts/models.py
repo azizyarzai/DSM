@@ -24,7 +24,7 @@ class Cart(models.Model):
     objects = CartManager()
 
     class Meta:
-        db_table = 'Cart'
+        db_table = 'cart'
         ordering = ('user',)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class CartItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = 'CartItem'
+        db_table = 'cart_item'
         ordering = ('-created',)
 
     def sub_total(self):
