@@ -16,7 +16,8 @@ ADDRESS_TYPE_CHOICES = (
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="profile")
     image = models.ImageField(upload_to="profiles", blank=True, null=True)
     phone = models.CharField(max_length=10)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
@@ -38,12 +39,13 @@ class Profile(models.Model):
 class Address(models.Model):
     address_type = models.CharField(max_length=4, choices=ADDRESS_TYPE_CHOICES)
     address = models.TextField(max_length=2000)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip_code = models.PositiveIntegerField()
     country = models.CharField(max_length=100)
-    profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name='addresses')
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    zip_code = models.PositiveIntegerField()
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='addresses')
 
     class Meta:
         ordering = ('address',)
@@ -51,4 +53,4 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return self.address
+        return str(self.address)

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
@@ -7,7 +7,9 @@ import urllib.request
 import urllib.parse
 import json
 from django.conf import settings
-from .models import Profile
+from .models import Profile, Address
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 
 
@@ -127,7 +129,143 @@ def send_otp(request):
 @login_required
 def view_profile(request):
     template = 'accounts/profile.html'
-    context = {
+    return render(request, template)
 
-    }
-    return render(request, template, context)
+
+@login_required
+def add_address(request):
+    if request.method == "POST":
+        user = request.user
+        address_type = request.POST.get("address-type")
+        address = request.POST.get("address")
+        country = request.POST.get("country")
+        state = request.POST.get("state")
+        city = request.POST.get("city")
+        zip_code = request.POST.get("zip-code")
+
+        new_address = Address.objects.create(
+            user=user, address_type=address_type, address=address,
+            country=country, state=state, city=city, zip_code=zip_code
+        )
+
+        new_address.save()
+        messages.success(request, "New address was successfully added.")
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def update_address(request, address_id):
+    if request.method == "POST":
+        user = request.user
+        address_type = request.POST.get("address-type")
+        address = request.POST.get("address")
+        country = request.POST.get("country")
+        state = request.POST.get("state")
+        city = request.POST.get("city")
+        zip_code = request.POST.get("zip-code")
+
+        address_fetched = get_object_or_404(Address, id=address_id, user=user)
+        address_fetched.address_type = address_type
+        address_fetched.address = address
+        address_fetched.country = country
+        address_fetched.state = state
+        address_fetched.city = city
+        address_fetched.zip_code = zip_code
+        address_fetched.save()
+        messages.success(request, "Your address was successfully updated.")
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def delete_address(request, address_id):
+    address = get_object_or_404(Address, id=address_id)
+    address.delete()
+    messages.success(request, "Address was successfully deleted.")
+    return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def update_personal_details(request):
+    if request.method == "POST":
+        user = request.user
+        first_name = request.POST.get('first-name')
+        last_name = request.POST.get("last-name")
+        dob = request.POST.get('dob')
+        gender = request.POST.get("gender")
+
+        user.first_name = first_name
+        user.last_name = last_name
+
+        profile = Profile.objects.get(user=user)
+        profile.date_of_birth = dob
+        profile.gender = gender
+        profile.save()
+        user.save()
+        messages.success(request, "Personal details has been updated.")
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def update_accounts_status(request):
+    if request.method == "POST":
+        user = request.user
+        status = request.POST.get("active-status")
+        if status == "0":
+            user.is_active = False
+            user.save()
+            auth.logout(request)
+            messages.error(request, 'Your account has beeen deactivated')
+            return HttpResponseRedirect(reverse_lazy("accounts:login"))
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def update_email(request):
+    if request.method == "POST":
+        user = request.user
+        email = request.POST.get('email')
+        user.email = email
+        user.save()
+        messages.success(request, "Your email has been updated.")
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def add_phone(request):
+    if request.method == "POST":
+        user = request.user
+        phone = request.POST.get('phone')
+        profile = Profile.objects.get(user=user)
+        profile.phone = phone
+        profile.save()
+        messages.success(request, "Your phone has been updated.")
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    else:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, "Your password has been updated.")
+            return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+        # else:
+        #     messages.error(request, "blablanblab")
+        #     return HttpResponseRedirect('/accounts/profile/#change-password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, "accounts/form.html", {'form': form})

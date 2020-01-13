@@ -20,7 +20,7 @@ inputs.forEach(input => {
 $(function () {
     // Custom password validators
     $.validator.addMethod("passLength", function (value, element) {
-        return value.length >= 6;
+        return value.length >= 8;
     }, "Your password must be at least 6 character long");
 
     $.validator.addMethod("charNum", function (value, element) {
@@ -68,7 +68,7 @@ $(function () {
             lname: {
                 required: true,
                 lettersonly: true
-            }
+            },
         },
         messages: {
             email: {
@@ -91,6 +91,33 @@ $(function () {
             },
             lname: {
                 required: "Please enter your last name"
+            }
+        }
+    });
+    $('#changePassword').validate({
+        rules: {
+            old_password: {
+                required: true
+            },
+            new_password1: {
+                required: true,
+                passLength: true,
+                charNum: true
+            },
+            new_password2: {
+                required: true,
+                equalTo: "#newPassword"
+            }
+        },
+        messages: {
+            old_password: {
+                required: "Please enter your old password"
+            },
+            new_password1: {
+                required: "Please enter your new password"
+            },
+            new_password2: {
+                required: "Please enter your new password again"
             }
         }
     });

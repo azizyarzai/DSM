@@ -965,6 +965,11 @@ body {
     font-size: 14px;
 }
 
+.my_custom_table .prod-name {
+    text-transform: capitalize;
+    color: #212529;
+}
+
 .my_custom_thead {
     font-weight: normal;
     text-transform: uppercase;
@@ -988,4 +993,22 @@ body {
 
 .my_custom_button {
     margin-top: 5px;
+}
+
+.counter {
+    /* width: 25px;
+    height: 25px; */
+    border-radius: 50%;
+    position: absolute;
+    left: 1.7rem;
+    top: 1.2rem;
+    background-color: #f16565;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 18px;
+    padding: 0 6px;
+    height: 18px;
 }

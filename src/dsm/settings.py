@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'django.contrib.sites',
 
+    # local installed apps
+    'widget_tweaks',
     # All auth
     'allauth',
     'allauth.account',
@@ -51,9 +53,6 @@ INSTALLED_APPS = [
     # Providers
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-
-    # stripe
-    'stripe',
 
     # Local
     'pages',
@@ -102,7 +101,7 @@ WSGI_APPLICATION = 'dsm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dsmdb',
+        'NAME': 'dsm',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',

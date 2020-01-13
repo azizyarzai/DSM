@@ -31,7 +31,8 @@
         {% for group in groups %}
         <div class="stamp-type-details">
             <div class="stamp-type-img">
-                <a href="#"><img src="{{ group.image.url }}" class='rounded' width='100%' alt="{{ group.slug }}"></a>
+                <a href="{{ group.get_absolute_url }}"><img src="{{ group.image.url }}" class='rounded' width='100%'
+                        alt="{{ group.slug }}"></a>
             </div>
             <div class="stamp-type-desc">
                 <a href="{{ group.get_absolute_url }}" class='head'>{{ group.name }}

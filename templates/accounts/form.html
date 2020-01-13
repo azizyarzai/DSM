@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_head %}
+<script src="{% static 'js/jquery-validation.min.js' %}"></script>
+<script src="{% static 'js/jquery-validation-additional-methods.min.js' %}"></script>
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container formcont">
+    <h3>Change Password</h3>
+    <div class="passform">
+        <form action="{% url 'accounts:change_password' %}" id="changePassword" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="existingPassword" class="form-label">Confirm Current Password</label>
+                {% render_field form.old_password class="form-control" data-bv-field="existingpassword" id="existingPassword" placeholder="Enter Current Password" %}
+                {{ form.old_password.errors }}
+                <label for="newPassword" class="form-label">New Password</label>
+                {% render_field form.new_password1 class="form-control" data-bv-field="newpassword" id="newPassword" placeholder="Enter New Password" %}
+                {{ form.new_password1.errors }}
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                {% render_field form.new_password2 class="form-control" data-bv-field="confirmgpassword" id="confirmPassword" placeholder="Enter Confirm New Password" %}
+                {{ form.new_password2.errors }}
+            </div>
+            <button class="btn btn-primary btn-block mt-4" type="submit">Change
+                Password</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_scripts %}
+<!-- custom javascript -->
+<script src="{% static 'js/authentication.js' %}"></script>
+{% endblock extra_scripts %}

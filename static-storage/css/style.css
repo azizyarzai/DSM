@@ -1130,6 +1130,7 @@ hr {
     text-shadow: none;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    text-transform: capitalize;
 }
 
 .page-header .breadcrumb>li+li:before {
@@ -1144,6 +1145,7 @@ hr {
 .page-header .breadcrumb>li a {
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    text-transform: capitalize;
 }
 
 .page-header .breadcrumb>li a:hover {
@@ -2070,4 +2072,68 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 
 .modal-content label {
     margin: .5rem .5rem .5rem 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.new-add {
+    padding: 0 !important;
+}
+
+.new-add a {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #dee3e4;
+    text-transform: uppercase;
+}
+
+.new-add i {
+    margin-right: 1rem;
+}
+
+/* Password change form */
+
+ul.errorlist {
+    margin-bottom: 0 !important;
+    list-style: none;
+    padding-left: 0 !important;
+}
+
+.errorlist li, label.error {
+    color: red !important;
+    font-size: 12px !important;
+}
+
+label.error {
+    display: block;
+}
+
+.passform {
+    display: grid;
+}
+
+.passform {
+    max-width: 40rem;
+    align-self: center;
+    justify-self: center;
+    margin: auto;
+}
+
+.passform button {
+    max-width: 10rem;
+    margin: 0 auto 1rem auto;
+}
+
+.passform label.form-label {
+    margin-top: 1rem
+}
+
+.formcont h3 {
+    text-align: center;
+    margin: 1rem;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #8e9a9d
 }

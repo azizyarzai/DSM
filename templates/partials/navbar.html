@@ -15,8 +15,8 @@
       <div class="header-column justify-content-start">
         <!-- Logo
           ============================= -->
-        <div class="logo"> <a class="d-flex" href="{% url 'pages:home' %}" title="Payyed - HTML Template"><img
-              src="{% static 'img/logo/dsm.png' %}" width="50px" alt="Dangui Stamp Makers" /></a> </div>
+        <div class="logo"> <a class="d-flex" href="{% url 'pages:home' %}"><img src="{% static 'img/logo/dsm.png' %}"
+              width="50px" alt="Dangui Stamp Makers" /></a> </div>
         <!-- Logo end -->
         <!-- Collapse Button
           ============================== -->
@@ -117,7 +117,12 @@
           ============================== -->
         <nav class="login-signup navbar navbar-expand">
           <ul class="navbar-nav">
-            <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart nav-icon"></i></a> </li>
+            <li><a href="{% url 'cart:cart_detail' %}"><i
+                  class="fas fa-shopping-cart nav-icon"></i>{% if item_count == 0 %}
+                {% else %}
+                <span class="counter">{{ item_count }}</span>
+                {% endif %}
+              </a> </li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'cart:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a> </li>
             <li class="dropdown avatar">

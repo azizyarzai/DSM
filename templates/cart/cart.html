@@ -51,19 +51,15 @@ Cart -
                                 alt="" class="float-left rounded custom_image"></a>
                     </td>
                     <td class="text-left">
-                        {{ cart_item.product.name }}
+                        <a class='prod-name' href="">{{ cart_item.product.name }}</a>
                         <br>
-                        SKU: {{ cart_item.product.id }}
-                        <br>
-                        Unit Price: {{ cart_item.product.price }}
+                        Price: {{ cart_item.product.price }}
                         <br>
                         Qty: {{ cart_item.quantity }}
                     </td>
                     <td>
                         &#8377; {{ cart_item.sub_total }}
                     </td>
-
-                    {% if cart_item.quantity < cart_item.product.stock %}
                     <td>
                         <a href="{% url 'cart:add_to_cart' cart_item.product.id %}" class="custom_a">
                             <i class="fas fa-plus-circle custom_icon"></i>
@@ -75,16 +71,6 @@ Cart -
                             <i class="fas fa-trash custom_icon"></i>
                         </a>
                     </td>
-                    {% else %}
-                    <td>
-                        <a href="{% url 'cart:remove_from_cart' cart_item.product.id %}" class="custom_a">
-                            <i class="fas fa-minus-circle custom_icon"></i>
-                        </a>&nbsp;
-                        <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_a">
-                            <i class="fas fa-trash-alt custom_icon"></i>
-                        </a>
-                    </td>
-                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -113,10 +99,7 @@ Cart -
             </tbody>
         </table>
         <div class="mx-auto">
-            <a href="{% url 'cart:pay_by_card' %}" class="btn btn-secondary btn-block my_custom_button">Pay
-                by card</a>
-            <a href="{% url 'cart:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay
-                by razorpay</a>
+            <a href="{% url 'cart:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay Now</a>
             <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                 Shopping</a>
         </div>
