@@ -29,8 +29,8 @@ $(document).ready(function () {
         $('#address-details-modal select[name=country]').val('').find("option[value='']").attr('selected', true);
         $('#address-details-modal select[name=state]').val('').find("option[value='']").attr('selected', true);
         $('#address-details-modal select[name=city]').val('').find("option[value='']").attr('selected', true);
-        $('#address-details-modal input[name=zip_code]').val('');
-        $('#address-details-modal input[name=address_id]').val('').prop("disabled", true);
+        $('#address-details-modal input[name=zip-code]').val('');
+        $('#address-details-modal input[name=address-id]').val('').prop("disabled", true);
         $('#address-details-modal form').attr('action', "/accounts/profile/address/add-address/");
     });
 

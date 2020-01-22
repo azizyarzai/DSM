@@ -1012,3 +1012,7 @@ body {
     padding: 0 6px;
     height: 18px;
 }
+
+.hidden {
+    display: none !important;
+}

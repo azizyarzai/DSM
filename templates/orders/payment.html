@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="row text-center">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <form action="https://localhost:8000/order/payment/success/" method="POST">
+                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ key_id }}"
+                            data-amount="100" data-currency="INR" data-order_id="{{ order_id }}"
+                            data-buttontext="Pay Now" data-name="Stamp 1" data-description="This is a stamp"
+                            data-image="{% static 'img/logo/dsm.png' %}" data-prefill.name="Aziz Rahman Yarzai"
+                            data-prefill.email="{{ user.email }}" data-prefill.contact="{{ user.profile.phone }}"
+                            data-theme.color="#317CFF">
+                            </script>
+                        <input type="hidden" custom="Hidden Element" name="hidden">
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="payment-options">
+                        <button class="btn">Cash On Delivery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="price-details">
+                <h4>Price Details</h4>
+                <hr>
+                <div>
+                    <div>
+                        <span>Order Total</span>
+                        <span>{{ order.total }}</span>
+                    </div>
+                    <div>
+                        <span>Delivery Charges</span>
+                        <span>{% if order.delivery_charges > 0 %} {{ order.delivery_charges }} {% else %} FREE
+                            {% endif %}</span>
+                    </div>
+                    <hr>
+                    <div>
+                        <span>Total</span>
+                        <span>{{ order.total }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="add-details">
+                <h4>Deliver To:</h4>
+                <div>{{ user.first_name }} {{ user.last_name }}</div>
+                <div>{{ order.delivery_address.address }}</div>
+                <div>{{ order.delivery_address.city }}</div>
+                <span>{{ order.delivery_address.state }}</span>
+                <span>{{ order.delivery_address.zip_code }}</span>
+                <div>Mobile: {{ user.profile.phone }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -10,6 +10,7 @@ from django.conf import settings
 from .models import Profile, Address
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.http import is_safe_url
 # Create your views here.
 
 
@@ -19,10 +20,12 @@ def login(request):
     else:
         if request.method == 'POST':
             # Login User
-            email = request.POST.get('email_phone')
+            email_phone = request.POST.get('email_phone')
             password = request.POST.get('pass')
 
-            user = auth.authenticate(username=email, password=password)
+            redirect_url_path = request.POST.get('next') or None
+
+            user = auth.authenticate(username=email_phone, password=password)
 
             if user is not None:
                 if user.profile.blocked:
@@ -32,12 +35,17 @@ def login(request):
                 else:
                     auth.login(request, user)
                     messages.success(request, 'You are now logged in')
-                    return HttpResponseRedirect(reverse_lazy('accounts:dashboard'))
+                    if redirect_url_path != 'None':
+                        if is_safe_url(redirect_url_path, request.get_host()):
+                            return HttpResponseRedirect(redirect_url_path)
+                    else:
+                        return HttpResponseRedirect(reverse_lazy('accounts:dashboard'))
             else:
                 messages.error(request, 'Invalid credentials')
                 return HttpResponseRedirect(reverse_lazy('accounts:login'))
         else:
-            return render(request, 'accounts/login.html')
+            next_url = request.GET.get('next')
+            return render(request, 'accounts/login.html', {"next_url": next_url})
 
 
 def register(request):
@@ -64,10 +72,6 @@ def register(request):
                     last_name=last_name, email=email, password=password,
                 )
                 user.save()
-
-                # creating profile for the user
-                profile = Profile.objects.get_or_create(user=user)
-                profile.save()
 
                 # login after register
                 auth.login(

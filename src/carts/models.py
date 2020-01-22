@@ -1,7 +1,7 @@
 from django.db import models
 from stamps.models import Product
 from django.contrib.auth.models import User
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, post_delete
 # Create your models here.
 
 
@@ -13,11 +13,27 @@ class CartManager(models.Manager):
                 user_obj = user
         return self.model.objects.create(user=user_obj)
 
+    def new_or_get(self, request):
+        cart_id = request.session.get("cart_id", None)
+        qs = self.get_queryset().filter(id=cart_id)
+        if qs.count() == 1:
+            new_obj = False
+            cart_obj = qs.first()
+            if request.user.is_authenticated and cart_obj.user is None:
+                cart_obj.user = request.user
+                cart_obj.save()
+        else:
+            cart_obj = Cart.objects.new_cart(user=request.user)
+            new_obj = True
+            request.session['cart_id'] = cart_obj.id
+        return cart_obj, new_obj
+
 
 class Cart(models.Model):
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    checked_out = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -37,7 +53,6 @@ class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart, on_delete=models.CASCADE, related_name="cart_items")
     quantity = models.IntegerField()
-    active = models.BooleanField(default=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -51,9 +66,8 @@ class CartItem(models.Model):
     def __str__(self):
         return str(self.product)
 
-# Calculating the total of the card
 
-
+# Calculating the total of the cart after saving CartItem
 def post_save_cart_item_receiver(sender, instance, *args, **kwarge):
     cart = instance.cart
     total = 0
@@ -65,3 +79,14 @@ def post_save_cart_item_receiver(sender, instance, *args, **kwarge):
 
 
 post_save.connect(post_save_cart_item_receiver, sender=CartItem)
+
+
+# Calculating the total of the cart after deleting CartItem
+def post_delete_cart_item_receiver(sender, instance, *args, **kwargs):
+    cart = instance.cart
+    subtract_amount = instance.quantity * instance.product.price
+    cart.total = cart.total - subtract_amount
+    cart.save()
+
+
+post_delete.connect(post_delete_cart_item_receiver, sender=CartItem)

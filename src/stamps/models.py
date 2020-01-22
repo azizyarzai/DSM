@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse_lazy
 from django.db.models.signals import pre_save
-from .utils import unique_slug_generator
+from dsm.utils import unique_slug_generator
 
 # Create your models here.
 

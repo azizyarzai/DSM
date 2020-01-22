@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.db.models.signals import post_save
 # Create your models here.
 
 
@@ -35,6 +36,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# When a user is created a profile will be created for him
+def post_save_user_created_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
+
+
+post_save.connect(post_save_user_created_receiver, sender=User)
 
 
 class Address(models.Model):

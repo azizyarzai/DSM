@@ -53,12 +53,12 @@ Cart -
                     <td class="text-left">
                         <a class='prod-name' href="">{{ cart_item.product.name }}</a>
                         <br>
-                        Price: {{ cart_item.product.price }}
+                        Price: &#8377;{{ cart_item.product.price }}
                         <br>
                         Qty: {{ cart_item.quantity }}
                     </td>
                     <td>
-                        &#8377; {{ cart_item.sub_total }}
+                        &#8377;{{ cart_item.sub_total }}
                     </td>
                     <td>
                         <a href="{% url 'carts:add_to_cart' cart_item.product.id %}" class="custom_a">
@@ -93,15 +93,16 @@ Cart -
                 </tr>
                 <tr>
                     <td class="text-left">
-                        Your total is: <strong>&#8377; {{ total }}</strong>
+                        Your total is: <strong>&#8377;{{ total }}</strong>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="mx-auto">
-            <a href="{% url 'carts:razorpay' %}" class="btn btn-secondary btn-block my_custom_button">Pay Now</a>
             <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                 Shopping</a>
+            <a href="{% url 'orders:delivery_address' %}"
+                class="btn btn-secondary btn-block my_custom_button">Checkout</a>
         </div>
     </div>
 </div>

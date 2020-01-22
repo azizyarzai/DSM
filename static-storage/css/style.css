@@ -2009,6 +2009,9 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 .full-add {
     border: 1px solid #dee3e4;
     padding: 1rem 1rem 0 1rem;
+}
+
+.add-contain {
     margin-bottom: 0.5rem;
 }
 
@@ -2056,7 +2059,7 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     padding: 5px;
     border-radius: 3px;
     top: 1rem;
-    z-index: 99;
+    z-index: 99999;
 }
 
 .edit-menu a {
@@ -2091,6 +2094,27 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 
 .new-add i {
     margin-right: 1rem;
+}
+
+.edit-delete {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.edit-delete>div {
+    flex: 1;
+}
+
+.edit-delete a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #dee3e4;
+    color: #878787;
 }
 
 /* Password change form */

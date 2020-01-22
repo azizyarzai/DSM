@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="select-address">
+                <h3>Select Delivery Addres</h3>
+                <form action="{% url 'orders:delivery_address' %}" method="POST" id="addForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% if user.addresses %}
+                        {% for address in user.addresses.all %}
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="add-details">
+                                <input type="radio" name="address-id" id="address" value="{{ address.id }}">
+                                <div>
+                                    <span>{{ address.address_type }}</span>
+                                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                                    <span>{{ address.address }}</span>
+                                    <span>{{ address.city }}</span>
+                                    <span>{{ address.state }} - {{ address.zip_code }}</span>
+                                    <span>{{ address.country }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="price-details">
+                <h4>Price Details</h4>
+                <hr>
+                <div>
+                    <div>
+                        <span>Order Total</span>
+                        <span>{{ order.total }}</span>
+                    </div>
+                    <div>
+                        <span>Delivery Charges</span>
+                        <span>{% if order.delivery_charges > 0 %} {{ order.delivery_charges }} {% else %} FREE
+                            {% endif %}</span>
+                    </div>
+                    <hr>
+                    <div>
+                        <span>Total</span>
+                        <span>{{ order.total }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Continue" class='btn btn-inline-block btn-success del-add'>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    $('.del-add').on('click', function () {
+        $('#addForm').submit();
+    });
+</script>
+{% endblock extra_scripts %}

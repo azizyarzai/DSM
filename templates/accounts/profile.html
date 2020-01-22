@@ -196,7 +196,7 @@
                     <h3 class="text-5 font-weight-400 mb-3">Address Details</h3>
                     {% if  user.addresses.all %}
                     {% for  address in user.addresses.all %}
-                    <div class="row">
+                    <div class="row add-contain">
                         <div class="col-12 full-add">
                             <div class="add-head">
                                 <span class='add-type'>{{ address.address_type }}</span>
@@ -222,6 +222,14 @@
                             <p>{{ address.address }}, {{ address.city }}, {{ address.state }} {{ address.country }}
                                 {{ address.zip_code }}
                             </p>
+                        </div>
+                        <div class="col-12 edit-delete">
+                            <div class="add-btn">
+                                <a href="">Edit</a>
+                            </div>
+                            <div class="add-btn">
+                                <a href="">Delete</a>
+                            </div>
                         </div>
                     </div>
 

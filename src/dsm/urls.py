@@ -27,6 +27,7 @@ urlpatterns = [
     path('stamps/', include(("stamps.urls", "stamps"), "stamps")),
     path('staff/', include(("staff.urls", "stuff"), "staff")),
     path('carts/', include(("carts.urls", "carts"), "carts")),
+    path('orders/', include(("orders.urls", "orders"), "orders")),
 ]
 
 if settings.DEBUG:

@@ -41,6 +41,7 @@
         <div class="login-container login">
             <form action="{% url 'accounts:login' %}" id="auth-form" method="POST">
                 {% csrf_token %}
+                <input type="text" class="hidden" value="{{ next_url }}" name="next">
                 <img class="avatar" src="{% static 'img/svg/profile.svg' %}" alt="">
                 <h2>Welcome</h2>
                 <div class="social-login">
