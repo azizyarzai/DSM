@@ -60,7 +60,7 @@
                 </div>
                 <!-- Need Help? End -->
 
-
+                <!-- Inqury Modal -->
                 <div class="modal fade" id="inquiryModal" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content contact-modal">
@@ -71,7 +71,8 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="{% url 'contacts:contact' %}" method="POST">
+                                    {% csrf_token %}
                                     <div class="form-group">
                                         <label for="name" class="col-form-label">Name:</label>
                                         <input type="text" name="name" class="form-control" required>
@@ -89,6 +90,7 @@
                                         <textarea name="message" class="form-control" required></textarea>
                                     </div>
                                     <hr>
+                                    <input type="text" name="redirect" class="hidden" value="/accounts/profile/">
                                     <input type="submit" value="Send" class="btn btn-block btn-secondary">
                                 </form>
                             </div>
@@ -200,24 +202,6 @@
                         <div class="col-12 full-add">
                             <div class="add-head">
                                 <span class='add-type'>{{ address.address_type }}</span>
-                                <span class="add-edit">
-                                    <a class="edit-link"><i class="fas fa-ellipsis-v"></i></a>
-                                    <div class="edit-menu">
-                                        <a href="#address-details-modal" data-toggle="modal" class="edit-btn">
-                                            Edit
-                                            <div class="hidden address-type">{{ address.address_type }}</div>
-                                            <div class="hidden address-id">{{ address.id }}</div>
-                                            <div class="hidden address">{{ address.address }}</div>
-                                            <div class="hidden city">{{ address.city }}</div>
-                                            <div class="hidden state">{{ address.state }}</div>
-                                            <div class="hidden country">{{ address.country }}</div>
-                                            <div class="hidden zip-code">{{ address.zip_code }}</div>
-                                        </a>
-                                        <a href="{% url 'accounts:delete_address' address.id %}">
-                                            Delete
-                                        </a>
-                                    </div>
-                                </span>
                             </div>
                             <p>{{ address.address }}, {{ address.city }}, {{ address.state }} {{ address.country }}
                                 {{ address.zip_code }}
@@ -225,10 +209,18 @@
                         </div>
                         <div class="col-12 edit-delete">
                             <div class="add-btn">
-                                <a href="">Edit</a>
+                                <a href="#address-details-modal" data-toggle="modal" class="edit-btn">Edit
+                                    <div class="hidden address-type">{{ address.address_type }}</div>
+                                    <div class="hidden address-id">{{ address.id }}</div>
+                                    <div class="hidden address">{{ address.address }}</div>
+                                    <div class="hidden city">{{ address.city }}</div>
+                                    <div class="hidden state">{{ address.state }}</div>
+                                    <div class="hidden country">{{ address.country }}</div>
+                                    <div class="hidden zip-code">{{ address.zip_code }}</div>
+                                </a>
                             </div>
                             <div class="add-btn">
-                                <a href="">Delete</a>
+                                <a href="{% url 'accounts:delete_address' address.id %}">Delete</a>
                             </div>
                         </div>
                     </div>

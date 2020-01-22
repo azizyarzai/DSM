@@ -7,11 +7,10 @@ def counter(request):
     if 'admin' in request.path:
         return {}
     else:
-        cart , cart_created = Cart.objects.new_or_get(request)
+        cart, cart_created = Cart.objects.new_or_get(request)
         print(cart_created)
         try:
-            cart = Cart.objects.filter(id=request.session.get('cart_id'))
-            cart_items = CartItem.objects.all().filter(cart=cart[:1])
+            cart_items = CartItem.objects.all().filter(cart=cart)
             for cart_item in cart_items:
                 item_count += 1
         except Cart.DoesNotExist:

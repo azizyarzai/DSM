@@ -44,7 +44,7 @@ def payment(request, total=0):
     client = Client(auth=(key_id, key_secret))
 
     try:
-        cart = Cart.objects.get(id=request.session.get('cart_id'))
+        cart, cart_created = Cart.objects.new_or_get(request)
         cart_items = CartItem.objects.filter(cart=cart)
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)

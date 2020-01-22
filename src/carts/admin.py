@@ -4,7 +4,7 @@ from .models import Cart, CartItem
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'total', 'created', 'updated', 'checked_out')
+    list_display = ('id', 'total', 'created', 'updated', 'checked_out', 'user')
     list_filter = ('created',)
     list_per_page = 20
 

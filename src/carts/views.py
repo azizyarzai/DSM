@@ -10,7 +10,7 @@ from orders.models import Order
 
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
-    cart = Cart.objects.get(id=request.session.get('cart_id'))
+    cart, cart_created = Cart.objects.new_or_get(request)
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
         cart_item.quantity += 1
@@ -29,7 +29,7 @@ def add_to_cart(request, product_id):
 
 def cart_detail(request, total=0, counter=0, cart_items=None):
     try:
-        cart = Cart.objects.get(id=request.session.get('cart_id'))
+        cart, cart_created = Cart.objects.new_or_get(request)
         cart_items = CartItem.objects.filter(cart=cart)
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
@@ -47,7 +47,7 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 
 # Decreasing item quantity
 def remove_from_cart(request, product_id):
-    cart = Cart.objects.get(id=request.session.get('cart_id'))
+    cart, cart_created = Cart.objects.new_or_get(request)
     product = get_object_or_404(Product, id=product_id)
     cart_item = CartItem.objects.get(product=product, cart=cart)
     if cart_item.quantity > 1:
@@ -60,7 +60,7 @@ def remove_from_cart(request, product_id):
 
 # Removing the full item
 def full_remove(request, product_id):
-    cart = Cart.objects.get(id=request.session.get('cart_id'))
+    cart, cart_created = Cart.objects.new_or_get(request)
     product = get_object_or_404(Product, id=product_id)
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()

@@ -32,17 +32,17 @@
                 <div>
                     <div>
                         <span>Order Total</span>
-                        <span>{{ order.total }}</span>
+                        <span>&#8377;{{ order.total }}</span>
                     </div>
                     <div>
                         <span>Delivery Charges</span>
-                        <span>{% if order.delivery_charges > 0 %} {{ order.delivery_charges }} {% else %} FREE
+                        <span>{% if order.delivery_charges > 0 %} &#8377;{{ order.delivery_charges }} {% else %} FREE
                             {% endif %}</span>
                     </div>
                     <hr>
                     <div>
                         <span>Total</span>
-                        <span>{{ order.total }}</span>
+                        <span>&#8377;{{ order.total }}</span>
                     </div>
                 </div>
             </div>

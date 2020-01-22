@@ -55,12 +55,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     # Local
-    'pages',
-    'stamps',
     'accounts',
-    'staff',
     'carts',
+    'contacts',
     'orders',
+    'pages',
+    'staff',
+    'stamps',
 ]
 
 MIDDLEWARE = [

@@ -10,7 +10,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{% url 'contacts:contact' %}" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="name" class="col-form-label">Name:</label>
                         <input type="text" name="name" class="form-control" required>
@@ -28,6 +29,7 @@
                         <textarea name="message" class="form-control" required></textarea>
                     </div>
                     <hr>
+                    <input type="text" name="redirect" class="hidden" value="/about/">
                     <input type="submit" value="Send" class="btn btn-block btn-secondary">
                 </form>
             </div>

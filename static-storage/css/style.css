@@ -2026,22 +2026,16 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     justify-self: left;
 }
 
-.add-head .add-edit {
-    justify-self: right;
-}
-
-.add-head .add-edit>a {
-    padding: .5rem;
-}
-
-.add-head .add-edit:hover {
-    cursor: pointer;
-}
-
 .full-add .add-type {
-    background-color: #f0f0f0;
-    padding: .2rem .5rem;
+    background-color: #F5F5F6;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    width: 50px;
     font-size: 12px;
+    text-align: center;
+    padding: 2px 3px;
 }
 
 .full-add p {
@@ -2113,8 +2107,15 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     height: 100%;
     text-align: center;
     padding: 1rem;
-    border: 1px solid #dee3e4;
-    color: #878787;
+    border-left: 1px solid #dee3e4;
+    border-right: 1px solid #dee3e4;
+    border-bottom: 1px solid #dee3e4;
+    color: #526cd0;
+    transition: .5s;
+}
+
+.edit-delete a:hover {
+    color: #22b355;
 }
 
 /* Password change form */

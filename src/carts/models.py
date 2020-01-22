@@ -13,19 +13,52 @@ class CartManager(models.Manager):
                 user_obj = user
         return self.model.objects.create(user=user_obj)
 
+    def merge_cart_items(self, original_cart, previous_cart):
+        org_cart_items = CartItem.objects.all().filter(cart=original_cart)
+        pre_cart_items = CartItem.objects.all().filter(cart=previous_cart)
+        for pre_cart_item in pre_cart_items:
+            try:
+                cart_item = CartItem.objects.get(
+                    product=pre_cart_item.product, cart=original_cart)
+                cart_item.quantity += pre_cart_item.quantity
+                cart_item.save()
+            except CartItem.DoesNotExist:
+                cart_item = CartItem.objects.create(
+                    product=pre_cart_item.product,
+                    quantity=pre_cart_item.quantity,
+                    cart=original_cart
+                )
+                cart_item.save()
+        previous_cart.delete()
+
     def new_or_get(self, request):
-        cart_id = request.session.get("cart_id", None)
-        qs = self.get_queryset().filter(id=cart_id)
-        if qs.count() == 1:
-            new_obj = False
-            cart_obj = qs.first()
-            if request.user.is_authenticated and cart_obj.user is None:
-                cart_obj.user = request.user
-                cart_obj.save()
+        if request.user.is_authenticated:
+            try:
+                cart_obj = Cart.objects.get(
+                    user=request.user, checked_out=False)
+                new_obj = False
+                cart_id = request.session.get("cart_id", None)
+                try:
+                    pre_cart = Cart.objects.get(id=cart_id, user=None)
+                    print("orignal cart" + str(cart_obj))
+                    print("previous cart" + str(pre_cart))
+                    Cart.objects.merge_cart_items(cart_obj, pre_cart)
+                    print("Carts merged")
+                except Cart.DoesNotExist:
+                    pass
+            except Cart.DoesNotExist:
+                cart_obj = Cart.objects.new_cart(user=request.user)
+                new_obj = True
         else:
-            cart_obj = Cart.objects.new_cart(user=request.user)
-            new_obj = True
-            request.session['cart_id'] = cart_obj.id
+            cart_id = request.session.get("cart_id", None)
+            qs = self.get_queryset().filter(id=cart_id)
+            if qs.count() == 1:
+                new_obj = False
+                cart_obj = qs.first()
+            else:
+                cart_obj = Cart.objects.new_cart()
+                new_obj = True
+                request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
 
