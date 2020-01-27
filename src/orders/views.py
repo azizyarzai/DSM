@@ -71,3 +71,12 @@ def payment(request, total=0):
         'order': order_obj
     }
     return render(request, template, context)
+
+
+@login_required
+def success(request, order_id):
+    template = 'orders/success.html'
+    context = {
+
+    }
+    return render(request, template, context)

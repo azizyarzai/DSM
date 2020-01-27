@@ -28,80 +28,39 @@
         <nav class="primary-menu navbar navbar-expand-lg">
           <div id="header-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="dropdown dropdown-mega"> <a class="dropdown-toggle" href="#">Stamps</a>
+              <li class="dropdown"> <a class="dropdown-toggle" href="#">Stamps</a>
+                {% if categories %}
                 <ul class="dropdown-menu">
-                  <li>
-                    <div class="dropdown-mega-content">
-                      <div class="row">
-                        {% if categories %}
-                        {% for category in categories %}
-                        <div class="col-lg-3"> <span class="sub-title">{{ category.name}}</Span>
-                          <ul class="dropdown-mega-submenu">
-                            {% if category.get_groups %}
-                            {% for group in category.get_groups %}
-                            <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
-                            </li>
-                            {% endfor %}
-                            {% endif %}
-                          </ul>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
-                      </div>
-                    </div>
+                  {% for category in categories %}
+                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
+                    <ul class="dropdown-menu">
+                      {% if category.get_groups %}
+                      {% for group in category.get_groups %}
+                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
+                      {% endfor %}
+                      {% endif %}
+                    </ul>
                   </li>
+                  {% endfor %}
                 </ul>
+                {% endif %}
               </li>
               <li class="dropdown"> <a class="dropdown-toggle" href="#">Features</a>
+                {% if categories %}
                 <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Headers</a>
+                  {% for category in categories %}
+                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="index.html">Light Version (Default)</a></li>
-                      <li><a class="dropdown-item" href="feature-header-dark.html">Dark Version</a></li>
-                      <li><a class="dropdown-item" href="feature-header-primary.html">Primary Version</a></li>
-                      <li><a class="dropdown-item" href="index-2.html">Transparent Version</a></li>
+                      {% if category.get_groups %}
+                      {% for group in category.get_groups %}
+                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
+                      {% endfor %}
+                      {% endif %}
                     </ul>
                   </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Navigation DropDown</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="index.html">Light Version (Default)</a></li>
-                      <li><a class="dropdown-item" href="feature-navigation-dropdown-dark.html">Dark Version</a></li>
-                      <li><a class="dropdown-item" href="feature-navigation-dropdown-primary.html">Primary Version</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Second Navigation</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="send-money.html">Default Version</a></li>
-                      <li><a class="dropdown-item" href="deposit-money.html">Alternate Version</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Page Headers</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="feature-page-header-left-alignment.html">Left Alignment</a>
-                      </li>
-                      <li><a class="dropdown-item" href="feature-page-header-center-alignment.html">Center Alignment</a>
-                      </li>
-                      <li><a class="dropdown-item" href="feature-page-header-light.html">Light Version</a></li>
-                      <li><a class="dropdown-item" href="feature-page-header-dark.html">Dark Version</a></li>
-                      <li><a class="dropdown-item" href="feature-page-header-primary.html">Primary Version</a></li>
-                      <li><a class="dropdown-item" href="feature-page-header-custom-background.html">Custom
-                          Background</a></li>
-                      <li><a class="dropdown-item"
-                          href="feature-page-header-custom-background-with-transparent-header.html">Custom Background
-                          2</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Footer</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="index.html">Light Version Default</a></li>
-                      <li><a class="dropdown-item" href="index-2.html">Alternate Version</a></li>
-                      <li><a class="dropdown-item" href="feature-footer-dark.html">Dark Version</a></li>
-                      <li><a class="dropdown-item" href="feature-footer-primary.html">Primary Version</a></li>
-                    </ul>
-                  </li>
-                  <li><a class="dropdown-item" href="feature-layout-boxed.html">Layout Boxed</a></li>
+                  {% endfor %}
                 </ul>
+                {% endif %}
               </li>
               <li><a href="{% url 'stamps:browse_stamps' %}">Fees</a></li>
               <li><a href="{% url 'pages:about' %}">About Us</a></li>

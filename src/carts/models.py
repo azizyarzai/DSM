@@ -2,6 +2,7 @@ from django.db import models
 from stamps.models import Product
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save, post_delete
+from django.core.exceptions import MultipleObjectsReturned
 # Create your models here.
 
 
@@ -46,6 +47,8 @@ class CartManager(models.Manager):
                     print("Carts merged")
                 except Cart.DoesNotExist:
                     pass
+            except MultipleObjectsReturned:
+                cart_obj = cart_obj.first()
             except Cart.DoesNotExist:
                 cart_obj = Cart.objects.new_cart(user=request.user)
                 new_obj = True
