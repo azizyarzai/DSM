@@ -12,8 +12,7 @@ def contact(request):
         client_email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        redirect_url = request.POST.get('redirect')
-        print(redirect_url)
+        redirect_url = "/about/"
 
         contact = Contact(name=name, subject=subject,
                           email=client_email, message=message)
