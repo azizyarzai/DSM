@@ -89,7 +89,7 @@ iframe {
 
 h1, h2, h3, h4, h5, h6 {
     color: #1e1d1c;
-    font-family: "Rubik", sans-serif;
+    font-family: 'DM Sans', sans-serif !important;
 }
 
 .lead {
@@ -1136,7 +1136,7 @@ hr {
 .page-header .breadcrumb>li+li:before {
     color: inherit;
     opacity: 0.7;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'DM Sans', sans-serif !important;
     content: "\f105";
     padding: 0 7px 0 5px;
     font-weight: 900;
@@ -2101,7 +2101,7 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     flex: 1;
 }
 
-.edit-delete a {
+.edit-delete a, .edit-delete input[type="submit"] {
     display: inline-block;
     width: 100%;
     height: 100%;
@@ -2112,6 +2112,11 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     border-bottom: 1px solid #dee3e4;
     color: #526cd0;
     transition: .5s;
+    background-color: transparent;
+}
+
+.edit-delete input[type="submit"] {
+    border-top: 1px solid #dee3e4;
 }
 
 .edit-delete a:hover {

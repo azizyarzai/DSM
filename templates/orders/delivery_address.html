@@ -1,68 +1,182 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
+{% load static %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <div class="select-address">
-                <h3>Select Delivery Addres</h3>
-                <form action="{% url 'orders:delivery_address' %}" method="POST" id="addForm">
-                    {% csrf_token %}
-                    <div class="row">
-                        {% if user.addresses %}
-                        {% for address in user.addresses.all %}
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="add-details">
-                                <input type="radio" name="address-id" id="address" value="{{ address.id }}">
-                                <div>
-                                    <span>{{ address.address_type }}</span>
-                                    <span>{{ user.first_name }} {{ user.last_name }}</span>
-                                    <span>{{ address.address }}</span>
-                                    <span>{{ address.city }}</span>
-                                    <span>{{ address.state }} - {{ address.zip_code }}</span>
-                                    <span>{{ address.country }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="price-details">
-                <h4>Price Details</h4>
-                <hr>
-                <div>
+  {% include "partials/alerts.html" %}
+  <div class="row sel-add">
+    <div class="col-md-8 col-sm-12">
+      <div class="select-address">
+        <h3 class="a-head">Select Delivery Address</h3>
+        <form action="{% url 'orders:delivery_address' %}" method="POST" id="addForm">
+          {% csrf_token %}
+          <div class="row">
+            {% if user.addresses %} {% for address in user.addresses.all %}
+            <div class="col-12">
+              <div class="add-details">
+                <div class="add-1">
+                  <input type="radio" name="address-id" value="{{ address.id }}" />
+                  <div>
                     <div>
-                        <span>Order Total</span>
-                        <span>&#8377;{{ order.total }}</span>
+                      <span class="name">{{ user.first_name }} {{ user.last_name }}</span>
+                      <span class="type-add">{{ address.address_type }}</span>
                     </div>
-                    <div>
-                        <span>Delivery Charges</span>
-                        <span>{% if order.delivery_charges > 0 %} &#8377;{{ order.delivery_charges }} {% else %} FREE
-                            {% endif %}</span>
+                    <div class="de">
+                      <div class="de-1">{{ address.address }}</div>
+                      <div class="de-1">{{ address.city }}</div>
+                      <div class="de-1">{{ address.state }} - {{ address.zip_code }}</div>
+                      <div class="de-1">{{ address.country }}</div>
                     </div>
-                    <hr>
-                    <div>
-                        <span>Total</span>
-                        <span>&#8377;{{ order.total }}</span>
-                    </div>
+                  </div>
                 </div>
+                <div class='add-2'>
+                  <div>
+                    <a href="#address-details-modal" data-toggle="modal" class="edit-btn">Edit
+                      <div class="hidden address-type">{{ address.address_type }}</div>
+                      <div class="hidden address-id">{{ address.id }}</div>
+                      <div class="hidden address">{{ address.address }}</div>
+                      <div class="hidden city">{{ address.city }}</div>
+                      <div class="hidden state">{{ address.state }}</div>
+                      <div class="hidden country">{{ address.country }}</div>
+                      <div class="hidden zip-code">{{ address.zip_code }}</div>
+                    </a>
+                    <form action="{% url 'accounts:delete_address' address.id %}" method="POST">
+                      {% csrf_token %}
+                      <input type="text" name="redirect" class="hidden" value="delivery_address">
+                      <input type="submit" class="del-btn" value="Delete">
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-                <input type="submit" value="Continue" class='btn btn-inline-block btn-success del-add'>
+            {% endfor %} {% endif %}
+            <div class="col-12 a">
+              <div class="new-dd">
+                <a href="#address-details-modal" data-toggle="modal" class="add-address">
+                  <div class='add-plus'>
+                    <i class="fas fa-plus-circle"></i>
+                    <h5 class="add-address">Add new address</h5>
+                  </div>
+                </a>
+              </div>
             </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
+    <div class="col-md-4 col-sm-12 det">
+      <div class="price-details">
+        <h3 class="a-head">Price Details</h3>
+        <hr />
+        <div>
+          <div class="de-in">
+            <span class="txt">Order Total</span>
+            <span class="rt">&#8377;{{ order.total }}</span>
+          </div>
+          <div class="de-in">
+            <span class="txt">Delivery Charges</span>
+            <span class="rt {% if order.delivery_charges <= 0 %} free {% endif %}">{% if order.delivery_charges > 0 %} &#8377;{{
+              order.delivery_charges }} {% else %} FREE {% endif %}</span>
+          </div>
+          <hr />
+          <div>
+            <span class="txt">Total</span>
+            <span class="rt">&#8377;{{ order.total }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="b1 text-center">
+        <input type="submit" value="Continue" class="btn del-add" />
+      </div>
+    </div>
+  </div>
 </div>
+<!-- Address Details Modal ================================== -->
+<div id="address-details-modal" class="modal fade " role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-400">Address Details</h5>
+        <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"> <span
+            aria-hidden="true">&times;</span> </button>
+      </div>
+      <div class="modal-body p-4">
+        <form action="{% url 'accounts:add_address' %}" id="addressdetails" method="POST">
+          {% csrf_token %}
+          <input type="text" class="hidden" name="address-id">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="address-type">Address Type</label>
+                <select class="custom-select" id="address-type" name="address-type">
+                  <option value="">Select Address Type</option>
+                  <option value="Home">Home</option>
+                  <option value="Work">Work</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12">
+              <h3 class="text-5 font-weight-400 mt-3">Address</h3>
+              <hr>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="address">Address (Area and Street)</label>
+                <input name="address" type="text" value="{{ address.address }}" class="form-control"
+                  data-bv-field="address" id="address" required placeholder="Address">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="inputCountry">Country</label>
+                <select class="custom-select countries" id="countryId" name="country">
+                  <option value="">Select Country</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="input-zone">State</label>
+                <select class="custom-select states" id="stateId" name="state">
+                  <option value="">Select State</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="city">City</label>
+                <select name="city" class="custom-select cities" id="cityId">
+                  <option value="">Select City</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="zipCode">Zip Code</label>
+                <input name="zip-code" id="zipCode" value="{{ address.zip_code }}" type="text" class="form-control"
+                  required placeholder="zip code">
+              </div>
+            </div>
+
+          </div>
+          <div class="hidden">
+            <input type="text" name="redirect" value="delivery_address">
+          </div>
+          <button class="btn btn-primary btn-block mt-4 add-btn" type="submit">Save
+            Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Address Details End -->
+
+{% include "partials/payments.html" %}
 {% endblock content %}
 
 {% block extra_scripts %}
+<script src="{% static 'js/countrystatecity.js' %}"></script>
 <script>
-    $('.del-add').on('click', function () {
-        $('#addForm').submit();
-    });
+  $(".del-add").on("click", function () {
+    $("#addForm").submit();
+  });
 </script>
 {% endblock extra_scripts %}

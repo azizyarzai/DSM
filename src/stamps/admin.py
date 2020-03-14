@@ -12,14 +12,14 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 
-class GroupAdmin(admin.ModelAdmin):
+class TypeAdmin(admin.ModelAdmin):
     exclude = ('slug',)
     list_display = ('name', 'category', 'image', 'updated')
     list_per_page = 20
     list_filter = ('category',)
 
 
-admin.site.register(Group, GroupAdmin)
+admin.site.register(Group, TypeAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):

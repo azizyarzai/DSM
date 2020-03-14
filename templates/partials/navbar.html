@@ -15,8 +15,11 @@
       <div class="header-column justify-content-start">
         <!-- Logo
           ============================= -->
-        <div class="logo"> <a class="d-flex" href="{% url 'pages:home' %}"><img src="{% static 'img/logo/dsm.png' %}"
-              width="50px" alt="Dangui Stamp Makers" /></a> </div>
+        <div class="logo">
+          <a class="d-flex" href="{% url 'pages:home' %}">
+            <img src="{% static 'img/logo/logo3.png' %}" width="120px" alt="Dangui Stamp Makers" />
+          </a>
+        </div>
         <!-- Logo end -->
         <!-- Collapse Button
           ============================== -->
@@ -95,10 +98,11 @@
                       class="fas fa-user drop-icon"></i>My
                     Profile</a>
                 </li>
-                <li><a class="dropdown-item" href="feature-layout-boxed.html"><i
+                <li><a class="dropdown-item" href="{% url 'orders:view_orders' %}"><i
                       class="fas fa-briefcase drop-icon"></i>Orders</a>
                 </li>
-                <li><a class="dropdown-item" href="feature-layout-boxed.html"><i class="fas fa-heart drop-icon"></i>Wish
+                <li><a class="dropdown-item" href="{% url 'pages:view_wish' %}"><i
+                      class="fas fa-heart drop-icon"></i>Wish
                     List</a>
                 </li>
                 <li><a class="dropdown-item" href="javascript:document.getElementById('logout').submit();"><i
@@ -118,3 +122,9 @@
   </div>
 </header>
 <!-- Header End -->
+
+{% block extra_scripts %}
+<script>
+
+</script>
+{% endblock extra_scripts %}

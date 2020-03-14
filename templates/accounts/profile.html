@@ -15,9 +15,9 @@
 <div class="bg-primary">
     <div class="container d-flex justify-content-center">
         <ul class="nav secondary-nav">
-            <li class="nav-item"> <a class="nav-link active" href="profile.html">Account</a></li>
-            <li class="nav-item"> <a class="nav-link" href="profile-cards-and-bank-accounts.html">Orders</a></li>
-            <li class="nav-item"> <a class="nav-link" href="profile-notifications.html">Wish List</a></li>
+            <li class="nav-item"> <a class="nav-link active" href="{% url 'accounts:view_profile' %}">Account</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'orders:view_orders' %}">Orders</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'pages:view_wish' %}">Wish List</a></li>
         </ul>
     </div>
 </div>
@@ -220,7 +220,11 @@
                                 </a>
                             </div>
                             <div class="add-btn">
-                                <a href="{% url 'accounts:delete_address' address.id %}">Delete</a>
+                                <form action="{% url 'accounts:delete_address' address.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text" class="hidden" value="profile" name="redirect">
+                                    <input type="submit" value="Delete">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -229,9 +233,9 @@
                     {% endif %}
                     <div class="row">
                         <div class="col-12 new-add">
-                            <a href="#address-details-modal" data-toggle="modal" class="add-address"><i
-                                    class="fas fa-plus"></i><span>add a
-                                    new address</span></a>
+                            <a href="#address-details-modal" data-toggle="modal" class="add-address">
+                                <i class="fas fa-plus"></i>
+                                <span>add a new address</span></a>
                         </div>
                     </div>
                 </div>
@@ -303,6 +307,9 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="hidden">
+                                        <input type="text" name="redirect" value="profile">
                                     </div>
                                     <button class="btn btn-primary btn-block mt-4 add-btn" type="submit">Save
                                         Changes</button>

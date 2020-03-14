@@ -17,6 +17,11 @@ ORDER_STATUS_CHOICES = (
 )
 
 
+class OrderManager(models.Manager):
+    def all(self):
+        return super().all().filter(placed=True)
+
+
 class Order(models.Model):
     order_id = models.CharField(max_length=120, blank=True)
     delivery_address = models.ForeignKey(
@@ -29,8 +34,11 @@ class Order(models.Model):
     delivery_charges = models.DecimalField(
         default=0, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    placed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    objects = OrderManager()
 
     class Meta:
         db_table = 'order'
@@ -49,8 +57,22 @@ class Order(models.Model):
         self.save()
         return new_total
 
+    def check_done(self):
+        delivery_address = self.delivery_address
+        total = self.total
+        if delivery_address and total > 0:
+            return True
+        return False
+
+    def mark_placed(self):
+        if self.check_done:
+            self.placed = True
+            self.save()
+        return self.placed
 
 # Generate the order id
+
+
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_id_generator(instance)

@@ -50,8 +50,8 @@ class Group(models.Model):
     class Meta:
         db_table = 'group'
         ordering = ('name',)
-        verbose_name = "group"
-        verbose_name_plural = "groups"
+        verbose_name = "Type"
+        verbose_name_plural = "Types"
 
     def get_absolute_url(self):
         return reverse_lazy("stamps:group", args=[self.category.slug, self.slug])
@@ -79,8 +79,12 @@ class Product(models.Model):
     slug = models.SlugField(max_length=300, blank=True, unique=True)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
-    height = models.DecimalField(max_digits=5, decimal_places=2)
-    width = models.DecimalField(max_digits=5, decimal_places=2)
+    height = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
+    width = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
+    diameter = models.DecimalField(
+        max_digits=4, decimal_places=2, blank=True, null=True)
     image = models.ImageField(upload_to="products")
     availible = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)

@@ -75,8 +75,25 @@ def payment(request, total=0):
 
 @login_required
 def success(request, order_id):
-    template = 'orders/success.html'
-    context = {
+    cart, cart_created = Cart.objects.new_or_get(request)
+    order, order_created = Order.objects.get_or_create(cart=cart)
+    if order.check_done():
+        placed = order.mark_placed()
 
+    if placed:
+        cart.checked_out = True
+        cart.save()
+
+    template = 'orders/success.html'
+    context = {}
+    return render(request, template, context)
+
+
+@login_required
+def orders(request):
+    orders = Order.objects.all().filter(cart__user=request.user)
+    template = 'orders/orders.html'
+    context = {
+        'orders': orders
     }
     return render(request, template, context)

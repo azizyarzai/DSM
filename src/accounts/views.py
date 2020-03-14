@@ -146,6 +146,7 @@ def add_address(request):
         state = request.POST.get("state")
         city = request.POST.get("city")
         zip_code = request.POST.get("zip-code")
+        redirect_to = request.POST.get('redirect')
 
         new_address = Address.objects.create(
             user=user, address_type=address_type, address=address,
@@ -154,7 +155,10 @@ def add_address(request):
 
         new_address.save()
         messages.success(request, "New address was successfully added.")
-        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+        if 'profile' in redirect_to:
+            return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+        elif 'delivery_address' in redirect_to:
+            return HttpResponseRedirect(reverse_lazy("orders:delivery_address"))
     else:
         return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
 
@@ -169,6 +173,7 @@ def update_address(request, address_id):
         state = request.POST.get("state")
         city = request.POST.get("city")
         zip_code = request.POST.get("zip-code")
+        redirect_to = request.POST.get('redirect')
 
         address_fetched = get_object_or_404(Address, id=address_id, user=user)
         address_fetched.address_type = address_type
@@ -179,17 +184,25 @@ def update_address(request, address_id):
         address_fetched.zip_code = zip_code
         address_fetched.save()
         messages.success(request, "Your address was successfully updated.")
-        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+        if 'profile' in redirect_to:
+            return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+        elif 'delivery_address' in redirect_to:
+            return HttpResponseRedirect(reverse_lazy("orders:delivery_address"))
     else:
         return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
 
 
 @login_required
 def delete_address(request, address_id):
+    redirect_to = request.POST.get('redirect')
+
     address = get_object_or_404(Address, id=address_id)
     address.delete()
     messages.success(request, "Address was successfully deleted.")
-    return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    if 'profile' in redirect_to:
+        return HttpResponseRedirect(reverse_lazy("accounts:view_profile"))
+    elif 'delivery_address' in redirect_to:
+        return HttpResponseRedirect(reverse_lazy("orders:delivery_address"))
 
 
 @login_required

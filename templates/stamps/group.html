@@ -24,8 +24,11 @@
 <!-- List of the stamps -->
 <section id="stamps-list">
     {% if group %}
-    <div>
+    <div class="container">
         <h1 class="heading">{{ group.name }}</h1>
+        {% if group.description %}
+        <p class="dec">{{ group.description }}</p>
+        {% endif %}
     </div>
     {% endif %}
     <div class="stamp-container">
@@ -37,9 +40,19 @@
                         alt="{{ product.slug }}"></a>
             </div>
             <div class="stamp-desc">
-                <a href="stamp-customization.html" class="stamp-name">{{ product.name }}</a>
+                <a href="{{ product.get_absolute_url }}" class="stamp-name">{{ product.name }}</a>
                 <p class="stamp-price">&#8377; {{ product.price }}</p>
-                <p class="stamp-size">{{ product.height}}cm x {{ product.width }}cm</p>
+                <p class="stamp-size">
+                    {% if  product.height %}
+                    {{ product.height }}cm x
+                    {% endif %}
+                    {% if  product.width %}
+                    {{ product.width }}cm
+                    {% endif %}
+                    {% if  product.diameter %}
+                    {{ product.diameter }}cm Diameter
+                    {% endif %}
+                </p>
                 <a href="{{ product.get_absolute_url }}" class="stamp-detail-btn">Details</a>
             </div>
         </div>

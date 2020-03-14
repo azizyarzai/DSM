@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-8 col-sm-12">
             <div class="row text-center">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <form action="http://localhost:8000/orders/payment/success/{{ order.order_id | lower }}/"
+                    <form action="http://localhost:8000/orders/checkout/success/{{ order.order_id | lower }}/"
                         method="POST">
                         {% csrf_token %}
                         <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ key_id }}"
@@ -29,35 +29,36 @@
         </div>
         <div class="col-md-4 col-sm-12">
             <div class="price-details">
-                <h4>Price Details</h4>
-                <hr>
+                <h3 class="a-head">Price Details</h3>
+                <hr />
                 <div>
-                    <div>
-                        <span>Order Total</span>
-                        <span>&#8377;{{ order.total }}</span>
+                    <div class="de-in">
+                        <span class="txt">Order Total</span>
+                        <span class="rt">&#8377;{{ order.total }}</span>
                     </div>
-                    <div>
-                        <span>Delivery Charges</span>
-                        <span>{% if order.delivery_charges > 0 %} &#8377;{{ order.delivery_charges }} {% else %} FREE
-                            {% endif %}</span>
+                    <div class="de-in">
+                        <span class="txt">Delivery Charges</span>
+                        <span
+                            class="rt {% if order.delivery_charges <= 0 %} free {% endif %}">{% if order.delivery_charges > 0 %} &#8377;{{
+                      order.delivery_charges }} {% else %} FREE {% endif %}</span>
                     </div>
-                    <hr>
+                    <hr />
                     <div>
-                        <span>Total</span>
-                        <span>&#8377;{{ order.total }}</span>
+                        <span class="txt">Total</span>
+                        <span class="rt">&#8377;{{ order.total }}</span>
                     </div>
                 </div>
             </div>
-            <div class="add-details">
+            <div class="deliver-to">
                 <h4>Deliver To:</h4>
-                <div>{{ user.first_name }} {{ user.last_name }}</div>
-                <div>{{ order.delivery_address.address }}</div>
-                <div>{{ order.delivery_address.city }}</div>
-                <span>{{ order.delivery_address.state }}</span>
-                <span>{{ order.delivery_address.zip_code }}</span>
-                <div>Mobile: {{ user.profile.phone }}</div>
+                <div class="txt mt-2">{{ user.first_name }} {{ user.last_name }}</div>
+                <div class="txt mt-2">{{ order.delivery_address.address }}</div>
+                <div class="txt mt-2">{{ order.delivery_address.city }}</div>
+                <div class="txt mt-2">{{ order.delivery_address.state }} {{ order.delivery_address.zip_code }}</div>
+                <div class="txt mt-2">Mobile: <strong>{{ user.profile.phone }}</strong></div>
             </div>
         </div>
     </div>
 </div>
+{% include "partials/payments.html" %}
 {% endblock content %}

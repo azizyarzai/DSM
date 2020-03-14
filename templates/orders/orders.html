@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_head %}
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+
+{% endblock extra_head %}
+{% block content %}
+<!-- Header ============================================= -->
+
+<!-- Secondary Menu ============================================= -->
+<div class="bg-primary">
+    <div class="container d-flex justify-content-center">
+        <ul class="nav secondary-nav">
+            <li class="nav-item"> <a class="nav-link" href="{% url 'accounts:view_profile' %}">Account</a></li>
+            <li class="nav-item"> <a class="nav-link active" href="{% url 'orders:view_orders' %}">Orders</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'pages:view_wish' %}">Wish List</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Secondary Menu end -->
+
+<!-- Content ============================================= -->
+<div id="content" class="py-4">
+    <div class="container">
+        {% include "partials/alerts.html" %}
+        <div class="row">
+            {% for order in orders %}
+            {{ order.order_id }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Content end -->
+
+{% endblock content %}
+
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

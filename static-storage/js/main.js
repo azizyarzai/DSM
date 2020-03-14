@@ -7,6 +7,7 @@ $(document).ready(function () {
     // Address modal
     // Adding a new address
     $(".add-address").click(function () {
+        console.log("clicked");
         $('#address-details-modal .add-btn').html("Add Address");
         $('#address-details-modal .modal-title').html("Add New Address");
         $('#address-details-modal input[name=address]').val('');
