@@ -15,13 +15,12 @@
     <section class="hero-wrap section shadow-md">
       <div class="hero-mask opacity-7 bg-dark"></div>
       <div class="hero-bg" style="background-image:url('{% static "img/showcase.jpg" %}');"></div>
-
       <div class="hero-content py-2 py-lg-5">
         <div class="container text-center">
-          <h2 class="text-16 text-white">First Slide</h2>
-          <p class="text-5 text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br
-              class="d-none d-lg-block">
-            Lorem ipsum dolor sit amet</p>
+          <h2 class="text-16 text-white">Rubber Stamps</h2>
+          <p class="text-5 text-white mb-4">Is a craft in which some type of ink made of dye or
+            pigment is applied to an image or pattern that has been carved, molded, laser engraved or vulcanized, onto a
+            sheet of rubber</p>
           <a href="#" class="btn btn-primary m-2">Open a Free Account</a> <a class="btn btn-outline-light video-btn m-2"
             href="#" data-src="https://www.youtube.com/embed/7e90gBu4pas" data-toggle="modal"
             data-target="#videoModal"><span class="text-2 mr-3"><i class="fas fa-play"></i></span>See How it Works</a>
@@ -36,10 +35,10 @@
 
       <div class="hero-content py-2 py-lg-5">
         <div class="container text-center">
-          <h2 class="text-16 text-white">Second Slide</h2>
-          <p class="text-5 text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br
-              class="d-none d-lg-block">
-            Lorem ipsum dolor sit amet</p>
+          <h2 class="text-16 text-white">Rubber Stamps</h2>
+          <p class="text-5 text-white mb-4">Is a craft in which some type of ink made of dye or
+            pigment is applied to an image or pattern that has been carved, molded, laser engraved or vulcanized, onto a
+            sheet of rubber</p>
           <a href="#" class="btn btn-primary m-2">Open a Free Account</a> <a class="btn btn-outline-light video-btn m-2"
             href="#" data-src="https://www.youtube.com/embed/7e90gBu4pas" data-toggle="modal"
             data-target="#videoModal"><span class="text-2 mr-3"><i class="fas fa-play"></i></span>See How it Works</a>
@@ -65,9 +64,11 @@
     <div class="stamp-list-item">
       <img src="{{ category.image.url }}" class='rounded' width='100%' alt="{{ category.slug }}">
       <a href="{{ category.get_absolute_url }}" class='head'>{{ category.name }} <i class="fa fa-chevron-right"></i></a>
-      <span>up to 30% off</span>
+      {% if category.discount > 0 %}
+      <span>up to {{ category.discount }}% off</span>
+      {% endif %}
+      <hr>
       <div class="stamp-types">
-
         {% if category.get_groups %}
         {% for group in category.get_groups %}
         <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>

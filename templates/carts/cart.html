@@ -62,13 +62,16 @@ Cart -
                             &#8377;{{ cart_item.sub_total }}
                         </td>
                         <td>
-                            <a href="{% url 'carts:add_to_cart' cart_item.product.id %}" class="custom_a">
+                            <a href="{% url 'carts:add_to_cart' cart_item.product.id %}" title="Increase Quantity"
+                                data-toggle="tooltip" class="custom_a">
                                 <i class="fas fa-plus-circle custom_icon"></i>
                             </a>&nbsp;
-                            <a href="{% url 'carts:remove_from_cart' cart_item.product.id %}" class="custom_a">
+                            <a href="{% url 'carts:remove_from_cart' cart_item.product.id %}" title="Decrease Quantity"
+                                data-toggle="tooltip" class="custom_a">
                                 <i class="fas fa-minus-circle custom_icon"></i>
                             </a>&nbsp;
-                            <a href="{% url 'carts:full_remove' cart_item.product.id %}" class="custom_a">
+                            <a href="{% url 'carts:full_remove' cart_item.product.id %}" title="Remove"
+                                data-toggle="tooltip" class="custom_a">
                                 <i class="fas fa-trash custom_icon"></i>
                             </a>
                         </td>

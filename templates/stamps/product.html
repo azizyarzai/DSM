@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_head %}
+<script src="{% static 'js/jquery-validation.min.js' %}"></script>
+<script src="{% static 'js/jquery-validation-additional-methods.min.js' %}"></script>
+{% endblock extra_head %}
+
+
 {% block content %}
 
 <!-- Page Header
 ============================================= -->
-<section class="page-header page-header-text-light bg-dark-5 py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-12">
-                <ul class="breadcrumb mb-0">
-                    <li><a href="{% url 'pages:home' %}">Home</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li><a href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li class="active">{{ product.name }}</li>
-                </ul>
+<div class="container">
+    <section class="page-header page-header-text-light bg-dark-5 py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="breadcrumb mb-0">
+                        <li><a href="{% url 'pages:home' %}">Home</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li><a href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li class="active">{{ product.name }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <!-- Page Header End -->
-
+<div class="container">
+    {% include "partials/alerts.html" %}
+</div>
+<div class="container">
+    <h1 class="heading">Customize The Stamp</h1>
+</div>
 <!-- Stamp customization -->
 <section class="customization">
     <div class="details">
@@ -40,48 +53,50 @@
 
         </div>
         <div class="customize-details">
-            <form action="" method="POST" class="form-container">
+            <form action="{% url 'carts:add_to_cart' product.id %}" method="POST" class="form-container"
+                id="customize-product">
+                {% csrf_token %}
                 <div class="body-style grid">
                     <div class="lft">
                         <label for="stamp body">choose body style:</label>
                     </div>
                     <div class="rgt">
                         <div class="input-center">
-                            <input type="radio" name="body style"> <img
-                                src="{% static 'img/stamp_body/Maxlight_SLIM-4141_plus_tex.jpg' %}" alt="stamp body">
+                            <input type="radio" name="body_style" value="1" checked="checked">
+                            <img src="{% static 'img/stamp_body/body1.jpg' %}" alt="stamp body">
                         </div>
                         <div class="input-center">
-                            <input type="radio" name="body style"> <img
-                                src="{% static 'img/stamp_body/trodat_printy_4924_text.jpg' %}" alt="stamp body">
+                            <input type="radio" name="body_style" value="2">
+                            <img src="{% static 'img/stamp_body/body2.jpg' %}" alt="stamp body">
                         </div>
                         <div class="input-center">
-                            <input type="radio" name="body style"> <img
-                                src="{% static 'img/stamp_body/wood-mon-plus-text.jpg' %}" alt="stamp body">
+                            <input type="radio" name="body_style" value="3">
+                            <img src="{% static 'img/stamp_body/body3.jpg' %}" alt="stamp body">
                         </div>
                     </div>
                 </div>
                 <div class="line grid">
                     <div class="lft">
-                        <label for="line text">lin 1:</label>
+                        <label for="line1">lin 1:</label>
                     </div>
                     <div class="rgt stretch form-group">
-                        <input type="text" name="line1" class="form-control">
+                        <input type="text" name="line1" required class="form-control" />
                     </div>
                 </div>
                 <div class="line grid">
                     <div class="lft">
-                        <label for="line text">lin 2:</label>
+                        <label for="line2">lin 2:</label>
                     </div>
                     <div class="rgt stretch form-group">
-                        <input type="text" name="line2" class="form-control">
+                        <input type="text" name="line2" required class="form-control" />
                     </div>
                 </div>
                 <div class="line grid">
                     <div class="lft">
-                        <label for="line text">lin 3:</label>
+                        <label for="line3">lin 3:</label>
                     </div>
                     <div class="rgt stretch form-group">
-                        <input type="text" name="line3" class="form-control">
+                        <input type="text" name="line3" required class="form-control" />
                     </div>
                 </div>
                 <div class="color grid">
@@ -89,7 +104,7 @@
                         <label for="color">ink color:</label>
                     </div>
                     <div class="rgt">
-                        <input type="radio" name="color" value="black"> Black <br>
+                        <input type="radio" name="color" value="black" checked="checked"> Black <br>
                         <input type="radio" name="color" value="red"> Red <br>
                         <input type="radio" name="color" value="blue"> Blue <br>
                         <input type="radio" name="color" value="green"> Green <br>
@@ -125,12 +140,26 @@
 </div>
 <div class="add">
     <div class="buy">
-        <a href="" class="btn bn"><i class="fas fa-heart"></i>Add to Wishlist</a>
+        <a href="{% url 'pages:add_to_wishlist' product.id %}" class="btn bn"><i class="fas fa-heart"></i>Add to
+            Wishlist</a>
     </div>
     <div class="add-cart">
-        <a href="{% url 'carts:add_to_cart' product.id %}" class="btn atc"><i class="fa fa-cart-plus"></i>Add to
+        <!-- <a href="{% url 'carts:add_to_cart' product.id %}" class="btn atc"><i class="fa fa-cart-plus"></i>Add to
+            Cart</a> -->
+        <a class="btn atc"><i class="fa fa-cart-plus"></i>Add to
             Cart</a>
     </div>
 </div>
 
+
+
 {% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    $(".atc").click(function () {
+        $("#customize-product").submit();
+    });
+</script>
+<script src="{% static 'js/authentication.js' %}"></script>
+{% endblock extra_scripts %}

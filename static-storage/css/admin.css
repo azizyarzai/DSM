@@ -1,11 +1,17 @@
-#header {
-    height: 50px;
-    background: #10284e;
-    color: #fff;
+html {
+    box-sizing: border-box !important;
 }
 
-#branding h1 {
-    color: #fff;
+#header {
+    background: #dee1ec;
+    color: #10284e;
+}
+
+#branding h1 span {
+    color: #10284e;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 a:link, a:visited {
@@ -13,19 +19,61 @@ a:link, a:visited {
 }
 
 div.breadcrumbs {
-    background: #30caa0;
+    background: #086972;
     color: #10284e;
 }
 
-div.breadcrumbs a {
-    color: #333;
+div.breadcrumbs {
+    color: #fff;
 }
 
 .module h2, .module caption, .inline-group h2 {
-    background: #30caa0;
+    background: #086972;
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: #10284e;
     color: #fff;
+}
+
+.dashboard .colMS {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    margin-right: 0;
+    grid-column-gap: 1rem;
+    width: initial !important;
+    align-items: start;
+}
+
+@media (max-width: 765px) {
+    .dashboard .colMS {
+        grid-template-columns: 1fr;
+    }
+}
+
+.colMS>h1 {
+    display: none;
+}
+
+#content-related {
+    width: 100% !important;
+}
+
+.colMS #content-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-column-gap: 1rem;
+}
+
+#user-tools {
+    font-size: 1rem;
+    color: #071a52;
+}
+
+#user-tools a {
+    color: #071a52;
+}
+
+#user-tools a:link, #user-tools a:visited {
+    color: #071a52 !important;
 }

@@ -9,6 +9,7 @@ from orders.models import Order
 
 
 def add_to_cart(request, product_id):
+    print(request.POST)
     product = Product.objects.get(id=product_id)
     cart, cart_created = Cart.objects.new_or_get(request)
     try:

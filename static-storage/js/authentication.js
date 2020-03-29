@@ -17,6 +17,7 @@ inputs.forEach(input => {
     input.addEventListener('blur', blurFunc);
 });
 
+// Forms Validations
 $(function () {
     // Custom password validators
     $.validator.addMethod("passLength", function (value, element) {
@@ -39,6 +40,21 @@ $(function () {
         return this.optional(element)
             || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
     }, "Please enter a <em>valid</em> email address");
+
+    $.validator.addMethod('lettersonly', function (value, element) {
+        return /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(value);
+    }, "Letters only please")
+
+    $.validator.addMethod("numbersOnly", function (value, element) {
+        return /^\d+$/.test(value);
+    }, 'Intergers only please');
+
+    $.validator.addMethod('fixedLength', function (value, element) {
+        return /^\d{10}$/.test(value);
+    }, "Please enter a <em>Valid Phone Number");
+
+
+    // Login and register form validations
     $("#auth-form").validate({
         rules: {
             email: {
@@ -72,28 +88,30 @@ $(function () {
         },
         messages: {
             email: {
-                required: "Please enter an email address",
+                required: "* Please enter an email address",
             },
             email_phone: {
-                required: "Please enter an email address or phone number",
+                required: "* Please enter an email address or phone number",
             },
             pass: {
-                required: "Please enter the password"
+                required: "* Please enter the password"
             },
             password: {
-                required: "Please enter the password"
+                required: "* Please enter the password"
             },
             password1: {
-                required: "Please enter the password",
+                required: "* Please enter the password",
             },
             fname: {
-                required: "Please enter your first name"
+                required: "* Please enter your first name"
             },
             lname: {
-                required: "Please enter your last name"
+                required: "* Please enter your last name"
             }
         }
     });
+
+    // Change password form validations
     $('#changePassword').validate({
         rules: {
             old_password: {
@@ -121,8 +139,156 @@ $(function () {
             }
         }
     });
-});
 
+    // Order Address selection validations
+    $("#addForm").validate({
+        rules: {
+            address_id: {
+                required: true
+            }
+        },
+        messages: {
+            address_id: "* Please select your delivery address"
+        }
+    });
+
+    // Update personal details validation
+    $("#personaldetails").validate({
+        rules: {
+            first_name: {
+                required: true,
+                lettersonly: true
+            },
+            last_name: {
+                required: true,
+                lettersonly: true
+            },
+            dob: {
+                required: true
+            },
+            gender: {
+                required: true
+            }
+        },
+        messages: {
+            first_name: {
+                required: "* Please enter your first name"
+            },
+            last_name: {
+                required: "* Please enter your last name"
+            },
+            dob: {
+                required: "* Please select your date of birth"
+            },
+            gender: {
+                required: "* Please select your gender"
+            }
+        }
+    });
+
+    // Update address validation
+    $("#addressdetails").validate({
+        rules: {
+            address_type: {
+                required: true
+            },
+            address: {
+                required: true
+            },
+            country: {
+                required: true
+            },
+            state: {
+                required: true
+            },
+            city: {
+                required: true
+            },
+            zip_code: {
+                required: true,
+                numbersOnly: true
+            }
+        },
+        messages: {
+            address_type: {
+                required: "* Please select address type"
+            },
+            address: {
+                required: "* Please enter your address"
+            },
+            country: {
+                required: "* Please select your country"
+            },
+            state: {
+                required: "* Please select your state"
+            },
+            city: {
+                required: "* Please select your city"
+            },
+            zip_code: {
+                required: "* Please enter the zip code"
+            }
+        }
+    });
+
+    // Update email validations
+    $("#emailAddresses").validate({
+        rules: {
+            email: {
+                required: true,
+                onlyEmail: true
+            }
+        },
+        messages: {
+            email: {
+                required: "* Please enter your email address"
+            }
+        }
+    });
+
+    // Update phone number validation
+    $("#phone").validate({
+        rules: {
+            phone: {
+                required: true,
+                numbersOnly: true,
+                fixedLength: true
+            }
+        },
+        messages: {
+            phone: {
+                required: "* Please enter your phone number"
+            }
+        }
+    });
+
+    // Product customizations validation
+    $("#customize-product").validate({
+        rules: {
+            line1: {
+                required: true
+            },
+            line2: {
+                required: true
+            },
+            line3: {
+                required: true
+            },
+        },
+        messages: {
+            line1: {
+                required: "* Please fill the above input"
+            },
+            line2: {
+                required: "* Please fill the above input"
+            },
+            line3: {
+                required: "* Please fill the above input"
+
+            }
+        }
+    });
+});
 
 setTimeout(function () {
     $('#message').fadeOut('slow');

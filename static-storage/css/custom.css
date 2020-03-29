@@ -11,6 +11,11 @@ body {
     line-height: 22px;
 }
 
+#content {
+    position: relative;
+    top: 81px;
+}
+
 .heading {
     text-transform: uppercase;
     font-size: 1.7rem;
@@ -587,8 +592,9 @@ body {
 }
 
 .stretch {
-    display: flex;
-    flex-direction: row;
+    display: block;
+    /* display: flex;
+    flex-direction: row; */
 }
 
 .stretch input, .stretch textarea {
@@ -607,6 +613,10 @@ body {
     width: 100%;
 }
 
+.rgt .error {
+    margin-top: .5rem;
+}
+
 .input-center {
     display: flex;
     flex-direction: row;
@@ -619,6 +629,8 @@ body {
 .input-center img {
     flex: 7;
 }
+
+#body_style-error {}
 
 /* Add to cart */
 
@@ -644,7 +656,7 @@ body {
 }
 
 .bn, .atc {
-    color: #fff;
+    color: #fff !important;
     transition: transform .5s;
     box-shadow: 0 0.625rem 3.5rem 0 rgba(198, 203, 222, .45);
 }
@@ -969,6 +981,12 @@ body {
     font-size: 14px;
 }
 
+.my_title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
 .my_custom_table .prod-name {
     text-transform: capitalize;
     color: #212529;
@@ -1051,7 +1069,7 @@ body {
     flex-direction: row;
 }
 
-.add-1 input {
+.add-1 span {
     flex-basis: 50px;
 }
 
@@ -1164,6 +1182,12 @@ body {
 
 .free {
     color: #21e6c1;
+}
+
+#address_id-error {
+    position: absolute;
+    top: -1.8rem;
+    font-size: 1rem !important;
 }
 
 /* Payment options pictures */

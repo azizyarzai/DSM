@@ -54,6 +54,7 @@ class AddressAdmin(admin.ModelAdmin):
     list_display = ('address', 'city', 'state',
                     'zip_code', 'country', 'user')
     list_filter = ('state', 'zip_code', 'country')
+    search_fields = ('address', 'city', 'state', 'zip_code', 'user')
     list_per_page = 20
 
     # regular stuff

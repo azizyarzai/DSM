@@ -6,20 +6,22 @@ from .models import Category, Group, Product
 class CategoryAdmin(admin.ModelAdmin):
     exclude = ('slug',)
     list_display = ('name', 'image', 'updated')
+    search_fields = ('name', 'description')
     list_per_page = 20
 
 
 admin.site.register(Category, CategoryAdmin)
 
 
-class TypeAdmin(admin.ModelAdmin):
+class GroupAdmin(admin.ModelAdmin):
     exclude = ('slug',)
     list_display = ('name', 'category', 'image', 'updated')
     list_per_page = 20
     list_filter = ('category',)
+    search_fields = ('name', 'description', 'category')
 
 
-admin.site.register(Group, TypeAdmin)
+admin.site.register(Group, GroupAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -29,6 +31,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 20
     list_editable = ('availible', 'price')
     list_filter = ('group', 'availible', 'price')
+    search_fields = ('name', 'description', 'price', 'group')
 
 
 admin.site.register(Product, ProductAdmin)

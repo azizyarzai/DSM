@@ -85,9 +85,9 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, blank=True, related_name="products")
+        Product, on_delete=models.CASCADE, blank=True, related_name="cart_item")
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, related_name="cart_items")
+        Cart, on_delete=models.CASCADE, related_name="cart_item")
     quantity = models.IntegerField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -107,7 +107,7 @@ class CartItem(models.Model):
 def post_save_cart_item_receiver(sender, instance, *args, **kwarge):
     cart = instance.cart
     total = 0
-    cart_items = cart.cart_items.all()
+    cart_items = cart.cart_item.all()
     for cart_item in cart_items:
         total += cart_item.product.price * cart_item.quantity
     cart.total = total

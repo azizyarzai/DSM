@@ -12,7 +12,11 @@ PAYMENT_STATUS = (
     ('refunded', 'Refunded')
 )
 ORDER_STATUS_CHOICES = (
-    ('created', 'Created'),
+    ('not confirmed', 'Not Confirmed'),
+    ('cancelled', 'Cancelled'),
+    ('confirmed', 'Confirmed'),
+    ('ready', 'Ready'),
+    ('out for delivery', 'Out For Delivery'),
     ('deliverd', 'Delivered')
 )
 
@@ -45,8 +49,8 @@ class Order(models.Model):
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
 
-    def __Str__(self):
-        return self.order_id
+    def __str__(self):
+        return str(self.order_id)
 
     def update_total(self):
         cart_total = self.cart.total

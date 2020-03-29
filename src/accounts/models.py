@@ -48,7 +48,7 @@ post_save.connect(post_save_user_created_receiver, sender=User)
 
 
 class Address(models.Model):
-    address_type = models.CharField(max_length=4, choices=ADDRESS_TYPE_CHOICES)
+    address_type = models.CharField(max_length=5, choices=ADDRESS_TYPE_CHOICES)
     address = models.TextField(max_length=2000)
     country = models.CharField(max_length=100)
     state = models.CharField(max_length=100)

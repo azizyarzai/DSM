@@ -11,6 +11,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=300, blank=True, unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to="categories")
+    discount = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -41,7 +42,8 @@ pre_save.connect(categry_pre_save_receiver, sender=Category)
 class Group(models.Model):
     name = models.CharField(max_length=300, unique=True)
     slug = models.SlugField(max_length=300, blank=True, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="group")
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to="groups")
     created = models.DateTimeField(auto_now_add=True)
@@ -77,7 +79,8 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=300, unique=True)
     slug = models.SlugField(max_length=300, blank=True, unique=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, related_name="product")
     description = models.TextField(blank=True)
     height = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)

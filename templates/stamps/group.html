@@ -4,21 +4,23 @@
 {% block content %}
 <!-- Page Header
 ============================================= -->
-<section class="page-header page-header-text-light bg-dark-5 py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-12">
-                <ul class="breadcrumb mb-0">
-                    <li><a href="{% url 'pages:home' %}">Home</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li class="active">{{ group.name }}</li>
-                </ul>
+<div class="container">
+    <section class="page-header page-header-text-light bg-dark-5 py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="breadcrumb mb-0">
+                        <li><a href="{% url 'pages:home' %}">Home</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li class="active">{{ group.name }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <!-- Page Header End -->
 
 <!-- List of the stamps -->
@@ -36,7 +38,7 @@
         {% for product in products %}
         <div class="stamp-details">
             <div class="stamp-img">
-                <a href="stamp-customization.html"><img src="{{ product.image.url }}" class='rounded' width='100%'
+                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class='rounded' width='100%'
                         alt="{{ product.slug }}"></a>
             </div>
             <div class="stamp-desc">
@@ -57,8 +59,9 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
     </div>
 </section>
-{% endif %}
+
 
 {% endblock content %}

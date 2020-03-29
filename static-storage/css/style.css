@@ -97,6 +97,14 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.8;
 }
 
+#inquiryModal {
+    z-index: 99999;
+}
+
+.nav-active {
+    border-bottom: 2px solid #071a52;
+}
+
 /*-------- Preloader --------*/
 
 #preloader {
@@ -438,7 +446,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-dark-5 {
-    background-color: #435161 !important;
+    background-color: #0e153a !important;
 }
 
 hr {
@@ -483,6 +491,15 @@ hr {
 #header {
     background: #fff;
     border-bottom: 1px solid #efefef;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    transition: .5s;
+}
+
+#header.scrolled {
+    background-image: linear-gradient(to bottom, #a1eafb, #fdfdfd);
 }
 
 #header .navbar {
@@ -1106,6 +1123,7 @@ hr {
 .page-header {
     margin: 0 0 30px 0;
     padding: 15px 0 !important;
+    border-radius: 10px;
 }
 
 .page-header h1 {
@@ -2152,7 +2170,7 @@ label.error {
 }
 
 .passform button {
-    max-width: 10rem;
+    max-width: 14rem;
     margin: 0 auto 1rem auto;
 }
 

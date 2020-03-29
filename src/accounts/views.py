@@ -140,12 +140,12 @@ def view_profile(request):
 def add_address(request):
     if request.method == "POST":
         user = request.user
-        address_type = request.POST.get("address-type")
+        address_type = request.POST.get("address_type")
         address = request.POST.get("address")
         country = request.POST.get("country")
         state = request.POST.get("state")
         city = request.POST.get("city")
-        zip_code = request.POST.get("zip-code")
+        zip_code = request.POST.get("zip_code")
         redirect_to = request.POST.get('redirect')
 
         new_address = Address.objects.create(
@@ -167,12 +167,12 @@ def add_address(request):
 def update_address(request, address_id):
     if request.method == "POST":
         user = request.user
-        address_type = request.POST.get("address-type")
+        address_type = request.POST.get("address_type")
         address = request.POST.get("address")
         country = request.POST.get("country")
         state = request.POST.get("state")
         city = request.POST.get("city")
-        zip_code = request.POST.get("zip-code")
+        zip_code = request.POST.get("zip_code")
         redirect_to = request.POST.get('redirect')
 
         address_fetched = get_object_or_404(Address, id=address_id, user=user)
@@ -209,8 +209,8 @@ def delete_address(request, address_id):
 def update_personal_details(request):
     if request.method == "POST":
         user = request.user
-        first_name = request.POST.get('first-name')
-        last_name = request.POST.get("last-name")
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get("last_name")
         dob = request.POST.get('dob')
         gender = request.POST.get("gender")
 

@@ -4,19 +4,21 @@
 
 <!-- Page Header
 ============================================= -->
-<section class="page-header page-header-text-light bg-dark-5 py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-12">
-                <ul class="breadcrumb mb-0">
-                    <li><a href="{% url 'pages:home' %}">Home</a></li>
-                    <i class="fas fa-chevron-right next"></i>
-                    <li class="active">Browse Stamps</li>
-                </ul>
+<div class="container">
+    <section class="page-header page-header-text-light bg-dark-5 py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="breadcrumb mb-0">
+                        <li><a href="{% url 'pages:home' %}">Home</a></li>
+                        <i class="fas fa-chevron-right next"></i>
+                        <li class="active">Browse Stamps</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <!-- Page Header End -->
 
 <!-- Browse Stamps section -->
@@ -33,7 +35,9 @@
             <img src="{{ category.image.url }}" class='rounded' width='100%' alt="{{ category.slug }}">
             <a href="{{ category.get_absolute_url }}" class='head'>{{ category.name }} <i
                     class="fa fa-chevron-right"></i></a>
-            <span>up to 30% off</span>
+            {% if category.discount > 0 %}
+            <span>up to {{ category.discount }}% off</span>
+            {% endif %}
             <div class="stamp-types">
 
                 {% if category.get_groups %}

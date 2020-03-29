@@ -15,7 +15,7 @@ from.models import Order
 @login_required
 def delivery_address(request):
     if request.method == "POST":
-        address_id = request.POST.get('address-id')
+        address_id = request.POST.get('address_id')
         print(address_id)
         address = Address.objects.get(id=address_id)
         cart, cart_created = Cart.objects.new_or_get(request)
@@ -46,8 +46,8 @@ def payment(request, total=0):
     try:
         cart, cart_created = Cart.objects.new_or_get(request)
         cart_items = CartItem.objects.filter(cart=cart)
-        for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
+        order_obj, order_created = Order.objects.get_or_create(cart=cart)
+        total = order_obj.total
     except ObjectDoesNotExist:
         pass
 
@@ -56,19 +56,18 @@ def payment(request, total=0):
         "currency": 'INR',
         "receipt": 'order_rcpid_11',
         "payment_capture": 0,
-        "notes": {'Shipping address': 'Bommanahalli, Bangalore'}
+        "notes": {'Shipping address': str(order_obj.delivery_address)}
     }
 
     order = client.order.create(data=data)
     order_id = order.get('id')
-    print(order_id)
     template = 'orders/payment.html'
 
-    order_obj, order_created = Order.objects.get_or_create(cart=cart)
     context = {
         "order_id": order_id,
         'key_id': key_id,
-        'order': order_obj
+        'order': order_obj,
+        'cart_items': cart_items
     }
     return render(request, template, context)
 

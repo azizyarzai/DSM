@@ -1,5 +1,12 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
+
+{% block extra_head %}
+<script src="{% static 'js/jquery-validation.min.js' %}"></script>
+<script src="{% static 'js/jquery-validation-additional-methods.min.js' %}"></script>
+{% endblock extra_head %}
+
+
 <div class="container">
   {% include "partials/alerts.html" %}
   <div class="row sel-add">
@@ -8,12 +15,14 @@
         <h3 class="a-head">Select Delivery Address</h3>
         <form action="{% url 'orders:delivery_address' %}" method="POST" id="addForm">
           {% csrf_token %}
-          <div class="row">
+          <div class="row mt-3">
             {% if user.addresses %} {% for address in user.addresses.all %}
             <div class="col-12">
               <div class="add-details">
                 <div class="add-1">
-                  <input type="radio" name="address-id" value="{{ address.id }}" />
+                  <span class="text-center">
+                    <input type="radio" name="address_id" value="{{ address.id }}" />
+                  </span>
                   <div>
                     <div>
                       <span class="name">{{ user.first_name }} {{ user.last_name }}</span>
@@ -106,7 +115,7 @@
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="address-type">Address Type</label>
-                <select class="custom-select" id="address-type" name="address-type">
+                <select class="custom-select" id="address-type" name="address_type">
                   <option value="">Select Address Type</option>
                   <option value="Home">Home</option>
                   <option value="Work">Work</option>
@@ -151,7 +160,7 @@
             <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="zipCode">Zip Code</label>
-                <input name="zip-code" id="zipCode" value="{{ address.zip_code }}" type="text" class="form-control"
+                <input name="zip_code" id="zipCode" value="{{ address.zip_code }}" type="text" class="form-control"
                   required placeholder="zip code">
               </div>
             </div>
@@ -174,6 +183,7 @@
 
 {% block extra_scripts %}
 <script src="{% static 'js/countrystatecity.js' %}"></script>
+<script src="{% static 'js/authentication.js' %}"></script>
 <script>
   $(".del-add").on("click", function () {
     $("#addForm").submit();

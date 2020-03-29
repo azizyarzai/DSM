@@ -17,7 +17,7 @@
           ============================= -->
         <div class="logo">
           <a class="d-flex" href="{% url 'pages:home' %}">
-            <img src="{% static 'img/logo/logo3.png' %}" width="120px" alt="Dangui Stamp Makers" />
+            <img src="{% static 'img/logo/logo3.png' %}" width="120px" height="70px" alt="Dangui Stamp Makers" />
           </a>
         </div>
         <!-- Logo end -->
@@ -31,7 +31,25 @@
         <nav class="primary-menu navbar navbar-expand-lg">
           <div id="header-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="dropdown"> <a class="dropdown-toggle" href="#">Stamps</a>
+              <li class="dropdown"> <a class="dropdown-toggle" href="javascript: return void();">Stamps</a>
+                {% if categories %}
+                <ul class="dropdown-menu">
+                  {% for category in categories %}
+                  <li class="dropdown"><a class="dropdown-item dropdown-toggle"
+                      href="javascripts:void();">{{ category.name}}</a>
+                    <ul class="dropdown-menu">
+                      {% if category.get_groups %}
+                      {% for group in category.get_groups %}
+                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
+                      {% endfor %}
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </li>
+              <li class="dropdown"> <a class="dropdown-toggle" href="javascript: return void();">Features</a>
                 {% if categories %}
                 <ul class="dropdown-menu">
                   {% for category in categories %}
@@ -48,26 +66,11 @@
                 </ul>
                 {% endif %}
               </li>
-              <li class="dropdown"> <a class="dropdown-toggle" href="#">Features</a>
-                {% if categories %}
-                <ul class="dropdown-menu">
-                  {% for category in categories %}
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
-                    <ul class="dropdown-menu">
-                      {% if category.get_groups %}
-                      {% for group in category.get_groups %}
-                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
-                      {% endfor %}
-                      {% endif %}
-                    </ul>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </li>
-              <li><a href="{% url 'stamps:browse_stamps' %}">Fees</a></li>
-              <li><a href="{% url 'pages:about' %}">About Us</a></li>
-              <li><a href="help.html">Help</a></li>
+              <li><a href="{% url 'stamps:browse_stamps' %}"
+                  class="{% if 'browse-stamps' in request.path %} nav-active {% endif %}">Browse Stamps </a></li>
+              <li><a href="{% url 'pages:about' %}"
+                  class="{% if 'about' in request.path %} nav-active {% endif %}">About Us</a></li>
+              <li><a href="help.html" class="{% if 'help' in request.path %} nav-active {% endif %}">Help</a></li>
             </ul>
           </div>
         </nav>
@@ -101,9 +104,8 @@
                 <li><a class="dropdown-item" href="{% url 'orders:view_orders' %}"><i
                       class="fas fa-briefcase drop-icon"></i>Orders</a>
                 </li>
-                <li><a class="dropdown-item" href="{% url 'pages:view_wish' %}"><i
-                      class="fas fa-heart drop-icon"></i>Wish
-                    List</a>
+                <li><a class="dropdown-item" href="{% url 'pages:wishlist' %}"><i
+                      class="fas fa-heart drop-icon"></i>Wishlist</a>
                 </li>
                 <li><a class="dropdown-item" href="javascript:document.getElementById('logout').submit();"><i
                       class="fas fa-sign-out-alt drop-icon"></i>Logout</a></li>
@@ -125,6 +127,8 @@
 
 {% block extra_scripts %}
 <script>
-
+  $(window).scroll(function () {
+    $("#header").toggleClass('scrolled', $(this).scrollTop() > 10);
+  });
 </script>
 {% endblock extra_scripts %}
