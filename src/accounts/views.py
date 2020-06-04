@@ -39,7 +39,7 @@ def login(request):
                         if is_safe_url(redirect_url_path, request.get_host()):
                             return HttpResponseRedirect(redirect_url_path)
                     else:
-                        return HttpResponseRedirect(reverse_lazy('accounts:dashboard'))
+                        return HttpResponseRedirect(reverse_lazy('pages:home'))
             else:
                 messages.error(request, 'Invalid credentials')
                 return HttpResponseRedirect(reverse_lazy('accounts:login'))
@@ -78,19 +78,12 @@ def register(request):
                     request, user, backend='accounts.EmailAuthenticationBackend.EmailBackend')
                 messages.success(
                     request, "You are successfully registered; loged in")
-                return HttpResponseRedirect(reverse_lazy('accounts:dashboard'))
+                return HttpResponseRedirect(reverse_lazy('pages:home'))
         else:
             messages.error(request, "Passwords do not match!")
             return HttpResponseRedirect(reverse_lazy('accounts:register'))
     else:
         return render(request, "accounts/register.html")
-
-
-@login_required
-def dashboard(request):
-    template = "accounts/dashboard.html"
-    context = {}
-    return render(request, template, context)
 
 
 @login_required

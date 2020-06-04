@@ -5,7 +5,7 @@ from .models import Order
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_id', 'total', 'payment_status',
-                    'order_status', 'cart')
+                    'order_status', 'cart', 'placed')
     list_filter = ('created', 'payment_status', 'order_status')
     list_per_page = 20
     list_editable = ('payment_status', 'order_status')
