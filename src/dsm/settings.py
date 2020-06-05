@@ -28,7 +28,8 @@ SECRET_KEY = 'mt7x%x62efxulvum&epmr127==5(54j3%-!$c=dhlj^@1f+t()'
 DEBUG = True
 # bool(int(os.environ.get('DEBUG', 1)))
 
-ALLOWED_HOSTS = ["192.168.56.1", "172.20.10.4", "localhost", "*"]
+ALLOWED_HOSTS = ["192.168.56.1", "172.20.10.4", "localhost",
+                 "ec2-13-127-62-40.ap-south-1.compute.amazonaws.com", "yarzai.info", "13.127.62.40", "*"]
 
 
 # Application definition

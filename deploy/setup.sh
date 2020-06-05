@@ -34,7 +34,7 @@ cp $PROJECT_BASE_PATH/deploy/supervisor_dsm.conf /etc/supervisor/conf.d/dsm.conf
 supervisorctl reread
 supervisorctl update
 supervisorctl restart dsm
-
+    
 # Configure nginx
 cp $PROJECT_BASE_PATH/deploy/nginx_dsm.conf /etc/nginx/sites-available/dsm.conf
 rm /etc/nginx/sites-enabled/default
