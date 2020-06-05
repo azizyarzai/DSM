@@ -22,7 +22,7 @@ source $PROJECT_BASE_PATH/env/bin/activate
 
 # Install python packages
 sudo $PROJECT_BASE_PATH/env/bin/pip3 install -r $PROJECT_BASE_PATH/requirements.txt
-sudo $PROJECT_BASE_PATH/env/bin/pip3 install uwsgi==2.0.18
+sudo $PROJECT_BASE_PATH/env/bin/pip3 install uwsgi
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
