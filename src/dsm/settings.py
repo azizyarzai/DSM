@@ -106,7 +106,7 @@ DATABASES = {
         'NAME': 'dsm_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'dsm-db.c5tutasyww5b.ap-south-1.rds.amazonaws.com',
     }
 }
 
