@@ -11,6 +11,9 @@ import os
 
 
 from django.core.wsgi import get_wsgi_application
+from dsm import settings
+
+path = settings.BASE_DIR
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', "dsm.settings")
