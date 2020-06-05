@@ -26,8 +26,8 @@ $PROJECT_BASE_PATH/env/bin/pip3 install uwsgi==2.0.18
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
-$PROJECT_BASE_PATH/env/bin/python3 dsm/manage.py migrate
-$PROJECT_BASE_PATH/env/bin/python3 dsm/manage.py collectstatic --noinput
+$PROJECT_BASE_PATH/env/bin/python3 src/manage.py migrate
+$PROJECT_BASE_PATH/env/bin/python3 src/manage.py collectstatic --noinput
 
 # Configure supervisor
 cp $PROJECT_BASE_PATH/deploy/supervisor_dsm.conf /etc/supervisor/conf.d/dsm.conf
