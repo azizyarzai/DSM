@@ -8,8 +8,8 @@ PROJECT_GIT_URL='https://github.com/azizyarzai/DSM.git'
 PROJECT_BASE_PATH='/usr/local/apps/dsm'
 
 echo "Installing dependencies..."
-sudo apt-get update
-sudo apt-get install -y python3-dev python3-venv python-pip supervisor nginx git python-psycopg2
+apt-get update
+apt-get install -y python3-dev python3-venv python-pip supervisor nginx git python-psycopg2
 
 # Create project directory
 mkdir -p $PROJECT_BASE_PATH
@@ -20,8 +20,8 @@ mkdir -p $PROJECT_BASE_PATH/env
 python3 -m venv $PROJECT_BASE_PATH/env
 
 # Install python packages
-$sudo PROJECT_BASE_PATH/env/bin/pip install -r $PROJECT_BASE_PATH/requirements.txt
-$sudo PROJECT_BASE_PATH/env/bin/pip install uwsgi==2.0.18
+$PROJECT_BASE_PATH/env/bin/pip install -r $PROJECT_BASE_PATH/requirements.txt
+$PROJECT_BASE_PATH/env/bin/pip install uwsgi==2.0.18
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
