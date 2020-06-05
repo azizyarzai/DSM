@@ -18,16 +18,16 @@ git clone $PROJECT_GIT_URL $PROJECT_BASE_PATH
 # Create virtual environment
 mkdir -p $PROJECT_BASE_PATH/env
 python3 -m venv $PROJECT_BASE_PATH/env
-source $PROJECT_BASE_PATH/env/bin/activate
+
 
 # Install python packages
-$PROJECT_BASE_PATH/env/bin/pip3 install -r $PROJECT_BASE_PATH/requirements.txt
-$PROJECT_BASE_PATH/env/bin/pip3 install uwsgi==2.0.18
+$PROJECT_BASE_PATH/env/bin/pip install -r $PROJECT_BASE_PATH/requirements.txt
+$PROJECT_BASE_PATH/env/bin/pip install uwsgi==2.0.18
 
 # Run migrations and collectstatic
 cd $PROJECT_BASE_PATH
-$PROJECT_BASE_PATH/env/bin/python3 src/manage.py migrate
-$PROJECT_BASE_PATH/env/bin/python3 src/manage.py collectstatic --noinput
+$PROJECT_BASE_PATH/env/bin/python src/manage.py migrate
+$PROJECT_BASE_PATH/env/bin/python src/manage.py collectstatic --noinput
 
 # Configure supervisor
 cp $PROJECT_BASE_PATH/deploy/supervisor_dsm.conf /etc/supervisor/conf.d/dsm.conf
