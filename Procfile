@@ -1,1 +1,1 @@
-web: gunicorn src.dsm.wsgi --log-file -
+web: gunicorn dsm.wsgi --log-file -
