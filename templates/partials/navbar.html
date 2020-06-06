@@ -3,9 +3,8 @@
 <!-- A check form for logout -->
 <form action="{% url 'accounts:logout' %}" id="logout" method="POST">
   {% csrf_token %}
-  <input type="hidden">
+  <input type="hidden" />
 </form>
-
 
 <!-- Header
   ============================================= -->
@@ -23,54 +22,66 @@
         <!-- Logo end -->
         <!-- Collapse Button
           ============================== -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-nav"> <span></span>
-          <span></span> <span></span> </button><!-- Collapse Button end -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-nav">
+          <span></span> <span></span> <span></span></button><!-- Collapse Button end -->
 
         <!-- Primary Navigation
           ============================== -->
         <nav class="primary-menu navbar navbar-expand-lg">
           <div id="header-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="dropdown"> <a class="dropdown-toggle" href="javascript: return void();">Stamps</a>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="javascript: return void();">Stamps</a>
                 {% if categories %}
                 <ul class="dropdown-menu">
                   {% for category in categories %}
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle"
-                      href="javascripts:void();">{{ category.name}}</a>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="javascripts:void();">{{ category.name}}</a>
                     <ul class="dropdown-menu">
                       {% if category.get_groups %}
                       {% for group in category.get_groups %}
-                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
-                      {% endfor %}
-                      {% endif %}
+                      <li>
+                        <a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+                      </li>
+                      {% endfor %} {% endif %}
                     </ul>
                   </li>
                   {% endfor %}
                 </ul>
                 {% endif %}
               </li>
-              <li class="dropdown"> <a class="dropdown-toggle" href="javascript: return void();">Features</a>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="javascript: return void();">Features</a>
                 {% if categories %}
                 <ul class="dropdown-menu">
                   {% for category in categories %}
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
                     <ul class="dropdown-menu">
                       {% if category.get_groups %}
                       {% for group in category.get_groups %}
-                      <li><a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
-                      {% endfor %}
-                      {% endif %}
+                      <li>
+                        <a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+                      </li>
+                      {% endfor %} {% endif %}
                     </ul>
                   </li>
                   {% endfor %}
                 </ul>
                 {% endif %}
               </li>
-              <li><a href="{% url 'stamps:browse_stamps' %}"
-                  class="{% if 'browse-stamps' in request.path %} nav-active {% endif %}">Browse Stamps </a></li>
-              <li><a href="{% url 'pages:about' %}"
-                  class="{% if 'about' in request.path %} nav-active {% endif %}">About Us</a></li>
-              <li><a href="help.html" class="{% if 'help' in request.path %} nav-active {% endif %}">Help</a></li>
+              <li>
+                <a href="{% url 'stamps:browse_stamps' %}"
+                  class="{% if 'browse-stamps' in request.path %} nav-active {% endif %}">Browse Stamps
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'pages:about' %}" class="{% if 'about' in request.path %} nav-active {% endif %}">About
+                  Us</a>
+              </li>
+              <li>
+                <a href="help.html" class="{% if 'help' in request.path %} nav-active {% endif %}">Help</a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -82,39 +93,47 @@
           ============================== -->
         <nav class="login-signup navbar navbar-expand">
           <ul class="navbar-nav">
-            <li><a href="{% url 'carts:cart_detail' %}"><i class="fas fa-shopping-cart nav-icon"></i>
-                {% if item_count == 0 %}
-                {% else %}
+            <li>
+              <a href="{% url 'carts:cart_detail' %}"><i class="fas fa-shopping-cart nav-icon"></i>
+                {% if item_count == 0 %} {% else %}
                 <span class="counter">{{ item_count }}</span>
                 {% endif %}
-              </a> </li>
+              </a>
+            </li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'carts:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a> </li>
+            <li>
+              <a href="{% url 'carts:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a>
+            </li>
             <li class="dropdown avatar">
               <a class="dropdown-toggle profile-img" data-toggle="adm">
                 <img
                   src="{% if user.profile.image %} {{ user.profile.image.url }} {% else %}{% static 'img/svg/profile.svg' %}{% endif %}"
-                  width="40px" height="40px" class="rounded-circle z-depth-0" alt="profile image">
+                  width="40px" height="40px" class="rounded-circle z-depth-0" alt="profile image" />
               </a>
               <ul class="dropdown-menu adm">
-                <li><a class="dropdown-item" href="{% url 'accounts:view_profile' %}"><i
-                      class="fas fa-user drop-icon"></i>My
-                    Profile</a>
+                <li>
+                  <a class="dropdown-item" href="{% url 'accounts:view_profile' %}"><i
+                      class="fas fa-user drop-icon"></i>My Profile</a>
                 </li>
-                <li><a class="dropdown-item" href="{% url 'orders:view_orders' %}"><i
+                <li>
+                  <a class="dropdown-item" href="{% url 'orders:view_orders' %}"><i
                       class="fas fa-briefcase drop-icon"></i>Orders</a>
                 </li>
-                <li><a class="dropdown-item" href="{% url 'pages:wishlist' %}"><i
+                <li>
+                  <a class="dropdown-item" href="{% url 'pages:wishlist' %}"><i
                       class="fas fa-heart drop-icon"></i>Wishlist</a>
                 </li>
-                <li><a class="dropdown-item" href="javascript:document.getElementById('logout').submit();"><i
-                      class="fas fa-sign-out-alt drop-icon"></i>Logout</a></li>
+                <li>
+                  <a class="dropdown-item" href="javascript:document.getElementById('logout').submit();"><i
+                      class="fas fa-sign-out-alt drop-icon"></i>Logout</a>
+                </li>
               </ul>
             </li>
             {% else %}
-            <li><a href="{% url 'accounts:login' %}">Login</a> </li>
-            <li class="align-items-center h-auto ml-sm-3"><a class="btn btn-primary d-none d-sm-block"
-                href="{% url 'accounts:register' %}">Sign Up</a></li>
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li class="align-items-center h-auto ml-sm-3">
+              <a class="btn btn-primary d-none d-sm-block" href="{% url 'accounts:register' %}">Sign Up</a>
+            </li>
             {% endif %}
           </ul>
         </nav>
@@ -128,7 +147,7 @@
 {% block extra_scripts %}
 <script>
   $(window).scroll(function () {
-    $("#header").toggleClass('scrolled', $(this).scrollTop() > 10);
+    $("#header").toggleClass("scrolled", $(this).scrollTop() > 10);
   });
 </script>
 {% endblock extra_scripts %}
