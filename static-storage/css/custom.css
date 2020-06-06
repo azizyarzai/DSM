@@ -543,7 +543,7 @@ body {
     padding: 1.5rem;
     border: 1px solid #DBDBDB;
     box-shadow: 0 0.625rem 3.5rem 0 rgba(198, 203, 222, .45);
-    background-image: url(../img/checkerboard.png);
+    /* background-image: url('../img/checkerboard.png'); */
     background-size: 100%;
 }
 
@@ -1000,7 +1000,7 @@ body {
 }
 
 .custom_image {
-    width: 100px;
+    /* width: 100px; */
     height: 100px;
 }
 
@@ -1015,6 +1015,9 @@ body {
 
 .my_custom_button {
     margin-top: 5px;
+    width: 12rem;
+    padding: 10px;
+    
 }
 
 .counter {

@@ -40,7 +40,7 @@
 <!-- Stamp customization -->
 <section class="customization">
     <div class="details">
-        <div class="img">
+        <div class="img" style="background-image: url({% static 'img/checkerboard.png' %});">
             <img src="{{ product.image.url }}" alt="checkerboard">
         </div>
         <div class="desc">
@@ -75,30 +75,16 @@
                         </div>
                     </div>
                 </div>
+                {% for text, value in customization_fields.items %}
                 <div class="line grid">
                     <div class="lft">
-                        <label for="line1">lin 1:</label>
+                        <label for="{{ value }}">{{ text }}:</label>
                     </div>
                     <div class="rgt stretch form-group">
-                        <input type="text" name="line1" required class="form-control" />
+                        <input type="text" name="{{ value }}" required class="form-control" />
                     </div>
                 </div>
-                <div class="line grid">
-                    <div class="lft">
-                        <label for="line2">lin 2:</label>
-                    </div>
-                    <div class="rgt stretch form-group">
-                        <input type="text" name="line2" required class="form-control" />
-                    </div>
-                </div>
-                <div class="line grid">
-                    <div class="lft">
-                        <label for="line3">lin 3:</label>
-                    </div>
-                    <div class="rgt stretch form-group">
-                        <input type="text" name="line3" required class="form-control" />
-                    </div>
-                </div>
+                {% endfor %}
                 <div class="color grid">
                     <div class="lft">
                         <label for="color">ink color:</label>

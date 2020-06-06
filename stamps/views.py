@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse_lazy
 
-from .models import Category, Group, Product
+from .models import Category, Group, Product, DESC_CHOICES
+
 
 # Create your views here.
 
@@ -43,9 +44,24 @@ def product(request, slug_category, slug_group, slug_product):
     products = Product.objects.all().filter(group=group)
     product = get_object_or_404(products, slug=slug_product)
     template = "stamps/product.html"
+
+    customization_str = str(product.customization_descriptions)
+    cust_arr = customization_str.split(', ')
+
+    cust_d = {}
+    for text, val in DESC_CHOICES:
+        cust_d[val] = text
+
+    final_customization = {}
+
+    for c in cust_arr:
+        final_customization[c] = cust_d.get(c)
+
     context = {
         "category": category,
         "group": group,
-        "product": product
+        "product": product,
+        "customization_fields": final_customization
     }
+
     return render(request, template, context)

@@ -33,7 +33,7 @@ Cart -
 </div>
 <div class="container">
     <div class="row mx-auto">
-        <div class="col-12 col-sm-12 col-lg-8 text-center">
+        <div class="col-12 col-sm-12 col-lg-12 text-center">
             <table class="table my_custom_table">
                 <thead class="my_custom_thead">
                     <tr>
@@ -46,70 +46,75 @@ Cart -
 
                     {% for cart_item in cart_items %}
                     <tr>
-                        <td>
-                            <a href="{{ cart_item.product.get_absolute_url }}"><img
-                                    src="{{ cart_item.product.image.url }}" alt=""
-                                    class="float-left rounded custom_image"></a>
-                        </td>
-                        <td class="text-left">
-                            <a class='prod-name' href="">{{ cart_item.product.name }}</a>
-                            <br>
-                            Price: &#8377;{{ cart_item.product.price }}
-                            <br>
-                            Qty: {{ cart_item.quantity }}
-                        </td>
-                        <td>
-                            &#8377;{{ cart_item.sub_total }}
-                        </td>
-                        <td>
-                            <a href="{% url 'carts:add_to_cart' cart_item.product.id %}" title="Increase Quantity"
-                                data-toggle="tooltip" class="custom_a">
-                                <i class="fas fa-plus-circle custom_icon"></i>
-                            </a>&nbsp;
-                            <a href="{% url 'carts:remove_from_cart' cart_item.product.id %}" title="Decrease Quantity"
-                                data-toggle="tooltip" class="custom_a">
-                                <i class="fas fa-minus-circle custom_icon"></i>
-                            </a>&nbsp;
-                            <a href="{% url 'carts:full_remove' cart_item.product.id %}" title="Remove"
-                                data-toggle="tooltip" class="custom_a">
-                                <i class="fas fa-trash custom_icon"></i>
-                            </a>
-                        </td>
+                        <div class="row flex-wrap">
+                            <td class="">
+                                <a href="{{ cart_item.product.get_absolute_url }}"><img
+                                        src="{{ cart_item.product.image.url }}" alt=""
+                                        class="float-left rounded custom_image"></a>
+                            </td>
+                            <div class="">
+                                <td class="text-left">
+                                    <a class='prod-name' href="">{{ cart_item.product.name }}</a>
+                                    <br>
+                                    Price: &#8377;{{ cart_item.product.price }}
+                                    <br>
+                                    Qty: {{ cart_item.quantity }}
+                                </td>
+                                <td>
+                                    &#8377;{{ cart_item.sub_total }}
+                                </td>
+                                <td>
+                                    <a href="{% url 'carts:add_to_cart' cart_item.product.id %}"
+                                        title="Increase Quantity" data-toggle="tooltip" class="custom_a">
+                                        <i class="fas fa-plus-circle custom_icon"></i>
+                                    </a>&nbsp;
+                                    <a href="{% url 'carts:remove_from_cart' cart_item.product.id %}"
+                                        title="Decrease Quantity" data-toggle="tooltip" class="custom_a">
+                                        <i class="fas fa-minus-circle custom_icon"></i>
+                                    </a>&nbsp;
+                                    <a href="{% url 'carts:full_remove' cart_item.product.id %}" title="Remove"
+                                        data-toggle="tooltip" class="custom_a">
+                                        <i class="fas fa-trash custom_icon"></i>
+                                    </a>
+                                </td>
+                            </div>
                     </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
         </div>
-        <div class="col-12 col-sm-12 col-lg-4 text-center">
-            <table class="table my_custom_table">
-                <thead class="my_custom_thead">
-                    <tr>
-                        <th>
-                            Checkout
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Please review your shopping cart with the order payment.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">
-                            Your total is: <strong>&#8377;{{ total }}</strong>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="mx-auto">
-                <a href="{% url 'stamps:browse_stamps' %}" class="btn btn-secondary btn-block my_custom_button">Continue
-                    Shopping</a>
-                <a href="{% url 'orders:delivery_address' %}"
-                    class="btn btn-secondary btn-block my_custom_button">Checkout</a>
-            </div>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-12 text-center">
+        <table class="table my_custom_table">
+            <thead class="my_custom_thead">
+                <tr>
+                    <th>
+                        Checkout
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Please review your shopping cart with the order payment.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">
+                        Your total is: <strong>&#8377;{{ total }}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mx-auto">
+            <a href="{% url 'stamps:browse_stamps' %}"
+                class="btn btn-secondary btn-inline-block my_custom_button">Continue
+                Shopping</a>
+            <a href="{% url 'orders:delivery_address' %}"
+                class="btn btn-secondary btn-inline-block my_custom_button">Checkout</a>
         </div>
     </div>
+</div>
 </div>
 <br>
 {% include "partials/payments.html" %}

@@ -1,9 +1,25 @@
 from django.db import models
 from django.urls import reverse_lazy
 from django.db.models.signals import pre_save
+from multiselectfield import MultiSelectField
+
 from dsm.utils import unique_slug_generator
 
 # Create your models here.
+
+DESC_CHOICES = (
+    ('line1', 'Line 1'),
+    ('line2', 'Line 2'),
+    ('line3', 'Line 3'),
+    ('line4', 'Line 4'),
+    ('line5', 'Line 5'),
+    ('text', 'Text'),
+    ('top-outer-circle-text', 'Top Outer Circle Text'),
+    ("monogram-initial", "Monogram Initial"),
+    ('center-text', 'Center Text'),
+    ('bottom-outer-circle-text', 'Bottom Outer Circle Text'),
+    ("below-arrow", "Below Arrow")
+)
 
 
 class Category(models.Model):
@@ -91,6 +107,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to="media/products")
     availible = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
+    customization_descriptions = MultiSelectField(
+        choices=DESC_CHOICES, null=True, blank=True, max_length=999)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -114,3 +132,9 @@ def product_pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(product_pre_save_receiver, sender=Product)
+
+# class Stamp_Customization(models.Model):
+#     sfsd = models.TextField()
+
+# class Customization_Description(models.Model):
+#     line1 = models.TextField(max_length=100)
