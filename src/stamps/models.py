@@ -10,7 +10,7 @@ class Category(models.Model):
     name = models.CharField(max_length=300, unique=True)
     slug = models.SlugField(max_length=300, blank=True, unique=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to="categories")
+    image = models.ImageField(upload_to="media/categories")
     discount = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -45,7 +45,7 @@ class Group(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="group")
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to="groups")
+    image = models.ImageField(upload_to="media/groups")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -88,7 +88,7 @@ class Product(models.Model):
         max_digits=5, decimal_places=2, null=True, blank=True)
     diameter = models.DecimalField(
         max_digits=4, decimal_places=2, blank=True, null=True)
-    image = models.ImageField(upload_to="products")
+    image = models.ImageField(upload_to="media/products")
     availible = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)

@@ -16,7 +16,7 @@ from django.utils.http import is_safe_url
 
 def login(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse_lazy('accounts:dashboard'))
+        return HttpResponseRedirect(reverse_lazy('pages:home'))
     else:
         if request.method == 'POST':
             # Login User

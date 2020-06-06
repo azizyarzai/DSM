@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mt7x%x62efxulvum&epmr127==5(54j3%-!$c=dhlj^@1f+t()'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = ["192.168.56.1", "172.20.10.4", "127.0.0.1",
@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 
+    # django-storages
+    'storages',
+
     # Local
     'accounts',
     'carts',
@@ -68,6 +71,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -161,7 +165,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-serve")
 
 
 # Media Foler Settings
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
 
 # Messages
@@ -185,7 +189,7 @@ AUTHENTICATION_BACKENDS = (
 
 # Login Settings
 LOGIN_URL = reverse_lazy('accounts:login')
-LOGIN_REDIRECT_URL = reverse_lazy('accounts:dashboard')
+LOGIN_REDIRECT_URL = reverse_lazy('pages:home')
 
 SITE_ID = 1
 
@@ -201,3 +205,15 @@ RAZORPAY_KEY_SECRET = 'Z0wINS1Qnvj7TJXJlqfKpMzd'
 # text local sms setting
 
 SMS_API_KEY = 'HzIdYmDfHQ0-dVfwREKByXDNF4j8xwB1y5oyZKLo1y'
+
+# S3 BUCKETS CONFIG
+
+AWS_ACCESS_KEY_ID = 'AKIAW72D4OT6S45FXTFF'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'dsm-backet'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_REGION_NAME = "ap-south-1"

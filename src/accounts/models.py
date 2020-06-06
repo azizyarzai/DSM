@@ -19,7 +19,8 @@ ADDRESS_TYPE_CHOICES = (
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile")
-    image = models.ImageField(upload_to="profiles", blank=True, null=True)
+    image = models.ImageField(
+        upload_to="media/profiles", blank=True, null=True)
     phone = models.CharField(max_length=10)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
