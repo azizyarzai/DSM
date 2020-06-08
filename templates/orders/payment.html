@@ -2,55 +2,211 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-4 p-2">
+    <h1 class="heading">Order Summary</h1>
     <div class="row mt-4">
-        <div class="col-md-8 col-sm-12">
+        <div class="col-lg-8 col-md-12 col-sm-12">
             <div class="row text-center">
-                <div class="col-12">
-                    <h1 class="heading">Order Summary</h1>
-                    <div class="row">
-                        {% if cart_items %}
+                <div class="col-sm-12">
+                    <div class="row mx-auto">
+                        <div class="col-12 col-sm-12 col-lg-12 text-center">
+                            <div class="table my_custom_table">
+                                <div class="my_custom_thead">
+                                    <div>
+                                        <div class="text-center"
+                                            style="height: 37px; padding-top: 8px; font-size: 18px;">
+                                            Your items
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    {% for cart_item in cart_items %}
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-7 col-md-12 col-sm-12 ">
+                                                <a href="{{ cart_item.product.get_absolute_url }}"
+                                                    style="display: block;">
+                                                    <img src="{{ cart_item.product.image.url }}" alt=""
+                                                        class="rounded custom_image mx-auto">
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-5 col-md-12 col-sm-12 mt-lg-0 mt-md-4 mt-sm-4 mt4">
+                                                <div class="row">
+                                                    <div class="col-6 align-items-center">
+                                                        <div class="text-left">
+                                                            <div class="mb-2">
+                                                                <strong>
+                                                                    <a class='prod-name'
+                                                                        href="{{ cart_item.product.get_absolute_url }}">{{ cart_item.product.name }}</a>
+                                                                </strong>
+                                                            </div>
 
-                        {% endif %}
-                        <div class="col-3 col-sm-12">
-                            <div>
-                                <img src="" alt="">
-                            </div>
-                        </div>
-                        <div class="col-3 col-sm-12">
-                            <div></div>
-                        </div>
-                        <div class="col-3 col-sm-12">
-                            <div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-6">
-                            <form action="http://yarzai.xyz/orders/checkout/success/{{ order.order_id | lower }}/"
-                                method="POST">
-                                {% csrf_token %}
-                                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ key_id }}"
-                                    data-amount="100" data-currency="INR" data-order_id="{{ order_id }}"
-                                    data-buttontext="Pay Now" data-name="Dangui Stamp Makers"
-                                    data-description="Pay for your order" data-image="{% static 'img/logo/logo3.png' %}"
-                                    data-prefill.name="Aziz Rahman Yarzai" data-prefill.email="{{ user.email }}"
-                                    data-prefill.contact="{{ user.profile.phone }}" data-theme.color="#317CFF">
-                                    </script>
-                                <input type="hidden" custom="Hidden Element" name="hidden">
-                            </form>
-                        </div>
-                        <div class="col-6">
-                            <div class=" payment-options">
-                                <button class="cod">Cash On Delivery</button>
+                                                            <div class="mb-2"> Price:
+                                                                &#8377;{{ cart_item.product.price }}</div>
+
+                                                            <div class="mb-2"> Qty: {{ cart_item.quantity }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div>&#8377;{{ cart_item.sub_total }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <h6>Stamp Customization Details</h6>
+                                            <div class="row">
+                                                <div class="col-6 text-left">
+                                                    <div style="width: fit-content;" class="ml-auto">
+                                                        {% if cart_item.customization_data.ink_color %}
+                                                        <div class="mt-1">
+                                                            <strong>Ink Color: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line1 %}
+                                                        <div class="mt-1">
+                                                            <strong>Line 1: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line2 %}
+                                                        <div class="mt-1">
+                                                            <strong>Line 2: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line3 %}
+                                                        <div class="mt-1">
+                                                            <strong>Line 3: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line4 %}
+                                                        <div class="mt-1">
+                                                            <strong>Line 4: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line5 %}
+                                                        <div class="mt-1">
+                                                            <strong>Line 5: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.text %}
+                                                        <div class="mt-1">
+                                                            <strong>Text: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.top_outer_circle_text %}
+                                                        <div class="mt-1">
+                                                            <strong>Top Outer Circle Text: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.monogram_initial %}
+                                                        <div class="mt-1">
+                                                            <strong>Monogram Initial: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.center_text %}
+                                                        <div class="mt-1">
+                                                            <strong>Center Text: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.bottom_outer_circle_text %}
+                                                        <div class="mt-1">
+                                                            <strong>Bottom Outer Circle Text: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.below_arrow %}
+                                                        <div class="mt-1">
+                                                            <strong>Below Arrow: </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.special_instruction %}
+                                                        <div class="mt-1">
+                                                            <strong>Special Instruction </strong>
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 text-left">
+                                                    <div>
+                                                        {% if cart_item.customization_data.ink_color %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.ink_color }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line1 %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.line1 }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line2 %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.line2 }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line3 %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.line3 }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line4 %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.line4 }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.line5 %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.line5 }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.text %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.text }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.top_outer_circle_text %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.top_outer_circle_text }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.monogram_initial %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.monogram_initial }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.center_text %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.center_text }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.bottom_outer_circle_text %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.bottom_outer_circle_text }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.below_arrow %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.below_arrow }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if cart_item.customization_data.special_instruction %}
+                                                        <div class="mt-1">
+                                                            <span>{{ cart_item.customization_data.special_instruction }}</span>
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12">
+        <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="price-details">
                 <h3 class="a-head">Price Details</h3>
                 <hr />
@@ -79,6 +235,32 @@
                 <div class="txt mt-2">{{ order.delivery_address.city }}</div>
                 <div class="txt mt-2">{{ order.delivery_address.state }} {{ order.delivery_address.zip_code }}</div>
                 <div class="txt mt-2">Mobile: <strong>{{ user.profile.phone }}</strong></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="text-center text-uppercase" style="letter-spacing: 1px;">Payment Options</h5>
+        <hr>
+        <div class="row text-center mt-1">
+            <div class="col-6">
+                <form action="http://yarzai.xyz/orders/checkout/success-paid/{{ order.order_id }}/" method="POST">
+                    {% csrf_token %}
+                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ key_id }}" data-amount="100"
+                        data-currency="INR" data-order_id="{{ order_id }}" data-buttontext="Pay Now"
+                        data-name="Dangui Stamp Makers" data-description="Pay for your order"
+                        data-image="{% static 'img/logo/logo3.png' %}" data-prefill.name="Aziz Rahman Yarzai"
+                        data-prefill.email="{{ user.email }}" data-prefill.contact="{{ user.profile.phone }}"
+                        data-theme.color="#317CFF">
+                        </script>
+                    <input type="hidden" custom="Hidden Element" name="hidden">
+                </form>
+            </div>
+            <div class="col-6">
+                <div class="payment-options mt-1">
+                    <a href="http://yarzai.xyz/orders/checkout/success-cod/{{ order.order_id }}/" class="cod">Cash
+                        On
+                        Delivery</a>
+                </div>
             </div>
         </div>
     </div>

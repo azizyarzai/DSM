@@ -50,26 +50,7 @@
                 </ul>
                 {% endif %}
               </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" href="javascript: return void();">Features</a>
-                {% if categories %}
-                <ul class="dropdown-menu">
-                  {% for category in categories %}
-                  <li class="dropdown">
-                    <a class="dropdown-item dropdown-toggle" href="#">{{ category.name}}</a>
-                    <ul class="dropdown-menu">
-                      {% if category.get_groups %}
-                      {% for group in category.get_groups %}
-                      <li>
-                        <a class="dropdown-item" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
-                      </li>
-                      {% endfor %} {% endif %}
-                    </ul>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </li>
+
               <li>
                 <a href="{% url 'stamps:browse_stamps' %}"
                   class="{% if 'browse-stamps' in request.path %} nav-active {% endif %}">Browse Stamps
@@ -78,9 +59,6 @@
               <li>
                 <a href="{% url 'pages:about' %}" class="{% if 'about' in request.path %} nav-active {% endif %}">About
                   Us</a>
-              </li>
-              <li>
-                <a href="help.html" class="{% if 'help' in request.path %} nav-active {% endif %}">Help</a>
               </li>
             </ul>
           </div>
@@ -101,9 +79,9 @@
               </a>
             </li>
             {% if user.is_authenticated %}
-            <li>
+            <!-- <li>
               <a href="{% url 'carts:cart_detail' %}"><i class="fas fa-envelope nav-icon"></i></a>
-            </li>
+            </li> -->
             <li class="dropdown avatar">
               <a class="dropdown-toggle profile-img" data-toggle="adm">
                 <img

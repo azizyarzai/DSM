@@ -9,12 +9,14 @@ from accounts.models import Address
 PAYMENT_STATUS = (
     ('paid', 'Paid'),
     ('not paid', 'Not Paid'),
-    ('refunded', 'Refunded')
+    ('refunded', 'Refunded'),
+    ('cash on delivery', "Cash On Delivery")
 )
 ORDER_STATUS_CHOICES = (
     ('not confirmed', 'Not Confirmed'),
     ('cancelled', 'Cancelled'),
-    ('confirmed', 'Confirmed'),
+    ('placed', 'Placed'),
+    ('created', 'Created'),
     ('ready', 'Ready'),
     ('out for delivery', 'Out For Delivery'),
     ('deliverd', 'Delivered')
@@ -30,7 +32,8 @@ class Order(models.Model):
     order_id = models.CharField(max_length=120, blank=True)
     delivery_address = models.ForeignKey(
         Address, related_name="orders", on_delete=models.CASCADE, null=True, blank=True)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(
+        Cart, on_delete=models.CASCADE, related_name="order")
     order_status = models.CharField(
         max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     payment_status = models.CharField(
@@ -48,6 +51,7 @@ class Order(models.Model):
         db_table = 'order'
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
+        ordering = ("-created",)
 
     def __str__(self):
         return str(self.order_id)
@@ -71,12 +75,12 @@ class Order(models.Model):
     def mark_placed(self):
         if self.check_done:
             self.placed = True
+            self.order_status = "placed"
             self.save()
         return self.placed
 
+
 # Generate the order id
-
-
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_id_generator(instance)

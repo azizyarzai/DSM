@@ -73,7 +73,7 @@ Cart -
                                         <span>&#8377;{{ cart_item.sub_total }}</span>
                                     </div>
 
-                                    <div class="col-">
+                                    <div class="col-4">
                                         <div>
                                             <a href="{% url 'carts:increase_quantity' cart_item.id %}"
                                                 title="Increase Quantity" data-toggle="tooltip" class="custom_a">
@@ -97,6 +97,11 @@ Cart -
                             <div class="row">
                                 <div class="col-6 text-left">
                                     <div style="width: fit-content;" class="ml-auto">
+                                        {% if cart_item.customization_data.ink_color %}
+                                        <div class="mt-1">
+                                            <strong>Ink Color: </strong>
+                                        </div>
+                                        {% endif %}
                                         {% if cart_item.customization_data.line1 %}
                                         <div class="mt-1">
                                             <strong>Line 1: </strong>
@@ -152,10 +157,20 @@ Cart -
                                             <strong>Below Arrow: </strong>
                                         </div>
                                         {% endif %}
+                                        {% if cart_item.customization_data.special_instruction %}
+                                        <div class="mt-1">
+                                            <strong>Special Instruction </strong>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-6 text-left">
                                     <div>
+                                        {% if cart_item.customization_data.ink_color %}
+                                        <div class="mt-1">
+                                            <span>{{ cart_item.customization_data.ink_color }}</span>
+                                        </div>
+                                        {% endif %}
                                         {% if cart_item.customization_data.line1 %}
                                         <div class="mt-1">
                                             <span>{{ cart_item.customization_data.line1 }}</span>
@@ -209,6 +224,11 @@ Cart -
                                         {% if cart_item.customization_data.below_arrow %}
                                         <div class="mt-1">
                                             <span>{{ cart_item.customization_data.below_arrow }}</span>
+                                        </div>
+                                        {% endif %}
+                                        {% if cart_item.customization_data.special_instruction %}
+                                        <div class="mt-1">
+                                            <span>{{ cart_item.customization_data.special_instruction }}</span>
                                         </div>
                                         {% endif %}
                                     </div>

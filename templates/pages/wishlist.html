@@ -23,11 +23,45 @@
 <!-- Secondary Menu end -->
 
 <!-- Content ============================================= -->
-<div id="content" class="py-4">
-    <div class="container">
-        {% include "partials/alerts.html" %}
-    </div>
+
+<div class="container">
+    {% include "partials/alerts.html" %}
+    <section id="stamps-list">
+        <div class="stamp-container">
+            {% if wishlist_items %}
+            {% for wishlist_item in wishlist_items %}
+            <div class="stamp-details">
+                <div class="stamp-img">
+                    <a href="{{ wishlist_item.product.get_absolute_url }}"><img
+                            src="{{ wishlist_item.product.image.url }}" class='rounded' width="100%"
+                            alt="{{ product.slug }}"></a>
+                </div>
+                <div class="stamp-desc">
+                    <a href="{{ wishlist_item.product.get_absolute_url }}"
+                        class="stamp-name">{{ wishlist_item.product.name }}</a>
+                    <p class="stamp-price">&#8377; {{ wishlist_item.product.price }}</p>
+                    <p class="stamp-size">
+                        {% if  wishlist_item.product.height %}
+                        {{ wishlist_item.product.height }}cm x
+                        {% endif %}
+                        {% if wishlist_item.product.width %}
+                        {{ wishlist_item.product.width }}cm
+                        {% endif %}
+                        {% if  wishlist_item.product.diameter %}
+                        {{ wishlist_item.product.diameter }}cm Diameter
+                        {% endif %}
+                    </p>
+                    <a href="{{ wishlist_item.product.get_absolute_url }}" class="stamp-detail-btn">Customize</a>
+                    <a href="{% url 'pages:remove_from_wishlist' wishlist_item.id %}"
+                        class="stamp-detail-btn">Remove</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </section>
 </div>
+
 <!-- Content end -->
 
 {% endblock content %}

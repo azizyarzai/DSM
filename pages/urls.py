@@ -4,7 +4,8 @@ from .views import (
     home,
     about,
     wishlist,
-    add_to_wishlist
+    add_to_wishlist,
+    remove_from_wishlist
 )
 
 urlpatterns = [
@@ -13,4 +14,6 @@ urlpatterns = [
     path('wishlist/', wishlist, name="wishlist"),
     path('<int:product_id>/add-to-wishlist/',
          add_to_wishlist, name="add_to_wishlist"),
+    path('<int:wishlist_item_id>/remove-from-wishlist/',
+         remove_from_wishlist, name="remove_from_wishlist"),
 ]
