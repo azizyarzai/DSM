@@ -242,7 +242,7 @@
         <h5 class="text-center text-uppercase" style="letter-spacing: 1px;">Payment Options</h5>
         <hr>
         <div class="row text-center mt-1">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <form action="http://yarzai.xyz/orders/checkout/success-paid/{{ order.order_id }}/" method="POST">
                     {% csrf_token %}
                     <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ key_id }}" data-amount="100"
@@ -255,7 +255,7 @@
                     <input type="hidden" custom="Hidden Element" name="hidden">
                 </form>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-12 mt3">
                 <div class="payment-options mt-1">
                     <a href="http://yarzai.xyz/orders/checkout/success-cod/{{ order.order_id }}/" class="cod">Cash
                         On
