@@ -34,7 +34,7 @@
   {% include "partials/alerts.html" %}
   {% for order in orders %}
   {% if order.cart.cart_item.all %}
-  <div class="mb-4 pb-3" style="border: 2px solid #c5e3f6; border-radius: 10px; padding: 1rem 0; width: 100%">
+  <div class="mb-4 pb-4" style="border: 2px solid #c5e3f6; border-radius: 10px; padding: 1rem 0; width: 100%">
     <h5 style="text-align: center; color: #fc5185;">Order Id: {{ order.order_id }}</h5>
     <h5 style="text-align: center; color: #fc5185;">Order Total Price: &#8377;{{ order.total }}</h5>
     <div class="row mx-auto">
