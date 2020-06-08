@@ -1,15 +1,18 @@
 from django.urls import path
 from .views import (
     add_to_cart,
-    cart_detail,
+    increase_quantity,
+    decrease_quantity,
     remove_from_cart,
-    full_remove,
-
+    cart_detail,
 )
 
 urlpatterns = [
     path('', cart_detail, name="cart_detail"),
     path('add/<int:product_id>/', add_to_cart, name="add_to_cart"),
-    path('remove/<int:product_id>/', remove_from_cart, name="remove_from_cart"),
-    path('full-remove/<int:product_id>/', full_remove, name="full_remove"),
+    path('remove/<int:cart_item_id>/', remove_from_cart, name="remove_from_cart"),
+    path('increase-quntity/<int:cart_item_id>/',
+         increase_quantity, name="increase_quantity"),
+    path('decrease-quntity/<int:cart_item_id>/',
+         decrease_quantity, name="decrease_quantity"),
 ]

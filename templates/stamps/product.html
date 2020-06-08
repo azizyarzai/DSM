@@ -62,7 +62,7 @@
                     </div>
                     <div class="rgt">
                         <div class="input-center">
-                            <input type="radio" name="body_style" value="1" checked="checked">
+                            <input type="radio" name="stamp_body" value="1" checked="checked">
                             <img src="{% static 'img/stamp_body/body1.jpg' %}" alt="stamp body">
                         </div>
                         <div class="input-center">
@@ -90,11 +90,11 @@
                         <label for="color">ink color:</label>
                     </div>
                     <div class="rgt">
-                        <input type="radio" name="color" value="black" checked="checked"> Black <br>
-                        <input type="radio" name="color" value="red"> Red <br>
-                        <input type="radio" name="color" value="blue"> Blue <br>
-                        <input type="radio" name="color" value="green"> Green <br>
-                        <input type="radio" name="color" value="purple"> Purple
+                        <input type="radio" name="ink_color" value="black" checked="checked"> Black <br>
+                        <input type="radio" name="ink_color" value="red"> Red <br>
+                        <input type="radio" name="ink_color" value="blue"> Blue <br>
+                        <input type="radio" name="ink_color" value="green"> Green <br>
+                        <input type="radio" name="ink_color" value="purple"> Purple
                     </div>
                 </div>
                 <div class="instruction grid">
@@ -102,28 +102,13 @@
                         <label for="">special instruction:</label>
                     </div>
                     <div class="rgt stretch form-group">
-                        <textarea name="instruction" id="3" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="special_instruction" id="3" cols="30" rows="10" class="form-control"></textarea>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </section>
-<div class="quantity">
-    <label for="quantity">Quantity: </label>
-    <select class="form-control" id="quantity">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-    </select>
-</div>
 <div class="add">
     <div class="buy">
         <a href="{% url 'pages:add_to_wishlist' product.id %}" class="btn bn"><i class="fas fa-heart"></i>Add to

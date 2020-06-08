@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cart, CartItem
+from .models import Cart, CartItem, CustomizationData
 # Register your models here.
 
 
@@ -14,10 +14,19 @@ admin.site.register(Cart, CartAdmin)
 
 
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('product', 'cart', 'quantity')
+    list_display = ('product', 'cart', 'quantity', 'customization_data')
     list_filter = ('cart',)
     search_fields = ('product', 'cart', 'quantity')
     list_per_page = 20
 
 
 admin.site.register(CartItem, CartItemAdmin)
+
+
+class CustomizationDataAmin(admin.ModelAdmin):
+    list_display = ('id',)
+    search_fields = ('id',)
+    list_per_page = 20
+
+
+admin.site.register(CustomizationData, CustomizationDataAmin)

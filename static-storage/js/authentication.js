@@ -274,6 +274,27 @@ $(function () {
             line3: {
                 required: true
             },
+            line4: {
+                required: true
+            },
+            line5: {
+                required: true
+            },
+            top_outer_circle_text: {
+                required: true
+            },
+            monogram_initial: {
+                required: true
+            },
+            center_text: {
+                required: true
+            },
+            bottom_outer_circle_text: {
+                required: true
+            },
+            below_arrow: {
+                required: true
+            }
         },
         messages: {
             line1: {
@@ -284,7 +305,27 @@ $(function () {
             },
             line3: {
                 required: "* Please fill the above input"
-
+            },
+            line4: {
+                required: "* Please fill the above input"
+            },
+            line5: {
+                required: "* Please fill the above input"
+            },
+            top_outer_circle_text: {
+                required: "* Please fill the above input"
+            },
+            monogram_initial: {
+                required: "* Please fill the above input"
+            },
+            center_text: {
+                required: "* Please fill the above input"
+            },
+            bottom_outer_circle_text: {
+                required: "* Please fill the above input"
+            },
+            below_arrow: {
+                required: "* Please fill the above input"
             }
         }
     });

@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from multiselectfield import MultiSelectField
 
 from dsm.utils import unique_slug_generator
+# from carts.models import CartItem
 
 # Create your models here.
 
@@ -14,11 +15,11 @@ DESC_CHOICES = (
     ('line4', 'Line 4'),
     ('line5', 'Line 5'),
     ('text', 'Text'),
-    ('top-outer-circle-text', 'Top Outer Circle Text'),
-    ("monogram-initial", "Monogram Initial"),
-    ('center-text', 'Center Text'),
-    ('bottom-outer-circle-text', 'Bottom Outer Circle Text'),
-    ("below-arrow", "Below Arrow")
+    ('top_outer_circle_text', 'Top Outer Circle Text'),
+    ("monogram_initial", "Monogram Initial"),
+    ('center_text', 'Center Text'),
+    ('bottom_outer_circle_text', 'Bottom Outer Circle Text'),
+    ("below_arrow", "Below Arrow")
 )
 
 
@@ -132,9 +133,3 @@ def product_pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(product_pre_save_receiver, sender=Product)
-
-# class Stamp_Customization(models.Model):
-#     sfsd = models.TextField()
-
-# class Customization_Description(models.Model):
-#     line1 = models.TextField(max_length=100)
