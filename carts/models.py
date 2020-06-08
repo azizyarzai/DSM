@@ -45,19 +45,10 @@ class CartManager(models.Manager):
     def merge_cart_items(self, original_cart, previous_cart):
         org_cart_items = CartItem.objects.all().filter(cart=original_cart)
         pre_cart_items = CartItem.objects.all().filter(cart=previous_cart)
-        for pre_cart_item in pre_cart_items:
-            try:
-                cart_item = CartItem.objects.get(
-                    product=pre_cart_item.product, cart=original_cart)
-                cart_item.quantity += pre_cart_item.quantity
-                cart_item.save()
-            except CartItem.DoesNotExist:
-                cart_item = CartItem.objects.create(
-                    product=pre_cart_item.product,
-                    quantity=pre_cart_item.quantity,
-                    cart=original_cart
-                )
-                cart_item.save()
+        if pre_cart_items:
+            for pre_cart_item in pre_cart_items:
+                pre_cart_item.cart = original_cart
+                pre_cart_item.save()
         previous_cart.delete()
 
     def new_or_get(self, request):

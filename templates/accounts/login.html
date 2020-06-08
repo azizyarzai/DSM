@@ -48,7 +48,7 @@
                 <div class="social-login">
                     <a href="{% provider_login_url 'google' %}" class="google-login btn">
                         <img src="{% static 'img/logo/google-logo.svg' %}" alt="">Google</a>
-                    <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="facebook-login btn">
+                    <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="facebook-login btn">
                         <img src="{% static 'img/logo/facebook-circular-logo.svg' %}" alt="">Facebook</a>
                 </div>
                 {% include "partials/alerts.html" %}
