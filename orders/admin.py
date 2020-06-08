@@ -8,6 +8,7 @@ class OrderAdmin(admin.ModelAdmin):
                     'order_status', 'cart', 'placed')
     list_filter = ('created', 'payment_status', 'order_status')
     list_per_page = 20
+    search_fields = ('order_id',)
     list_editable = ('payment_status', 'order_status')
 
 

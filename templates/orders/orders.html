@@ -34,7 +34,7 @@
   {% include "partials/alerts.html" %}
   {% for order in orders %}
   {% if order.cart.cart_item.all %}
-  <div class="mb-4" style="border: 2px solid #c5e3f6; border-radius: 10px; padding: 1rem 0">
+  <div class="mb-4 pb-3" style="border: 2px solid #c5e3f6; border-radius: 10px; padding: 1rem 0; width: 100%">
     <h5 style="text-align: center; color: #fc5185;">Order Id: {{ order.order_id }}</h5>
     <h5 style="text-align: center; color: #fc5185;">Order Total Price: &#8377;{{ order.total }}</h5>
     <div class="row mx-auto">
@@ -46,7 +46,8 @@
               <div class="row">
                 <div class="col-lg-5 col-md-12 col-sm-12 ">
                   <a href="{{ cart_item.product.get_absolute_url }}" style="display: block;">
-                    <img src="{{ cart_item.product.image.url }}" alt="" class="rounded custom_image mx-auto">
+                    <img src="{{ cart_item.product.image.url }}" alt=""
+                      class="rounded custom_image mx-auto w-100 h-100">
                   </a>
                 </div>
                 <div class="col-lg-7 col-md-12 col-sm-12 mt-lg-0 mt-md-4 mt-sm-4 mt4">
@@ -139,7 +140,7 @@
                       {% endif %}
                       {% if cart_item.customization_data.special_instruction %}
                       <div class="mt-1">
-                        <strong>Special Instruction </strong>
+                        <strong>Special Instruction: </strong>
                       </div>
                       {% endif %}
                     </div>
@@ -182,7 +183,7 @@
                       </div>
                       {% endif %}
                       {% if cart_item.customization_data.top_outer_circle_text %}
-                      <div class="mt-1">
+                      <div class="mt-1 mb-s1">
                         <span>{{ cart_item.customization_data.top_outer_circle_text }}</span>
                       </div>
                       {% endif %}
@@ -197,9 +198,10 @@
                       </div>
                       {% endif %}
                       {% if cart_item.customization_data.bottom_outer_circle_text %}
-                      <div class="mt-1">
+                      <div class="mt-1 mb-s2">
                         <span>{{ cart_item.customization_data.bottom_outer_circle_text }}</span>
                       </div>
+
                       {% endif %}
                       {% if cart_item.customization_data.below_arrow %}
                       <div class="mt-1">
@@ -232,28 +234,30 @@
         <div class="txt mt-2">Mobile: <strong>{{ user.profile.phone }}</strong></div>
       </div>
       <div class="col-md-6 col-sm-12 text-center">
-        <div
-          style="text-transform: capitalize; background: #FFE350; border-radius: 5px; padding: 1rem; color: #000; letter-spacing: 1px; float: right; margin-right: 1rem">
+        <div class="mx-auto"
+          style="text-transform: capitalize; background: #FFE350; border-radius: 5px; padding: 1rem; color: #000; letter-spacing: 1px; margin-right: 1rem">
           Payment Status: {{ order.payment_status }}</div>
       </div>
     </div>
-    {% if order.order_status != 'cancelled' %}
-    <a class="stamp-detail-btn ml-2" style="width: fit-content; display: inline-block;"
-      href="{% url 'orders:cancel_order' order.order_id %}">CANCEL
-      ORDER
-    </a>
-    {% else %}
-    <a class="stamp-detail-btn ml-2" style="width: fit-content; display: inline-block;"
-      href="{% url 'orders:re_order' order.order_id %}">RE-ORDER
-    </a>
-    {% endif %}
-    <span class="ml-auto">
-      <span
-        style="text-transform: capitalize; background: #c4dff6; border-radius: 5px; padding: 1rem; color: #000; letter-spacing: 1px; float: right; margin-right: 1rem"><strong>order
-          status:
-          {{order.order_status}}</strong>
-      </span>
-    </span>
+    <div class="row w-100 ml-0 text-center">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        {% if order.order_status != 'cancelled' %}
+        <a class="stamp-detail-btn ml-2 mx-auto" href="{% url 'orders:cancel_order' order.order_id %}">CANCEL
+          ORDER
+        </a>
+        {% else %}
+        <a class="stamp-detail-btn ml-2 mx-auto" href="{% url 'orders:re_order' order.order_id %}">RE-ORDER
+        </a>
+        {% endif %}
+      </div>
+      <div class="ml-auto col-lg-6 col-md-6 col-sm-12 mt-sm-2 mt-lg-0 mt-md-0">
+        <span class="mx-auto"
+          style="text-transform: capitalize; background: #c4dff6; border-radius: 5px; padding: 1rem; color: #000; letter-spacing: 1px; margin-right: 1rem"><strong>order
+            status:
+            {{order.order_status}}</strong>
+        </span>
+      </div>
+    </div>
   </div>
   {% endif %}
   <hr>

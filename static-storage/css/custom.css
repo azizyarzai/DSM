@@ -454,6 +454,7 @@ body {
     color: #fff !important;
     margin-bottom: 1rem;
     transition: all .5s;
+    width: fit-content;
 }
 
 .stamp-detail-btn:hover {
@@ -977,7 +978,6 @@ body {
 /* My Cart Page */
 
 .my_custom_table {
-    min-width: 400px;
     font-size: 14px;
 }
 
@@ -1259,4 +1259,16 @@ body {
 
 .razorpay-payment-button:hover, .cod:hover {
     color: #016612 !important;
+}
+
+@media (max-width: 428px){
+    .mb-s2 {
+    margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 378px){
+    .mb-s1 {
+    margin-bottom: 25px;
+    }
 }
