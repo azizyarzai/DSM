@@ -1272,3 +1272,9 @@ body {
     margin-bottom: 25px;
     }
 }
+
+@media (max-width: 767px){
+    .mt3 {
+        margin-top: 10px;
+    }
+}
