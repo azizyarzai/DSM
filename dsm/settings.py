@@ -25,8 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mt7x%x62efxulvum&epmr127==5(54j3%-!$c=dhlj^@1f+t()'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# bool(int(os.environ.get('DEBUG', 1)))
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
+
 
 ALLOWED_HOSTS = ["192.168.56.1", "172.20.10.4", "127.0.0.1",
                  "ec2-13-127-62-40.ap-south-1.compute.amazonaws.com", "yarzai.info", "13.127.62.40", "*", "dangui-stamp-makers.herokuapp.com"]
