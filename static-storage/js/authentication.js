@@ -21,8 +21,8 @@ inputs.forEach(input => {
 $(function () {
     // Custom password validators
     $.validator.addMethod("passLength", function (value, element) {
-        return value.length >= 6;
-    }, "Your password must be at least 6 character long");
+        return value.length >= 8;
+    }, "Your password must be at least 8 character long");
 
     $.validator.addMethod("charNum", function (value, element) {
         return /\d/.test(value)
