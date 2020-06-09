@@ -30,6 +30,7 @@
     <h5 class="text-center m-5" style="color: red;">There are no stamps in your wishlist yet. <a
             href="{% url 'stamps:browse_stamps' %}">Start Browsing Stamps</a></h5>
     {% endif %}
+    <hr>
     <section id="stamps-list">
         <div class="stamp-container">
             {% if wishlist_items %}
