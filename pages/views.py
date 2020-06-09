@@ -62,7 +62,7 @@ def remove_from_wishlist(request, wishlist_item_id):
             wishlist=user_wishlist
         )
     except WishlistItem.DoesNotExist:
-        return Http404
+        raise Http404("Page Not Found")
 
     wishlist_item.delete()
     messages.success(

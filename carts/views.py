@@ -11,7 +11,7 @@ from orders.models import Order
 
 def add_to_cart(request, product_id):
     if request.method == 'GET':
-        return Http404
+        raise Http404("Page Not Found")
     print(request.POST)
 
     stamp_body = request.POST.get('stamp_body')
@@ -41,7 +41,7 @@ def add_to_cart(request, product_id):
             or bottom_outer_circle_text
             or below_arrow
             ):
-        return Http404
+        raise Http404("Page Not Found")
 
     customization_data = CustomizationData.objects.create(
         stamp_body=stamp_body,

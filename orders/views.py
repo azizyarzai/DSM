@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.contrib import messages
 from django.conf import settings
 from razorpay import Client
 from django.core.exceptions import ObjectDoesNotExist
@@ -122,6 +123,7 @@ def cancel_order(request, order_id):
     order = Order.objects.get(order_id=order_id)
     order.order_status = 'cancelled'
     order.save()
+    messages.success(request, "Your order cancelled successfully")
     return HttpResponseRedirect(reverse_lazy('orders:view_orders'))
 
 
@@ -134,10 +136,10 @@ def re_order(request, order_id):
 
     try:
         order_obj, order_created = Order.objects.get_or_create(
-            order_id=order_id)
+            order_id=order_id, order_status="cancelled")
         total = order_obj.total
-    except ObjectDoesNotExist:
-        pass
+    except:
+        raise Http404("Page Not Found")
 
     data = {
         "amount": int(total * 100),
