@@ -23,7 +23,7 @@
 <!-- Secondary Menu end -->
 
 <!-- Content ============================================= -->
-
+<h2 class="heading mt-4">Your Wishlist</h2>
 <div class="container">
     {% include "partials/alerts.html" %}
     <section id="stamps-list">
@@ -57,6 +57,10 @@
                 </div>
             </div>
             {% endfor %}
+
+            {% else %}
+            <h5 class="text-center m-5" style="color: red;">There are no stamps in your wishlist yet. <a
+                    href="{% url 'stamps:browse_stamps' %}">Browse Stamps</a></h5>
             {% endif %}
         </div>
     </section>

@@ -32,6 +32,7 @@
 <hr>
 <div class="container">
   {% include "partials/alerts.html" %}
+  {% if orders %}
   {% for order in orders %}
   {% if order.cart.cart_item.all %}
   <div class="mb-4 pb-4" style="border: 2px solid #c5e3f6; border-radius: 10px; padding: 1rem 0; width: 100%">
@@ -262,6 +263,11 @@
   {% endif %}
   <hr>
   {% endfor %}
+  {% else %}
+  <h5 class="text-center m-5" style="color: red;">There are no orders yet. <a
+      href="{% url 'stamps:browse_stamps' %}">Strat
+      Shopping</a>Strat Shopping</h5>
+  {% endif %}
 </div>
 
 <!-- Content end -->
