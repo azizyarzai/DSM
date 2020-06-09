@@ -25,12 +25,12 @@
 <!-- Content ============================================= -->
 <h2 class="heading mt-4">Your Wishlist</h2>
 <div class="container">
+    <hr>
     {% include "partials/alerts.html" %}
     {% if not wishlist_items %}
     <h5 class="text-center m-5" style="color: red;">There are no stamps in your wishlist yet. <a
             href="{% url 'stamps:browse_stamps' %}">Start Browsing Stamps</a></h5>
     {% endif %}
-    <hr>
     <section id="stamps-list">
         <div class="stamp-container">
             {% if wishlist_items %}
